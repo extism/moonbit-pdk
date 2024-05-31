@@ -63,6 +63,12 @@ pub struct VowelReport {
   vowels : String
 }
 
+impl @jsonutil.ToJson for VowelReport with to_json(self) {
+  @jsonutil.from_entries(
+    [("count", self.count), ("total", self.total), ("vowels", self.vowels)],
+  )
+}
+
 fn get_total() -> Int {
   match @pdk.Var::get("total") {
     Ok(Some(v)) => v
@@ -86,14 +92,17 @@ pub fn count_vowels() -> Int {
   // let input = @pdk.Host::input()
   let input = "World"
   //
-  let vowels = get_vowels().to_array()
-  let count = input.as_iter().filter(fn(ch) { vowels.contains(ch) }).count()
+  let vowels = get_vowels()
+  let vowels_arr = vowels.to_array()
+  let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
   //
   let mut total = get_total()
   total += count
   store_total(total)
   //
   let output = { count, total, vowels }
-  @pdk.Host::output(output.to_json())
+  let j = @jsonutil.to_json(output)
+  let s = @jsonutil.stringify(j, spaces=0, newline=false)
+  @pdk.Host::outputString(s)
   return 0
 }
