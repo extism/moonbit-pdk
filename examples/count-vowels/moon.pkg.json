@@ -1,0 +1,21 @@
+{
+  "import": [
+    "gmlewis/moonbit-pdk/pdk",
+    {
+      "path": "mizchi/json",
+      "alias": "jsonutil"
+    }
+  ],
+  "link": {
+    "wasm": {
+      "exports": [
+        "greet"
+      ]
+    },
+    "wasm-gc": {
+      "exports": [
+        "greet"
+      ]
+    }
+  }
+}
