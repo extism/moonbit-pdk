@@ -1,0 +1,17 @@
+{
+  "import": [
+    "gmlewis/moonbit-pdk/pdk"
+  ],
+  "link": {
+    "wasm": {
+      "exports": [
+        "greet"
+      ]
+    },
+    "wasm-gc": {
+      "exports": [
+        "greet"
+      ]
+    }
+  }
+}
