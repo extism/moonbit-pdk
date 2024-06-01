@@ -17,6 +17,7 @@ pub fn Host::inputString() -> String {
   let bytes = Host::input()
   // TODO: Make a real UTF-8 => UTF-16 converter.
   // For now, support ASCII.
+  // https://github.com/moonbitlang/core/issues/484
   let length = bytes.length()
   let buf = Buffer::make(2 * length)
   let mut i = 0

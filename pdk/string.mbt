@@ -1,5 +1,6 @@
 /// ToUtf8 is a workaround since the standard library does not make
 /// it easy to write a standard utf8 string.
+/// https://github.com/moonbitlang/core/issues/484
 pub trait ToUtf8 {
   to_utf8(Self) -> Bytes
 }
