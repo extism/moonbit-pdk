@@ -7,7 +7,11 @@ This is an experimental [Extism PDK] for the [MoonBit] programming language.
 
 ## Build
 
-To build this PDK, clone the repo, then type:
+Before building, you must have already installed the MoonBit programming language.
+To install MoonBit, follow the instructions here (it is super-easy with VSCode):
+https://www.moonbitlang.com/download/
+
+Then, to build this PDK, clone the repo, and type:
 
 ```bash
 $ ./build.sh
