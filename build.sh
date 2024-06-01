@@ -1,2 +1,2 @@
 #!/bin/bash -ex
-moon build --target wasm-gc
+moon build --target wasm
