@@ -9,7 +9,6 @@ pub struct Host {
 pub fn Host::input() -> Bytes {
   let length = input_length().to_int()
   let value = Bytes::make(length)
-  println("Host::input(): length=\(length), value=\(value)")
   let mut i = 0
   while i < length {
     value[i] = input_load_u8(i.to_int64())
@@ -74,7 +73,7 @@ pub fn Host::outputString(s : String) -> Unit {
         out(tmp_bytes[2])
         out(tmp_bytes[3])
       }
-      _ => abort("mal-formed UTF-16 string")
+      _ => panic() // abort("mal-formed UTF-16 string")
     }
     i += 1
   }

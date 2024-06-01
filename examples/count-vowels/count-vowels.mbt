@@ -16,7 +16,7 @@ fn get_total() -> Int {
   match @pdk.Var::get("total") {
     Ok(Some(v)) => v
     Ok(None) => 0
-    Err(_) => abort("Couldn't access extism variable 'total'")
+    Err(_) => panic() // abort("Couldn't access extism variable 'total'")
   }
 }
 
