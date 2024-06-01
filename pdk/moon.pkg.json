@@ -1,1 +1,8 @@
-{}
+{
+  "import": [
+    {
+      "path": "mizchi/json",
+      "alias": "jsonutil"
+    }
+  ]
+}

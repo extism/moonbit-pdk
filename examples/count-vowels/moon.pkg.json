@@ -9,12 +9,12 @@
   "link": {
     "wasm": {
       "exports": [
-        "greet"
+        "count_vowels"
       ]
     },
     "wasm-gc": {
       "exports": [
-        "greet"
+        "count_vowels"
       ]
     }
   }

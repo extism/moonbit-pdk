@@ -80,3 +80,9 @@ pub fn Host::outputString(s : String) -> Unit {
   }
   output_set(offset, length)
 }
+
+// outputJsonValue converts a MoonBit @json.JsonValue to an Extism JSON string.
+pub fn Host::outputJsonValue(j : @json.JsonValue) -> Unit {
+  let s = @jsonutil.stringify(j, spaces=0, newline=false)
+  Host::outputString(s)
+}

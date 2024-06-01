@@ -1,60 +1,3 @@
-// ───────┬─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-//        │ File: lib.rs
-// ───────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-//    1   │ use extism_pdk::*;
-//    2   │ use serde::Serialize;
-//    3   │
-//    4   │ const VOWELS: &str = "aeiouAEIOU";
-//    5   │
-//    6   │ #[derive(Serialize)]
-//    7   │ struct VowelReport {
-//    8   │     pub count: u32,
-//    9   │     pub total: u32,
-//   10   │     pub vowels: String,
-//   11   │ }
-//   12   │
-//   13   │ fn get_total() -> u32 {
-//   14   │     match var::get::<String>("total") {
-//   15   │         Ok(Some(v)) => v.parse::<u32>().ok().unwrap(),
-//   16   │         Ok(None) => 0u32,
-//   17   │         Err(_) => panic!("Couldn't access extism variable 'total'"),
-//   18   │     }
-//   19   │ }
-//   20   │
-//   21   │ fn store_total(total: u32) {
-//   22   │     var::set("total", total.to_string()).ok();
-//   23   │ }
-//   24   │
-//   25   │ fn get_vowels() -> String {
-//   26   │     match config::get("vowels") {
-//   27   │         Ok(Some(v)) => v,
-//   28   │         _ => VOWELS.to_string(),
-//   29   │     }
-//   30   │ }
-//   31   │
-//   32   │ #[plugin_fn]
-//   33   │ pub fn count_vowels(input: String) -> FnResult<Json<VowelReport>> {
-//   34   │     let mut count = 0;
-//   35   │     let vowels = get_vowels();
-//   36   │     for ch in input.chars() {
-//   37   │         if vowels.contains(ch) {
-//   38   │             count += 1;
-//   39   │         }
-//   40   │     }
-//   41   │
-//   42   │     let mut total = get_total();
-//   43   │     total += count;
-//   44   │     store_total(total);
-//   45   │
-//   46   │     let output = VowelReport {
-//   47   │         count,
-//   48   │         total,
-//   49   │         vowels,
-//   50   │     };
-//   51   │
-//   52   │     Ok(Json(output))
-//   53   │ }
-
 let vowels = "aeiouAEIOU"
 
 pub struct VowelReport {
@@ -102,7 +45,6 @@ pub fn count_vowels() -> Int {
   //
   let output = { count, total, vowels }
   let j = @jsonutil.to_json(output)
-  let s = @jsonutil.stringify(j, spaces=0, newline=false)
-  @pdk.Host::outputString(s)
+  @pdk.Host::outputJsonValue(j)
   return 0
 }
