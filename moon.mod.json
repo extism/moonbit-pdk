@@ -2,7 +2,7 @@
   "name": "gmlewis/moonbit-pdk",
   "version": "0.1.0",
   "deps": {
-    "mizchi/json": "0.4.0"
+    "gmlewis/json": "0.4.0"
   },
   "readme": "README.md",
   "repository": "https://github.com/gmlewis/moonbit-pdk",

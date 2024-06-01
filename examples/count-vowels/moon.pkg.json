@@ -2,7 +2,7 @@
   "import": [
     "gmlewis/moonbit-pdk/pdk",
     {
-      "path": "mizchi/json",
+      "path": "gmlewis/json",
       "alias": "jsonutil"
     }
   ],

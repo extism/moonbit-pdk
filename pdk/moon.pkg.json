@@ -1,7 +1,7 @@
 {
   "import": [
     {
-      "path": "mizchi/json",
+      "path": "gmlewis/json",
       "alias": "jsonutil"
     }
   ]
