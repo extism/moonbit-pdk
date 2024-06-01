@@ -14,7 +14,17 @@ pub fn Host::input() -> Bytes {
 
 /// Host::inputString returns a string from the host.
 pub fn Host::inputString() -> String {
-  Host::input().to_string()
+  let bytes = Host::input()
+  // TODO: Make a real UTF-8 => UTF-16 converter.
+  // For now, support ASCII.
+  let length = bytes.length()
+  let buf = Buffer::make(2 * length)
+  let mut i = 0
+  while i < length {
+    buf.write_char(Char::from_int(bytes[i].to_int()))
+    i += 1
+  }
+  buf.to_string()
 }
 
 /// Host::output sends a sequence of bytes to the host.

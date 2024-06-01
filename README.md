@@ -32,17 +32,15 @@ To run the examples, type:
 $ ./run.sh Benjamin
 ```
 
-## Examples
-
-* [count-vowels](examples/count-vowels/)
-* [greet](examples/greet/)
-
 ## Status
 
-This PDK is just in its infancy and nothing is working yet.
+This PDK is just in its infancy.
 
-Currently, the PDK is broken and gives this error:
+These plugins work (with the caveat that full UTF-8 input is not yet supported,
+only ASCII input currently works for strings):
 
-```
-Error: import func[extism:host/env.store_u8]: signature mismatch: i64i32_i32 != i64i32_v
-```
+* [greet](examples/greet/)
+
+These examples don't yet work:
+
+* [count-vowels](examples/count-vowels/)
