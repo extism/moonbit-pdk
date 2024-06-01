@@ -19,6 +19,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 )
 
@@ -28,6 +29,19 @@ var (
 	from      = flag.String("from", "$printc", "Name of internal function being replaced with shim")
 	prefix    = flag.String("prefix", "$@gmlewis/moonbit-pdk/pdk.Host::outputString.fn/", "Prefix to search for in *.wat files for shim function")
 )
+
+// workarounds is a list of substitutions needed in order to get the MoonBit compiler
+// output to match what Extism is expecting:
+var workarounds = map[*regexp.Regexp]string{
+	regexp.MustCompile(`\(import "extism:host/env" "store_u8"\)
+ \(param i64\) \(param i32\) \(result i32\)\)`): `(import "extism:host/env" "store_u8")
+ (param i64) (param i32))`,
+	regexp.MustCompile(`\(import "extism:host/env" "output_set"\)
+ \(param i64\) \(param i64\) \(result i32\)\)`): `(import "extism:host/env" "output_set")
+ (param i64) (param i64))`,
+	regexp.MustCompile(`(\(call \$extism:host/env\.store_u8\.\d+\))`):   `$1 (i32.const 0)`,
+	regexp.MustCompile(`(\(call \$extism:host/env\.output_set\.\d+\))`): `$1 (i32.const 0)`,
+}
 
 func main() {
 	flag.Parse()
@@ -83,12 +97,18 @@ func processFile(path string) {
 	}
 
 	finalOut := strings.ReplaceAll(strings.Join(out, "\n"), *from, shimFunc)
+
+	// Now process all workaround substitutions:
+	for re, toStr := range workarounds {
+		finalOut = re.ReplaceAllString(finalOut, toStr)
+	}
+
 	must(os.WriteFile(path, []byte(finalOut), 0644))
 
 	log.Printf("running: wat2wasm '%v' -o '%v'", path, wasmPath)
 	cmdOut, err := exec.Command("wat2wasm", path, "-o", wasmPath).CombinedOutput()
 	if err != nil {
-		log.Fatalf("wat2wasm error: %v\n%v", err, cmdOut)
+		log.Fatalf("wat2wasm error: %v\n%s", err, cmdOut)
 	}
 }
 
