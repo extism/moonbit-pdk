@@ -39,3 +39,10 @@ Currently, the PDK is broken and gives this error:
 ```
 Error: section type: read 0-th type: invalid byte: 0x50 != 0x60
 ```
+
+Here is the first clue... maybe the wasm format isn't compatible?
+
+```bash
+$ wasm2wat target/wasm-gc/release/build/examples/greet/greet.wasm
+000000d: error: unexpected type form (got 0x5e)
+```
