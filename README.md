@@ -29,7 +29,7 @@ $ ./build.sh
 To run the examples, type:
 
 ```bash
-$ ./run.sh Benjamin
+$ ./run.sh
 ```
 
 ## Status
