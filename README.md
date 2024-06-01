@@ -11,18 +11,25 @@ Before building, you must have already installed the MoonBit programming languag
 To install MoonBit, follow the instructions here (it is super-easy with VSCode):
 https://www.moonbitlang.com/download/
 
+Additionally, there is currently an [issue with MoonBit] that needs a workaround,
+so the tool [`wat2wasm`] also needs to be available in your `$PATH`.
+
 Then, to build this PDK, clone the repo, and type:
 
 ```bash
 $ ./build.sh
 ```
 
+[issue with MoonBit]: https://github.com/moonbitlang/core/issues/480
+[wasm-merge]: https://github.com/WebAssembly/binaryen?tab=readme-ov-file#wasm-merge
+[wat2wasm]: https://github.com/WebAssembly/wabt?tab=readme-ov-file#running-wat2wasm
+
 ## Run
 
 To run the examples, type:
 
 ```bash
-$ ./run.sh
+$ ./run.sh Benjamin
 ```
 
 ## Examples
@@ -37,5 +44,5 @@ This PDK is just in its infancy and nothing is working yet.
 Currently, the PDK is broken and gives this error:
 
 ```
-Error: module[spectest] not instantiated
+Error: import func[extism:host/env.store_u8]: signature mismatch: i64i32_i32 != i64i32_v
 ```
