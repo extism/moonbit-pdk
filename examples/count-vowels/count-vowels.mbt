@@ -26,7 +26,7 @@ fn store_total(total : Int) -> Unit {
 
 fn get_vowels() -> String {
   match @pdk.Config::get("vowels") {
-    Ok(Some(v)) => v
+    Some(s) => s
     _ => vowels
   }
 }

@@ -20,3 +20,24 @@ pub fn ToUtf8::to_utf8(s : String) -> Bytes {
   result.blit(0, bytes, 0, length)
   result
 }
+
+/// ToUtf16 is a workaround since the standard library does not make
+/// it easy to read a standard utf8 string.
+/// https://github.com/moonbitlang/core/issues/484
+pub trait ToUtf16 {
+  to_utf16(Self) -> String
+}
+
+pub fn ToUtf16::to_utf16(b : Bytes) -> String {
+  // TODO: Make a real UTF-8 => UTF-16 converter.
+  // For now, support ASCII.
+  // https://github.com/moonbitlang/core/issues/484
+  let length = b.length()
+  let buf = Buffer::make(2 * length)
+  let mut i = 0
+  while i < length {
+    buf.write_char(Char::from_int(b[i].to_int()))
+    i += 1
+  }
+  buf.to_string()
+}

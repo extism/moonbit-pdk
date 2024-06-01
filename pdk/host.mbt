@@ -12,20 +12,9 @@ pub fn Host::input() -> Bytes {
   value
 }
 
-/// Host::inputString returns a string from the host.
+/// Host::inputString returns a (utf-16) String from the host.
 pub fn Host::inputString() -> String {
-  let bytes = Host::input()
-  // TODO: Make a real UTF-8 => UTF-16 converter.
-  // For now, support ASCII.
-  // https://github.com/moonbitlang/core/issues/484
-  let length = bytes.length()
-  let buf = Buffer::make(2 * length)
-  let mut i = 0
-  while i < length {
-    buf.write_char(Char::from_int(bytes[i].to_int()))
-    i += 1
-  }
-  buf.to_string()
+  Host::input() |> ToUtf16::to_utf16()
 }
 
 /// Host::output sends a sequence of bytes to the host.
