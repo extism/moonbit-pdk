@@ -30,28 +30,10 @@ var (
 	prefix    = flag.String("prefix", "$@gmlewis/moonbit-pdk/pdk.Host::output_string.fn/", "Prefix to search for in *.wat files for shim function")
 )
 
-// workarounds is a list of substitutions needed in order to get the MoonBit compiler
-// output to match what Extism is expecting:
-var workarounds = map[*regexp.Regexp]string{
-	// store_u8
-	regexp.MustCompile(`\(import "extism:host/env" "store_u8"\)
- \(param i64\) \(param i32\) \(result i32\)\)`): `(import "extism:host/env" "store_u8")
- (param i64) (param i32))`,
-	regexp.MustCompile(`(\(call \$extism:host/env\.store_u8\.\d+\))`): `$1 (i32.const 0)`,
-	// output_set
-	regexp.MustCompile(`\(import "extism:host/env" "output_set"\)
- \(param i64\) \(param i64\) \(result i32\)\)`): `(import "extism:host/env" "output_set")
- (param i64) (param i64))`,
-	regexp.MustCompile(`(\(call \$extism:host/env\.output_set\.\d+\))`): `$1 (i32.const 0)`,
-	// var_set
-	regexp.MustCompile(`\(import "extism:host/env" "var_set"\)
- \(param i64\) \(param i64\) \(result i32\)\)`): `(import "extism:host/env" "var_set")
- (param i64) (param i64))`,
-	regexp.MustCompile(`(\(call \$extism:host/env\.var_set\.\d+\))`): `$1 (i32.const 0)`,
-}
-
 func main() {
 	flag.Parse()
+
+	workarounds := genWorkarounds()
 
 	fileSystem := os.DirFS(*dir)
 	fs.WalkDir(fileSystem, ".", func(path string, d fs.DirEntry, err error) error {
@@ -59,7 +41,7 @@ func main() {
 			log.Fatal(err)
 		}
 		if strings.HasSuffix(path, ".wat") {
-			processFile(filepath.Join(*dir, path))
+			processFile(filepath.Join(*dir, path), workarounds)
 		}
 		return nil
 	})
@@ -67,7 +49,7 @@ func main() {
 	log.Printf("Done.")
 }
 
-func processFile(path string) {
+func processFile(path string, workarounds map[*regexp.Regexp]string) {
 	wasmPath := strings.TrimSuffix(path, "wat") + "wasm"
 	// log.Printf("Adding shim from %v to %v ...", path, wasmPath)
 	b, err := os.ReadFile(path)
@@ -123,4 +105,39 @@ func must(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+var unitMethods = []string{
+	"free",
+	"output_set",
+	"error_set",
+	"var_set",
+	"store_u8",
+	"store_u64",
+	"log_warn",
+	"log_info",
+	"log_debug",
+	"log_error",
+}
+
+// Currently, every MoonBit external method that returns nothing (i.e. `-> Unit`) is
+// set to return an i32 in the code.
+// genWorkarounds generates a collection of regular expressions used to rewrite
+// the WAT and fix the broken code.
+func genWorkarounds() map[*regexp.Regexp]string {
+	workarounds := map[*regexp.Regexp]string{}
+
+	const hostEnv = "extism:host/env"
+	for _, method := range unitMethods {
+		// strip the i32 return type:
+		regStr := fmt.Sprintf(`(?s)(\(import %q %q\).*?) \(result i32\)\)`, hostEnv, method)
+		re := regexp.MustCompile(regStr)
+		workarounds[re] = `$1)`
+		// wherever it is called, inject a 0 value:
+		regStr = fmt.Sprintf(`(\(call \$%v\.%v\.\d+\))`, hostEnv, method)
+		re = regexp.MustCompile(regStr)
+		workarounds[re] = "$1 (i32.const 0)"
+	}
+
+	return workarounds
 }
