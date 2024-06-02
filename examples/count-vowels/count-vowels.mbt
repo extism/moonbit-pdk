@@ -41,8 +41,13 @@ pub fn count_vowels() -> Int {
   // total += count
   // store_total(total)
   //
-  let output = { count: 0, total: 0, vowels: "I got: input=\(input)" }
-  let j = @jsonutil.to_json(output)
-  @pdk.Host::output_json_value(j)
-  return 0
+  { count: 1, total: 2, vowels: "I got: input=\(input)" }
+  |> @jsonutil.to_json()
+  |> @pdk.Host::output_json_value()
+  // WHY DOES :THIS: ^^^ output "{count:null,total:null,vowels:null}"  ?!?!?
+  // @jsonutil.stringify(j, spaces=0, newline=false) |> @pdk.Host::output_string()
+  // let s = @jsonutil.stringify(j, spaces=0, newline=false)
+  // @pdk.Host::output_string(s)
+  // @pdk.Host::output_string("{count:1,total:2,vowels:\"some string\"}")
+  0 // success
 }
