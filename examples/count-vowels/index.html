@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+  <script>
+    function prototype_to_ffi(prototype) {
+      return Object.fromEntries(
+        Object.entries(Object.getOwnPropertyDescriptors(prototype))
+          .filter(([_key, value]) => value.value)
+          .map(([key, value]) => {
+            if (typeof value.value == 'function')
+              return [key, Function.prototype.call.bind(value.value)]
+            else
+              return [key, () => value.value]
+          })
+      )
+    }
+
+    const [log, flush] = (() => {
+      var buffer = []
+      function flush() {
+        if (buffer.length > 0) {
+          console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()))
+          buffer = []
+        }
+      }
+      function log(ch) {
+        if (ch == '\n'.charCodeAt(0)) { flush() }
+        else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
+        else { buffer.push(ch) }
+      }
+      return [log, flush]
+    })()
+
+
+
+    const importObject = {
+      "extism:host/env": {
+        alloc: (length) => new Uint8Array(Number(length)),
+        output_set: (args) => console.log('extism:host/env.output_set', args),
+        store_u8: (args) => console.log('extism:host/env.store_u8', args),
+        yo: () => console.log('extism:host/env.yo'),
+      },
+      spectest: {
+        print_char: log
+      },
+    }
+
+    WebAssembly.instantiateStreaming(fetch("/target/wasm-gc/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
+      (obj) => {
+        obj.instance.exports._start()
+        obj.instance.exports["count_vowels"]()
+        flush()
+      }
+    )
+  </script>
+</body>
+
+</html>
