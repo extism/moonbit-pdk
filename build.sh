@@ -1,6 +1,7 @@
 #!/bin/bash -ex
 
 # wasm-gc is useful for debugging in the browser:
+moon build --target wasm-gc --output-wat
 moon build --target wasm-gc
 
 # Due to this current MoonBit issue: https://github.com/moonbitlang/core/issues/480
