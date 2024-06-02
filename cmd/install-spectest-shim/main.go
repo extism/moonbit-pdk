@@ -85,7 +85,9 @@ func processFile(path string, workarounds map[*regexp.Regexp]string) {
 		log.Fatalf("unable to find bad import starting with prefix %v", *badImport)
 	}
 
-	finalOut := strings.ReplaceAll(strings.Join(out, "\n"), *from, shimFunc)
+	finalOut := strings.Join(out, "\n")
+	// log.Printf("Replacing:\n%v\nwith:\n%v", *from, shimFunc)
+	finalOut = strings.ReplaceAll(finalOut, *from, shimFunc)
 
 	// Now process all workaround substitutions:
 	for re, toStr := range workarounds {

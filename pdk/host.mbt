@@ -17,8 +17,7 @@ pub fn Host::input_string() -> String {
   Host::input() |> ToUtf16::to_utf16()
 }
 
-/// Host::output sends a sequence of bytes to the host.
-pub fn Host::output(b : Bytes) -> Unit {
+fn output_memory(b : Bytes) -> Memory {
   let length = b.length().to_int64()
   let offset = alloc(length)
   let mut i = 0
@@ -26,6 +25,12 @@ pub fn Host::output(b : Bytes) -> Unit {
     store_u8(offset + i.to_int64(), b[i])
     i += 1
   }
+  { offset, length }
+}
+
+/// Host::output sends a sequence of bytes to the host.
+pub fn Host::output(b : Bytes) -> Unit {
+  let { offset, length } = output_memory(b)
   output_set(offset, length)
 }
 
@@ -43,4 +48,28 @@ pub fn Host::output_string(s : String) -> Unit {
 /// and sends it to the host.
 pub fn Host::output_json_value(j : @json.JsonValue) -> Unit {
   @jsonutil.stringify(j, spaces=0, newline=false) |> Host::output_string()
+}
+
+/// Host::log_warn_str is a helper function to log a warn string to the host.
+pub fn Host::log_warn_str(s : String) -> Unit {
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
+  log_warn(offset)
+}
+
+/// Host::log_info_str is a helper function to log a info string to the host.
+pub fn Host::log_info_str(s : String) -> Unit {
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
+  log_info(offset)
+}
+
+/// Host::log_debug_str is a helper function to log a debug string to the host.
+pub fn Host::log_debug_str(s : String) -> Unit {
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
+  log_debug(offset)
+}
+
+/// Host::log_error_str is a helper function to log a error string to the host.
+pub fn Host::log_error_str(s : String) -> Unit {
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
+  log_error(offset)
 }

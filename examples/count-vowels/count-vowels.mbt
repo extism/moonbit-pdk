@@ -31,6 +31,8 @@ fn get_vowels() -> String {
 }
 
 pub fn count_vowels() -> Int {
+  @pdk.Host::log_debug_str("ENTER count_vowels")
+  //
   let input = @pdk.Host::input_string()
   // println("count_vowels: input=\(input)")
   //

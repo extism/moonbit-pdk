@@ -33,6 +33,7 @@ pub fn ToUtf16::to_utf16(b : Bytes) -> String {
   // For now, support ASCII.
   // https://github.com/moonbitlang/core/issues/484
   let length = b.length()
+  Host::log_debug_str("ToUtf16::to_utf16: b.length=\(length)")
   let buf = Buffer::make(2 * length)
   let mut i = 0
   while i < length {

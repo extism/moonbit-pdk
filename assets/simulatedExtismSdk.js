@@ -86,6 +86,10 @@ export const importObject = {
       // console.log(`load_u8(${offset}) = ${byte}`)
       return byte
     },
+    log_info: (offset) => console.info(`log_info: ${decodeOffset(offset)}`),
+    log_debug: (offset) => console.log(`log_debug: ${decodeOffset(offset)}`),
+    log_error: (offset) => console.error(`log_error: ${decodeOffset(offset)}`),
+    log_warn: (offset) => console.warn(`log_warn: ${decodeOffset(offset)}`),
     output_set: (offset) => console.log(decodeOffset(offset)),
     store_u8: (offsetBigInt, byte) => {
       const offset = Number(offsetBigInt)
