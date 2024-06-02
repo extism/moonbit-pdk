@@ -40,6 +40,7 @@ These plugins work (with the caveat that full UTF-8 input is not yet supported,
 only ASCII input currently works for strings):
 
 * [greet](examples/greet/)
+
   e.g. `./scripts/greet.sh 'My Name'`
 
 These examples don't yet work:
