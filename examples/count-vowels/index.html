@@ -5,6 +5,23 @@
 
 <body>
   <script>
+    // useful for debugging the wasm-gc target with `println()`:
+    const [log, flush] = (() => {
+      var buffer = []
+      function flush() {
+        if (buffer.length > 0) {
+          console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()))
+          buffer = []
+        }
+      }
+      function log(ch) {
+        if (ch == '\n'.charCodeAt(0)) { flush() }
+        else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
+        else { buffer.push(ch) }
+      }
+      return [log, flush]
+    })()
+
     const memory = new WebAssembly.Memory({ initial: 1, maximum: 1, shared: false })
     const fakeAlloc = { offset: 0, buffers: {} }
     const alloc = (lengthBigInt) => {
@@ -27,11 +44,11 @@
     }
     const decodeOffset = (offset) => new TextDecoder().decode(fakeAlloc.buffers[offset].buffer)
     const configs = {
-      'vowels': 'aeiouAEIOU',
+      'vowels': 'aeiouyAEIOUY',
     }
     const vars = {}  // no vars to start with
 
-    const inputString = 'Once upon a dream'
+    let inputString = ''
 
     const importObject = {
       "extism:host/env": {
@@ -59,15 +76,19 @@
         },
         load_u8: (offsetBigInt) => {
           const offset = Number(offsetBigInt)
-          Object.keys(fakeAlloc.buffers).forEach((key) => {
+          const bs = Object.keys(fakeAlloc.buffers).filter((key) => {
             const b = fakeAlloc.buffers[key]
-            if (offset >= b.offset && offset < b.offset + b.length) {
-              const byte = b.buffer[offset - key]
-              console.log(`load_u8(${offset}) = ${byte}`)
-              return byte
-            }
+            return (offset >= b.offset && offset < b.offset + b.length)
           })
-          return 0
+          if (bs.length !== 1) {
+            console.error(`load_u8: offset ${offset} not found`)
+            return 0
+          }
+          const key = bs[0]
+          const b = fakeAlloc.buffers[key]
+          const byte = b.buffer[offset - key]
+          console.log(`load_u8(${offset}) = ${byte}`)
+          return byte
         },
         output_set: (offset) => console.log(decodeOffset(offset)),
         store_u8: (offsetBigInt, byte) => {
@@ -97,12 +118,17 @@
           vars[key] = bufOffsetBigInt
         },
       },
+      spectest: { print_char: log },
     }
 
-    WebAssembly.instantiateStreaming(fetch("/target/wasm/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
+    WebAssembly.instantiateStreaming(fetch("/target/wasm-gc/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
       (obj) => {
         obj.instance.exports._start()
+        inputString = 'Once upon a dream'
         obj.instance.exports["count_vowels"]()
+        inputString = 'eight more vowels yo'
+        obj.instance.exports["count_vowels"]()
+        flush()
       }
     )
   </script>

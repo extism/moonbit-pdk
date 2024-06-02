@@ -54,10 +54,16 @@ pub fn to_int(self : Memory) -> Int {
 /// to_bytes reads the bytes residing in the host memory
 /// to a MoonBit Bytes.
 pub fn to_bytes(self : Memory) -> Bytes {
+  let offset = self.offset // MoonBit compiler workaround
+  let length = self.length // ditto
+  println("Memory.to_bytes: offset=\(offset), length=\(length)")
+  //
   let bytes = Bytes::make(self.length.to_int())
   let mut i = 0L
   while i < self.length {
-    bytes[i.to_int()] = load_u8(self.offset + i)
+    let byte = load_u8(self.offset + i)
+    println("Memory.to_bytes: bytes[\(i)]=\(byte)")
+    bytes[i.to_int()] = byte
     i += 1L
   }
   bytes

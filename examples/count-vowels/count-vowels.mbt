@@ -32,16 +32,19 @@ fn get_vowels() -> String {
 
 pub fn count_vowels() -> Int {
   let input = @pdk.Host::input_string()
+  println("count_vowels: input=\(input)")
   //
   let vowels = get_vowels()
+  println("count_vowels: vowels=\(vowels)")
   let vowels_arr = vowels.to_array()
+  println("count_vowels: vowels_arr=\(vowels_arr)")
   let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
   //
   let mut total = get_total()
   total += count
   store_total(total)
   //
-  { count: 1, total: 2, vowels: "I got: input=\(input)" }
+  { count, total, vowels }
   |> @jsonutil.to_json()
   |> @pdk.Host::output_json_value()
   0 // success
