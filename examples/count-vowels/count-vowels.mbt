@@ -1,4 +1,4 @@
-pub let vowels = "aeiouAEIOU"
+let vowels = "aeiouAEIOU"
 
 pub struct VowelReport {
   count : Int
@@ -12,18 +12,18 @@ impl @jsonutil.ToJson for VowelReport with to_json(self) {
   )
 }
 
-pub fn get_total() -> Int {
+fn get_total() -> Int {
   match @pdk.Var::get_int("total") {
     Some(total) => total
     None => 0
   }
 }
 
-pub fn store_total(total : Int) -> Unit {
+fn store_total(total : Int) -> Unit {
   @pdk.Var::set_int("total", total)
 }
 
-pub fn get_vowels() -> String {
+fn get_vowels() -> String {
   match @pdk.Config::get("vowels") {
     Some(s) => s
     _ => vowels
@@ -31,24 +31,18 @@ pub fn get_vowels() -> String {
 }
 
 pub fn count_vowels() -> Int {
-  // let input = @pdk.Host::input_string()
+  let input = @pdk.Host::input_string()
   //
-  // let vowels = get_vowels()
-  // let vowels_arr = vowels.to_array()
-  // let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
-  // //
-  // let mut total = get_total()
-  // total += count
-  // store_total(total)
+  let vowels = get_vowels()
+  let vowels_arr = vowels.to_array()
+  let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
   //
-  // { count: 1, total: 2, vowels: "I got: input=\(input)" }
-  { count: 1, total: 2, vowels: "What the heck?!?" }
+  let mut total = get_total()
+  total += count
+  store_total(total)
+  //
+  { count: 1, total: 2, vowels: "I got: input=\(input)" }
   |> @jsonutil.to_json()
   |> @pdk.Host::output_json_value()
-  // WHY DOES :THIS: ^^^ output: {"count":null,"total":null,"vowels":null}  when the unit test passes?!?!?
-  // @jsonutil.stringify(j, spaces=0, newline=false) |> @pdk.Host::output_string()
-  // let s = @jsonutil.stringify(j, spaces=0, newline=false)
-  // @pdk.Host::output_string(s)
-  // @pdk.Host::output_string("{count:1,total:2,vowels:\"some string\"}")
   0 // success
 }
