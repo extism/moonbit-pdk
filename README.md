@@ -7,7 +7,9 @@ This is an experimental [Extism PDK] for the [MoonBit] programming language.
 
 ## Build
 
-Before building, you must have already installed the MoonBit programming language.
+Before building, you must have already installed the MoonBit programming language
+and the [Extism CLI tool].
+
 To install MoonBit, follow the instructions here (it is super-easy with VSCode):
 https://www.moonbitlang.com/download/
 
@@ -20,6 +22,7 @@ Then, to build this PDK, clone the repo, and type:
 $ ./build.sh
 ```
 
+[Extism CLI tool]: https://extism.org/docs/install/
 [issue with MoonBit]: https://github.com/moonbitlang/core/issues/480
 [wasm-merge]: https://github.com/WebAssembly/binaryen?tab=readme-ov-file#wasm-merge
 [wat2wasm]: https://github.com/WebAssembly/wabt?tab=readme-ov-file#running-wat2wasm
