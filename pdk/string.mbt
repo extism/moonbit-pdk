@@ -38,7 +38,7 @@ pub fn ToUtf16::to_utf16(b : Bytes) -> String {
   while i < length {
     let byte = b[i].to_int()
     let char = Char::from_int(byte)
-    println("to_utf16: b[\(i)]=\(byte)=\(char)")
+    // println("to_utf16: b[\(i)]=\(byte)=\(char)")
     buf.write_char(char)
     i += 1
   }

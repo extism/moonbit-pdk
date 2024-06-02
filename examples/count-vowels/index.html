@@ -56,7 +56,7 @@
         config_get: (offsetBigInt) => {
           const offset = Number(offsetBigInt)
           const key = decodeOffset(offset)
-          console.log(`config_get(${offset}) = configs[${key}] = ${configs[key]}`)
+          // console.log(`config_get(${offset}) = configs[${key}] = ${configs[key]}`)
           if (!configs[key]) { return BigInt(0) }
           return allocAndCopy(configs[key])
         },
@@ -71,7 +71,7 @@
           const offset = Number(offsetBigInt)
           const b = fakeAlloc.buffers[offset]
           if (!b) { return BigInt(0) }
-          console.log(`length(${offset}) = ${b.length}`)
+          // console.log(`length(${offset}) = ${b.length}`)
           return BigInt(b.length)
         },
         load_u8: (offsetBigInt) => {
@@ -87,7 +87,7 @@
           const key = bs[0]
           const b = fakeAlloc.buffers[key]
           const byte = b.buffer[offset - key]
-          console.log(`load_u8(${offset}) = ${byte}`)
+          // console.log(`load_u8(${offset}) = ${byte}`)
           return byte
         },
         output_set: (offset) => console.log(decodeOffset(offset)),
@@ -97,24 +97,24 @@
             const b = fakeAlloc.buffers[key]
             if (offset >= b.offset && offset < b.offset + b.length) {
               b.buffer[offset - key] = byte
-              console.log(`store_u8(${offset})=${byte}`)
-              if (offset == b.offset + b.length - 1) {
-                console.log(`store_u8 completed offset=${key}..${offset}, length=${b.length}: '${decodeOffset(key)}'`)
-              }
+              // console.log(`store_u8(${offset})=${byte}`)
+              // if (offset == b.offset + b.length - 1) {
+              //   console.log(`store_u8 completed offset=${key}..${offset}, length=${b.length}: '${decodeOffset(key)}'`)
+              // }
             }
           })
         },
         var_get: (offsetBigInt) => {
           const offset = Number(offsetBigInt)
           const key = decodeOffset(offset)
-          console.log(`var_get(${offset}) = vars[${key}] = ${vars[key]}`)
+          // console.log(`var_get(${offset}) = vars[${key}] = ${vars[key]}`)
           if (!vars[key]) { return BigInt(0) }
           return vars[key]  // BigInt
         },
         var_set: (offsetBigInt, bufOffsetBigInt) => {
           const offset = Number(offsetBigInt)
           const key = decodeOffset(offset)
-          console.log(`var_set(${offset}, ${bufOffsetBigInt}) = vars[${key}]`)
+          // console.log(`var_set(${offset}, ${bufOffsetBigInt}) = vars[${key}]`)
           vars[key] = bufOffsetBigInt
         },
       },
