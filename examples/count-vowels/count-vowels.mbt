@@ -31,18 +31,18 @@ fn get_vowels() -> String {
 }
 
 pub fn count_vowels() -> Int {
-  let input = @pdk.Host::inputString()
+  let input = @pdk.Host::input_string()
   //
-  let vowels = get_vowels()
-  let vowels_arr = vowels.to_array()
-  let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
+  // let vowels = get_vowels()
+  // let vowels_arr = vowels.to_array()
+  // let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
+  // //
+  // let mut total = get_total()
+  // total += count
+  // store_total(total)
   //
-  let mut total = get_total()
-  total += count
-  store_total(total)
-  //
-  let output = { count, total, vowels }
+  let output = { count: 0, total: 0, vowels: "I got: input=\(input)" }
   let j = @jsonutil.to_json(output)
-  @pdk.Host::outputJsonValue(j)
+  @pdk.Host::output_json_value(j)
   return 0
 }

@@ -12,8 +12,8 @@ pub fn Host::input() -> Bytes {
   value
 }
 
-/// Host::inputString returns a (utf-16) String from the host.
-pub fn Host::inputString() -> String {
+/// Host::input_string returns a (utf-16) String from the host.
+pub fn Host::input_string() -> String {
   Host::input() |> ToUtf16::to_utf16()
 }
 
@@ -33,14 +33,14 @@ pub fn Host::output(b : Bytes) -> Unit {
 //   output_set(s.offset, s.length)
 // }
 
-/// Host::outputString converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
+/// Host::output_string converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
 /// and sends it to the host.
-pub fn Host::outputString(s : String) -> Unit {
+pub fn Host::output_string(s : String) -> Unit {
   ToUtf8::to_utf8(s) |> Host::output()
 }
 
-/// Host::outputJsonValue converts a MoonBit @json.JsonValue to an Extism JSON string
+/// Host::output_json_value converts a MoonBit @json.JsonValue to an Extism JSON string
 /// and sends it to the host.
-pub fn Host::outputJsonValue(j : @json.JsonValue) -> Unit {
-  @jsonutil.stringify(j, spaces=0, newline=false) |> Host::outputString()
+pub fn Host::output_json_value(j : @json.JsonValue) -> Unit {
+  @jsonutil.stringify(j, spaces=0, newline=false) |> Host::output_string()
 }

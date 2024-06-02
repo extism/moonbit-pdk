@@ -27,7 +27,7 @@ var (
 	dir       = flag.String("dir", "target/wasm/release/build", "Directory to search for *.wat files")
 	badImport = flag.String("import", `(import "spectest" "print_char"`, "Start of bad import line to replace")
 	from      = flag.String("from", "$printc", "Name of internal function being replaced with shim")
-	prefix    = flag.String("prefix", "$@gmlewis/moonbit-pdk/pdk.Host::outputString.fn/", "Prefix to search for in *.wat files for shim function")
+	prefix    = flag.String("prefix", "$@gmlewis/moonbit-pdk/pdk.Host::output_string.fn/", "Prefix to search for in *.wat files for shim function")
 )
 
 // workarounds is a list of substitutions needed in order to get the MoonBit compiler
