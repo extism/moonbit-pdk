@@ -34,22 +34,30 @@
       return [log, flush]
     })()
 
-
+    const memory = new WebAssembly.Memory({ initial: 1, maximum: 1, shared: false })
+    const fakeAlloc = { offset: 0, buffers: [] }
 
     const importObject = {
+      "$moonbit.memory": memory,
       "extism:host/env": {
-        alloc: (length) => new Uint8Array(Number(length)),
-        output_set: (args) => console.log('extism:host/env.output_set', args),
-        store_u8: (args) => console.log('extism:host/env.store_u8', args),
-        yo: () => console.log('extism:host/env.yo'),
+        alloc: (length) => {
+          const offset = fakeAlloc.offset
+          fakeAlloc.buffers.push(new Uint8Array(memory.buffer, offset, Number(length)))
+          fakeAlloc.offset += Number(length)
+          return BigInt(offset)
+        },
+        output_set: (offset) => console.log(new TextDecoder().decode(fakeAlloc.buffers[0])),
+        store_u8: (offset, byte) => fakeAlloc.buffers[0][Number(offset)] = byte,
       },
       spectest: {
         print_char: log
       },
     }
 
-    WebAssembly.instantiateStreaming(fetch("/target/wasm-gc/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
+    WebAssembly.instantiateStreaming(fetch("/target/wasm/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
       (obj) => {
+        console.log(`Object.keys(obj.module)=${Object.keys(obj.module)}`)
+        console.log(`Object.keys(obj.instance)=${Object.keys(obj.instance)}`)
         obj.instance.exports._start()
         obj.instance.exports["count_vowels"]()
         flush()
