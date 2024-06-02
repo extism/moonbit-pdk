@@ -31,7 +31,7 @@ fn get_vowels() -> String {
 }
 
 pub fn count_vowels() -> Int {
-  let input = @pdk.Host::input_string()
+  // let input = @pdk.Host::input_string()
   //
   // let vowels = get_vowels()
   // let vowels_arr = vowels.to_array()
@@ -41,10 +41,11 @@ pub fn count_vowels() -> Int {
   // total += count
   // store_total(total)
   //
-  { count: 1, total: 2, vowels: "I got: input=\(input)" }
+  // { count: 1, total: 2, vowels: "I got: input=\(input)" }
+  { count: 1, total: 2, vowels: "What the heck?!?" }
   |> @jsonutil.to_json()
   |> @pdk.Host::output_json_value()
-  // WHY DOES :THIS: ^^^ output: {"count":null,"total":null,"vowels":null}  ?!?!?
+  // WHY DOES :THIS: ^^^ output: {"count":null,"total":null,"vowels":null}  when the unit test passes?!?!?
   // @jsonutil.stringify(j, spaces=0, newline=false) |> @pdk.Host::output_string()
   // let s = @jsonutil.stringify(j, spaces=0, newline=false)
   // @pdk.Host::output_string(s)
