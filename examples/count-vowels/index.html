@@ -5,40 +5,10 @@
 
 <body>
   <script>
-    // function prototype_to_ffi(prototype) {
-    //   return Object.fromEntries(
-    //     Object.entries(Object.getOwnPropertyDescriptors(prototype))
-    //       .filter(([_key, value]) => value.value)
-    //       .map(([key, value]) => {
-    //         if (typeof value.value == 'function')
-    //           return [key, Function.prototype.call.bind(value.value)]
-    //         else
-    //           return [key, () => value.value]
-    //       })
-    //   )
-    // }
-
-    // const [log, flush] = (() => {
-    //   var buffer = []
-    //   function flush() {
-    //     if (buffer.length > 0) {
-    //       console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()))
-    //       buffer = []
-    //     }
-    //   }
-    //   function log(ch) {
-    //     if (ch == '\n'.charCodeAt(0)) { flush() }
-    //     else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
-    //     else { buffer.push(ch) }
-    //   }
-    //   return [log, flush]
-    // })()
-
     const memory = new WebAssembly.Memory({ initial: 1, maximum: 1, shared: false })
     const fakeAlloc = { offset: 0, buffers: {} }
 
     const importObject = {
-      // "$moonbit.memory": memory,  // not required.
       "extism:host/env": {
         alloc: (lengthBigInt) => {
           const offset = fakeAlloc.offset
@@ -62,14 +32,12 @@
           })
         },
       },
-      // spectest: { print_char: log },  // not required
     }
 
     WebAssembly.instantiateStreaming(fetch("/target/wasm/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
       (obj) => {
         obj.instance.exports._start()
         obj.instance.exports["count_vowels"]()
-        // flush()
       }
     )
   </script>
