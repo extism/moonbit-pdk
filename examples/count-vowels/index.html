@@ -121,7 +121,8 @@
       spectest: { print_char: log },
     }
 
-    WebAssembly.instantiateStreaming(fetch("/target/wasm-gc/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
+    // WebAssembly.instantiateStreaming(fetch("/target/wasm-gc/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
+    WebAssembly.instantiateStreaming(fetch("/target/wasm/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
       (obj) => {
         obj.instance.exports._start()
         inputString = 'Once upon a dream'
