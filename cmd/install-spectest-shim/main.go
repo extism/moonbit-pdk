@@ -33,14 +33,21 @@ var (
 // workarounds is a list of substitutions needed in order to get the MoonBit compiler
 // output to match what Extism is expecting:
 var workarounds = map[*regexp.Regexp]string{
+	// store_u8
 	regexp.MustCompile(`\(import "extism:host/env" "store_u8"\)
  \(param i64\) \(param i32\) \(result i32\)\)`): `(import "extism:host/env" "store_u8")
  (param i64) (param i32))`,
+	regexp.MustCompile(`(\(call \$extism:host/env\.store_u8\.\d+\))`): `$1 (i32.const 0)`,
+	// output_set
 	regexp.MustCompile(`\(import "extism:host/env" "output_set"\)
  \(param i64\) \(param i64\) \(result i32\)\)`): `(import "extism:host/env" "output_set")
  (param i64) (param i64))`,
-	regexp.MustCompile(`(\(call \$extism:host/env\.store_u8\.\d+\))`):   `$1 (i32.const 0)`,
 	regexp.MustCompile(`(\(call \$extism:host/env\.output_set\.\d+\))`): `$1 (i32.const 0)`,
+	// var_set
+	regexp.MustCompile(`\(import "extism:host/env" "var_set"\)
+ \(param i64\) \(param i64\) \(result i32\)\)`): `(import "extism:host/env" "var_set")
+ (param i64) (param i64))`,
+	regexp.MustCompile(`(\(call \$extism:host/env\.var_set\.\d+\))`): `$1 (i32.const 0)`,
 }
 
 func main() {

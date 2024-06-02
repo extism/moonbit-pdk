@@ -42,6 +42,15 @@ pub fn to_string(self : Memory) -> String {
   self.to_bytes() |> ToUtf16::to_utf16()
 }
 
+/// to_int reads and converts the i32 residing in the host memory
+/// to a MoonBit Int.
+pub fn to_int(self : Memory) -> Int {
+  let bytes = self.to_bytes()
+  bytes[0].to_int() + bytes[1].to_int().lsl(8) + bytes[2].to_int().lsl(16) + bytes[3].to_int().lsl(
+    24,
+  )
+}
+
 /// to_bytes reads the bytes residing in the host memory
 /// to a MoonBit Bytes.
 pub fn to_bytes(self : Memory) -> Bytes {

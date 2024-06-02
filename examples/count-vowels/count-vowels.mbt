@@ -13,15 +13,14 @@ impl @jsonutil.ToJson for VowelReport with to_json(self) {
 }
 
 fn get_total() -> Int {
-  match @pdk.Var::get("total") {
-    Ok(Some(v)) => v
-    Ok(None) => 0
-    Err(_) => abort("Couldn't access extism variable 'total'")
+  match @pdk.Var::get_int("total") {
+    Some(total) => total
+    None => 0
   }
 }
 
 fn store_total(total : Int) -> Unit {
-  @pdk.Var::set("total", total)
+  @pdk.Var::set_int("total", total)
 }
 
 fn get_vowels() -> String {
