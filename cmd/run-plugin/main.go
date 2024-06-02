@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	extism "github.com/extism/go-sdk"
 )
@@ -34,6 +35,9 @@ func main() {
 	config := extism.PluginConfig{}
 	plugin, err := extism.NewPlugin(ctx, manifest, config, []extism.HostFunction{})
 	if err != nil {
+		wd, _ := os.Getwd()
+		log.Printf("Current work dir: %v", wd)
+		log.Printf("Attempted to load: %v", filepath.Join(wd, *wasmFile))
 		fmt.Printf("Failed to initialize plugin: %v\n", err)
 		os.Exit(1)
 	}

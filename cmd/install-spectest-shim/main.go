@@ -69,7 +69,7 @@ func main() {
 
 func processFile(path string) {
 	wasmPath := strings.TrimSuffix(path, "wat") + "wasm"
-	log.Printf("Adding shim from %v to %v ...", path, wasmPath)
+	// log.Printf("Adding shim from %v to %v ...", path, wasmPath)
 	b, err := os.ReadFile(path)
 	must(err)
 
@@ -112,7 +112,7 @@ func processFile(path string) {
 
 	must(os.WriteFile(path, []byte(finalOut), 0644))
 
-	log.Printf("running: wat2wasm '%v' -o '%v'", path, wasmPath)
+	// log.Printf("running: wat2wasm '%v' -o '%v'", path, wasmPath)
 	cmdOut, err := exec.Command("wat2wasm", path, "-o", wasmPath).CombinedOutput()
 	if err != nil {
 		log.Fatalf("wat2wasm error: %v\n%s", err, cmdOut)

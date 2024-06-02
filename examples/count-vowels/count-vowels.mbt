@@ -1,4 +1,4 @@
-let vowels = "aeiouAEIOU"
+pub let vowels = "aeiouAEIOU"
 
 pub struct VowelReport {
   count : Int
@@ -12,18 +12,18 @@ impl @jsonutil.ToJson for VowelReport with to_json(self) {
   )
 }
 
-fn get_total() -> Int {
+pub fn get_total() -> Int {
   match @pdk.Var::get_int("total") {
     Some(total) => total
     None => 0
   }
 }
 
-fn store_total(total : Int) -> Unit {
+pub fn store_total(total : Int) -> Unit {
   @pdk.Var::set_int("total", total)
 }
 
-fn get_vowels() -> String {
+pub fn get_vowels() -> String {
   match @pdk.Config::get("vowels") {
     Some(s) => s
     _ => vowels
