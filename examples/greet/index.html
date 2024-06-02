@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+  <script>
+    const memory = new WebAssembly.Memory({ initial: 1, maximum: 1, shared: false })
+    const fakeAlloc = { offset: 0, buffers: {} }
+
+    const inputString = 'Benjamin'
+
+    const importObject = {
+      "extism:host/env": {
+        alloc: (lengthBigInt) => {
+          const offset = fakeAlloc.offset
+          const length = Number(lengthBigInt)
+          fakeAlloc.buffers[offset] = {
+            offset,
+            length,
+            buffer: new Uint8Array(memory.buffer, offset, length),
+          }
+          fakeAlloc.offset += length
+          return BigInt(offset)
+        },
+        input_length: () => {
+          // console.log(`input_length: ${inputString.length}`)
+          return BigInt(inputString.length)
+        },
+        input_load_u8: (offsetBigInt) => {
+          const offset = Number(offsetBigInt)
+          if (offset < inputString.length) {
+            // console.log(`input_load_u8(${offset}) = ${inputString.charCodeAt(offset)}`)
+            return inputString.charCodeAt(offset)
+          }
+          console.error(`input_load_u8: wasm requested offset(${offset}) > inputString.length(${inputString.length})`)
+          return 0
+        },
+        output_set: (offset) => console.log(new TextDecoder().decode(fakeAlloc.buffers[offset].buffer)),
+        store_u8: (offsetBigInt, byte) => {
+          const offset = Number(offsetBigInt)
+          Object.keys(fakeAlloc.buffers).forEach((key) => {
+            const b = fakeAlloc.buffers[key]
+            if (offset >= b.offset && offset < b.offset + b.length) {
+              b.buffer[offset - key] = byte
+            }
+          })
+        },
+      },
+    }
+
+    WebAssembly.instantiateStreaming(fetch("/target/wasm/release/build/examples/greet/greet.wasm"), importObject).then(
+      (obj) => {
+        obj.instance.exports._start()
+        obj.instance.exports["greet"]()
+      }
+    )
+  </script>
+</body>
+
+</html>
