@@ -54,7 +54,7 @@ Here's the current situation with `count-vowels`:
 
 * the unit test _WORKS_ (`moon test`)
 * simulating the Extism SDK in the browser _WORKS_ (`./scripts/python-server.sh` then open `examples/count-vowels/index.html` in Chrome)
-* running `count-vowels` with the Go SDK _FAILS_: `./scripts/go-run-count-vowels.sh`
+* running `count-vowels` with the Extism Go SDK _FAILS_: `./scripts/go-run-count-vowels.sh`
 * running `count-vowels` with the Extism CLI _FAILS_: `./run.sh`
 
 So apparently I'm not understanding something about Extism that I need to know.
