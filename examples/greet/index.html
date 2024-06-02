@@ -23,16 +23,10 @@
           fakeAlloc.offset += length
           return BigInt(offset)
         },
-        input_length: () => {
-          // console.log(`input_length: ${inputString.length}`)
-          return BigInt(inputString.length)
-        },
+        input_length: () => BigInt(inputString.length),
         input_load_u8: (offsetBigInt) => {
           const offset = Number(offsetBigInt)
-          if (offset < inputString.length) {
-            // console.log(`input_load_u8(${offset}) = ${inputString.charCodeAt(offset)}`)
-            return inputString.charCodeAt(offset)
-          }
+          if (offset < inputString.length) { return inputString.charCodeAt(offset) }
           console.error(`input_load_u8: wasm requested offset(${offset}) > inputString.length(${inputString.length})`)
           return 0
         },
