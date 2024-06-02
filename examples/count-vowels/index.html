@@ -5,62 +5,71 @@
 
 <body>
   <script>
-    function prototype_to_ffi(prototype) {
-      return Object.fromEntries(
-        Object.entries(Object.getOwnPropertyDescriptors(prototype))
-          .filter(([_key, value]) => value.value)
-          .map(([key, value]) => {
-            if (typeof value.value == 'function')
-              return [key, Function.prototype.call.bind(value.value)]
-            else
-              return [key, () => value.value]
-          })
-      )
-    }
+    // function prototype_to_ffi(prototype) {
+    //   return Object.fromEntries(
+    //     Object.entries(Object.getOwnPropertyDescriptors(prototype))
+    //       .filter(([_key, value]) => value.value)
+    //       .map(([key, value]) => {
+    //         if (typeof value.value == 'function')
+    //           return [key, Function.prototype.call.bind(value.value)]
+    //         else
+    //           return [key, () => value.value]
+    //       })
+    //   )
+    // }
 
-    const [log, flush] = (() => {
-      var buffer = []
-      function flush() {
-        if (buffer.length > 0) {
-          console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()))
-          buffer = []
-        }
-      }
-      function log(ch) {
-        if (ch == '\n'.charCodeAt(0)) { flush() }
-        else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
-        else { buffer.push(ch) }
-      }
-      return [log, flush]
-    })()
+    // const [log, flush] = (() => {
+    //   var buffer = []
+    //   function flush() {
+    //     if (buffer.length > 0) {
+    //       console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()))
+    //       buffer = []
+    //     }
+    //   }
+    //   function log(ch) {
+    //     if (ch == '\n'.charCodeAt(0)) { flush() }
+    //     else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
+    //     else { buffer.push(ch) }
+    //   }
+    //   return [log, flush]
+    // })()
 
     const memory = new WebAssembly.Memory({ initial: 1, maximum: 1, shared: false })
-    const fakeAlloc = { offset: 0, buffers: [] }
+    const fakeAlloc = { offset: 0, buffers: {} }
 
     const importObject = {
-      "$moonbit.memory": memory,
+      // "$moonbit.memory": memory,  // not required.
       "extism:host/env": {
-        alloc: (length) => {
+        alloc: (lengthBigInt) => {
           const offset = fakeAlloc.offset
-          fakeAlloc.buffers.push(new Uint8Array(memory.buffer, offset, Number(length)))
-          fakeAlloc.offset += Number(length)
+          const length = Number(lengthBigInt)
+          fakeAlloc.buffers[offset] = {
+            offset,
+            length,
+            buffer: new Uint8Array(memory.buffer, offset, length),
+          }
+          fakeAlloc.offset += length
           return BigInt(offset)
         },
-        output_set: (offset) => console.log(new TextDecoder().decode(fakeAlloc.buffers[0])),
-        store_u8: (offset, byte) => fakeAlloc.buffers[0][Number(offset)] = byte,
+        output_set: (offset) => console.log(new TextDecoder().decode(fakeAlloc.buffers[offset].buffer)),
+        store_u8: (offsetBigInt, byte) => {
+          const offset = Number(offsetBigInt)
+          Object.keys(fakeAlloc.buffers).forEach((key) => {
+            const b = fakeAlloc.buffers[key]
+            if (offset >= b.offset && offset < b.offset + b.length) {
+              b.buffer[offset - key] = byte
+            }
+          })
+        },
       },
-      spectest: {
-        print_char: log
-      },
+      // spectest: { print_char: log },  // not required
     }
 
     WebAssembly.instantiateStreaming(fetch("/target/wasm/release/build/examples/count-vowels/count-vowels.wasm"), importObject).then(
       (obj) => {
-        console.log(`Object.keys(obj.module)=${Object.keys(obj.module)}`)
-        console.log(`Object.keys(obj.instance)=${Object.keys(obj.instance)}`)
         obj.instance.exports._start()
         obj.instance.exports["count_vowels"]()
-        flush()
+        // flush()
       }
     )
   </script>
