@@ -32,7 +32,9 @@ func main() {
 	}
 
 	ctx := context.Background()
-	config := extism.PluginConfig{}
+	config := extism.PluginConfig{
+		LogLevel: extism.LogLevelTrace,
+	}
 	plugin, err := extism.NewPlugin(ctx, manifest, config, []extism.HostFunction{})
 	if err != nil {
 		wd, _ := os.Getwd()
@@ -44,7 +46,7 @@ func main() {
 
 	exitCode, out, err := plugin.Call(*funcName, []byte(*input))
 	if err != nil {
-		log.Fatalf("exit code=%v: %v", exitCode, err)
+		log.Fatalf("exit code=%v: %v\nplugin.Call output:\n%s", exitCode, err, out)
 	}
 
 	fmt.Printf("%s\n", out)

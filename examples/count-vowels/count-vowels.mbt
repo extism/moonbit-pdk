@@ -34,10 +34,10 @@ pub fn count_vowels() -> Int {
   @pdk.Host::log_debug_str("ENTER count_vowels")
   //
   let input = @pdk.Host::input_string()
-  // println("count_vowels: input=\(input)")
+  @pdk.Host::log_debug_str("count_vowels: input=\(input)")
   //
   let vowels = get_vowels()
-  // println("count_vowels: vowels=\(vowels)")
+  @pdk.Host::log_debug_str("count_vowels: vowels=\(vowels)")
   let vowels_arr = vowels.to_array()
   // println("count_vowels: vowels_arr=\(vowels_arr)")
   let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
