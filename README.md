@@ -19,6 +19,7 @@ so the tool [`wat2wasm`] also needs to be available in your `$PATH`.
 Then, to build this PDK, clone the repo, and type:
 
 ```bash
+$ moon update
 $ moon install
 $ ./build.sh
 ```
