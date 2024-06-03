@@ -86,3 +86,6 @@ wasm stack trace:
 plugin.Call output:
 exit status 1
 ```
+
+This is the latest version that demonstrates the above problem:
+https://modsurfer.dylibso.com/module?hash=3e1b2f2808b048e89cc2d362bda2ced32d53591a3c25dc128c37c5352dc3dcf8
