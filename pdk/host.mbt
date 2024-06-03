@@ -54,22 +54,26 @@ pub fn Host::output_json_value(j : @json.JsonValue) -> Unit {
 pub fn Host::log_warn_str(s : String) -> Unit {
   let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
   log_warn(offset)
+  free(offset)
 }
 
 /// Host::log_info_str is a helper function to log a info string to the host.
 pub fn Host::log_info_str(s : String) -> Unit {
   let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
   log_info(offset)
+  free(offset)
 }
 
 /// Host::log_debug_str is a helper function to log a debug string to the host.
 pub fn Host::log_debug_str(s : String) -> Unit {
   let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
   log_debug(offset)
+  free(offset)
 }
 
 /// Host::log_error_str is a helper function to log a error string to the host.
 pub fn Host::log_error_str(s : String) -> Unit {
   let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
   log_error(offset)
+  free(offset)
 }
