@@ -56,6 +56,7 @@ export const importObject = {
       if (!configs[key]) { return BigInt(0) }
       return allocAndCopy(configs[key])
     },
+    free: () => { }, // noop for now.
     input_length: () => BigInt(inputString.value.length),
     input_load_u8: (offsetBigInt) => {
       const offset = Number(offsetBigInt)
