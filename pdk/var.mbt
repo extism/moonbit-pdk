@@ -16,21 +16,21 @@ pub fn Var::get_memory(key : String) -> Option[Memory] {
 pub fn Var::get_bytes(key : String) -> Option[Bytes] {
   match Var::get_memory(key) {
     Some(v) => Some(v.to_bytes())
-    _ => None
+    None => None
   }
 }
 
 pub fn Var::get_int(key : String) -> Option[Int] {
   match Var::get_memory(key) {
     Some(v) => Some(v.to_int())
-    _ => None
+    None => None
   }
 }
 
 pub fn Var::get_string(key : String) -> Option[String] {
   match Var::get_memory(key) {
     Some(v) => Some(v.to_string())
-    _ => None
+    None => None
   }
 }
 

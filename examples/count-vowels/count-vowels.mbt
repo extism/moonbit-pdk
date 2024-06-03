@@ -1,4 +1,4 @@
-let vowels = "aeiouAEIOU"
+let default_vowels = "aeiouAEIOU"
 
 pub struct VowelReport {
   count : Int
@@ -25,8 +25,16 @@ fn store_total(total : Int) -> Unit {
 
 fn get_vowels() -> String {
   match @pdk.Config::get("vowels") {
-    Some(s) => s
-    _ => vowels
+    Some(s) => {
+      @pdk.Host::log_debug_str("get_vowels: host returned vowels: \(s)")
+      s
+    }
+    None => {
+      @pdk.Host::log_debug_str(
+        "get_vowels: defaulting to built-in vowels: \(default_vowels)",
+      )
+      default_vowels
+    }
   }
 }
 
