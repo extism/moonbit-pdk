@@ -5,7 +5,7 @@
 
 <body>
   <script type="module">
-    import { flush, importObject, inputString } from '/assets/simulatedExtismSdk.js'
+    import { configs, flush, importObject, inputString } from '/assets/simulatedExtismSdk.js'
 
     const wasmUnderTest = '/target/wasm/release/build/examples/count-vowels/count-vowels.wasm'
 
@@ -14,6 +14,7 @@
       (obj) => {
         console.log('Using simulated Extism SDK...')
         obj.instance.exports._start()
+        // configs.vowels = 'aeiouyAEIOUY'
         inputString.value = 'Once upon a dream'
         obj.instance.exports['count_vowels']()
         inputString.value = 'eight more vowels yo'

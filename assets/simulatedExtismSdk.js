@@ -39,10 +39,8 @@ const allocAndCopy = (str) => {
   return offsetBigInt
 }
 const decodeOffset = (offset) => new TextDecoder().decode(fakeAlloc.buffers[offset].buffer)
-const configs = {
-  'vowels': 'aeiouyAEIOUY',
-}
-const vars = {}  // no vars to start with
+export const configs = {}  // no configs to start with
+export const vars = {}  // no vars to start with
 
 export const inputString = { value: '' }  // allows for exporting
 
