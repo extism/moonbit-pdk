@@ -28,6 +28,7 @@ var (
 	badImport = flag.String("import", `(import "spectest" "print_char"`, "Start of bad import line to replace")
 	from      = flag.String("from", "$printc", "Name of internal function being replaced with shim")
 	prefix    = flag.String("prefix", "$@gmlewis/moonbit-pdk/pdk.Host::output_string.fn/", "Prefix to search for in *.wat files for shim function")
+	watFlags  = flag.String("watflags", "", "Comma-separated list of flags to add to `wat2wasm`")
 )
 
 func main() {
@@ -96,8 +97,11 @@ func processFile(path string, workarounds map[*regexp.Regexp]string) {
 
 	must(os.WriteFile(path, []byte(finalOut), 0644))
 
-	// log.Printf("running: wat2wasm '%v' -o '%v'", path, wasmPath)
-	cmdOut, err := exec.Command("wat2wasm", path, "-o", wasmPath).CombinedOutput()
+	args := []string{"wat2wasm", path, "-o", wasmPath}
+	if *watFlags != "" {
+		args = append(args, strings.Split(*watFlags, ",")...)
+	}
+	cmdOut, err := exec.Command(args[0], args[1:]...).CombinedOutput()
 	if err != nil {
 		log.Fatalf("wat2wasm error: %v\n%s", err, cmdOut)
 	}
