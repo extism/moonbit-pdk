@@ -1,6 +1,6 @@
 pub struct Config {}
 
-pub fn Config::get_memory(key : String) -> Option[Memory] {
+pub fn Config::get_memory(key : String) -> Memory? {
   Host::log_debug_str("Config::get_memory(key=\(key))")
   let mem = Memory::allocate_string(key)
   let offset = config_get(mem.offset)
@@ -21,7 +21,7 @@ pub fn Config::get_memory(key : String) -> Option[Memory] {
   Some({ offset, length })
 }
 
-pub fn Config::get(key : String) -> Option[String] {
+pub fn Config::get(key : String) -> String? {
   match Config::get_memory(key) {
     Some(mem) => Some(mem.to_string())
     None => {

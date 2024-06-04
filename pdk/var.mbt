@@ -1,6 +1,6 @@
 pub struct Var {}
 
-pub fn Var::get_memory(key : String) -> Option[Memory] {
+pub fn Var::get_memory(key : String) -> Memory? {
   let mem = Memory::allocate_string(key)
   let offset = var_get(mem.offset)
   if offset == 0L {
@@ -13,21 +13,21 @@ pub fn Var::get_memory(key : String) -> Option[Memory] {
   Some({ offset, length })
 }
 
-pub fn Var::get_bytes(key : String) -> Option[Bytes] {
+pub fn Var::get_bytes(key : String) -> Bytes? {
   match Var::get_memory(key) {
     Some(v) => Some(v.to_bytes())
     None => None
   }
 }
 
-pub fn Var::get_int(key : String) -> Option[Int] {
+pub fn Var::get_int(key : String) -> Int? {
   match Var::get_memory(key) {
     Some(v) => Some(v.to_int())
     None => None
   }
 }
 
-pub fn Var::get_string(key : String) -> Option[String] {
+pub fn Var::get_string(key : String) -> String? {
   match Var::get_memory(key) {
     Some(v) => Some(v.to_string())
     None => None
