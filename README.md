@@ -13,9 +13,6 @@ and the [Extism CLI tool].
 To install MoonBit, follow the instructions here (it is super-easy with VSCode):
 https://www.moonbitlang.com/download/
 
-Additionally, there is currently an [issue with MoonBit] that needs a workaround,
-so the tool [`wat2wasm`] also needs to be available in your `$PATH`.
-
 Then, to build this PDK, clone the repo, and type:
 
 ```bash
@@ -25,9 +22,6 @@ $ ./build.sh
 ```
 
 [Extism CLI tool]: https://extism.org/docs/install/
-[issue with MoonBit]: https://github.com/moonbitlang/core/issues/480
-[wasm-merge]: https://github.com/WebAssembly/binaryen?tab=readme-ov-file#wasm-merge
-[wat2wasm]: https://github.com/WebAssembly/wabt?tab=readme-ov-file#running-wat2wasm
 
 ## Run
 
@@ -41,6 +35,13 @@ $ ./run.sh
 
 This PDK is just in its infancy.
 
+The code has been updated to support compiler version:
+
+```bash
+$ moon version
+moon 0.1.20240603 (c0289e3 2024-06-03)
+```
+
 These plugins work (with the caveat that full UTF-8 input is not yet supported,
 only ASCII input currently works for strings):
 
@@ -48,7 +49,7 @@ only ASCII input currently works for strings):
 
   e.g. `./scripts/greet.sh 'My Name'`
 
-These examples don't yet work:
+These examples partially work:
 
 * [count-vowels](examples/count-vowels/)
 
@@ -59,7 +60,9 @@ Here's the current situation with `count-vowels`:
 * running `count-vowels` with the Extism Go SDK _FAILS_: `./scripts/go-run-count-vowels.sh`
 * running `count-vowels` with the Extism CLI _FAILS_: `./run.sh`
 
-So apparently I'm not understanding something about Extism that I need to know.
+So apparently I'm not understanding something about Extism that I need to know
+because it appears that Chrome allows the wasm module to access all its memory
+but Extism doesn't.
 
 This section of code is somehow causing an out-of-bounds memory access:
 https://github.com/gmlewis/moonbit-pdk/blob/8682675a16ac3c461237a5a4665a580befca5f20/examples/count-vowels/count-vowels.mbt#L28-L37
@@ -88,6 +91,3 @@ wasm stack trace:
 plugin.Call output:
 exit status 1
 ```
-
-This is the latest version that demonstrates the above problem:
-https://modsurfer.dylibso.com/module?hash=3e1b2f2808b048e89cc2d362bda2ced32d53591a3c25dc128c37c5352dc3dcf8
