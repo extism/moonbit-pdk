@@ -25,33 +25,19 @@ fn store_total(total : Int) -> Unit {
 
 fn get_vowels() -> String {
   match @pdk.Config::get("vowels") {
-    Some(s) => {
-      @pdk.Host::log_debug_str("get_vowels: host returned vowels: \(s)")
-      s
-    }
-    None => {
-      @pdk.Host::log_debug_str(
-        "get_vowels: defaulting to built-in vowels: \(default_vowels)",
-      )
-      default_vowels
-    }
+    Some(s) => s
+    None => default_vowels
   }
 }
 
 pub fn count_vowels() -> Int {
-  @pdk.Host::log_debug_str("ENTER count_vowels")
-  //
   let input = @pdk.Host::input_string()
-  @pdk.Host::log_debug_str("count_vowels: input=\(input)")
   //
   let vowels = get_vowels()
-  @pdk.Host::log_debug_str("count_vowels: vowels=\(vowels)")
   let vowels_arr = vowels.to_array()
-  // println("count_vowels: vowels_arr=\(vowels_arr)")
   let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
   //
-  let mut total = get_total()
-  total += count
+  let total = get_total() + count
   store_total(total)
   //
   { count, total, vowels }

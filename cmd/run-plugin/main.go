@@ -36,7 +36,7 @@ func main() {
 	ctx := context.Background()
 	config := extism.PluginConfig{
 		EnableWasi: true,
-		LogLevel:   extism.LogLevelTrace,
+		// LogLevel:   extism.LogLevelTrace,
 	}
 	plugin, err := extism.NewPlugin(ctx, manifest, config, []extism.HostFunction{})
 	if err != nil {

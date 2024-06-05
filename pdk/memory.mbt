@@ -21,14 +21,12 @@ pub fn Memory::allocate(length : Int64) -> Memory {
 /// with the provided bytes.
 pub fn Memory::allocate_bytes(bytes : Bytes) -> Memory {
   let length = bytes.length().to_int64()
-  Host::log_debug_str("ENTER Memory::allocate_bytes: length=\(length)")
+  // Host::log_debug_str("ENTER Memory::allocate_bytes: length=\(length)")
   let offset = alloc(length)
   for i = 0L; i < length; i = i + 1L {
     store_u8(offset + i, bytes[i.to_int()])
   }
-  Host::log_debug_str(
-    "LEAVE Memory::allocate_bytes: offset=\(offset), length=\(length)",
-  )
+  // Host::log_debug_str("LEAVE Memory::allocate_bytes: offset=\(offset), length=\(length)")
   { offset, length }
 }
 
