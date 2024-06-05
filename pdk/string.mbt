@@ -5,6 +5,7 @@ pub trait ToUtf8 {
   to_utf8(Self) -> Bytes
 }
 
+/// `ToUtf8::to_utf8` converts the MoonBit (UTF-16) `String` to a UTF-8 encoded `Bytes`.
 pub fn ToUtf8::to_utf8(s : String) -> Bytes {
   let chars = s.to_array()
   // first, allocate the maximum possible length of the UTF-8 "string":
@@ -26,6 +27,7 @@ pub trait ToUtf16 {
   to_utf16(Self) -> String
 }
 
+/// `ToUtf16::to_utf16` converts a UTF-8 encoded `Bytes` to a MoonBit (UTF-16) `String`.
 pub fn ToUtf16::to_utf16(b : Bytes) -> String {
   // TODO: Make a real UTF-8 => UTF-16 converter.
   // For now, support ASCII.
