@@ -7,8 +7,8 @@ This is an experimental [Extism PDK] for the [MoonBit] programming language.
 
 ## Build
 
-Before building, you must have already installed the MoonBit programming language
-and the [Extism CLI tool].
+Before building, you must have already installed the MoonBit programming language,
+the [Go] programming language, and the [Extism CLI tool].
 
 To install MoonBit, follow the instructions here (it is super-easy with VSCode):
 https://www.moonbitlang.com/download/
@@ -22,6 +22,7 @@ $ ./build.sh
 ```
 
 [Extism CLI tool]: https://extism.org/docs/install/
+[Go]: https://go.dev/
 
 ## Run
 
@@ -49,21 +50,6 @@ only ASCII input currently works for strings):
 
   e.g. `./scripts/greet.sh 'My Name'`
 
-These examples partially work:
-
 * [count-vowels](examples/count-vowels/)
 
-Here's the current situation with `count-vowels`:
-
-* the unit test _WORKS_ (`moon test`)
-* simulating the Extism SDK in the browser _WORKS_ (`./scripts/python-server.sh` then open `examples/count-vowels/index.html` in Chrome)
-* running `count-vowels` with the Extism Go SDK _FAILS_: `./scripts/go-run-count-vowels.sh`
-* running `count-vowels` with the Extism CLI _FAILS_: `./run.sh`
-
-This demonstrates the current problem:
-
-```bash
-$ ./build.sh && ./scripts/go-run-count-vowels.sh
-...
-{"count":null,"total":null,"vowels":null}
-```
+  e.g. `./scripts/count-vowels.sh 'Once upon a dream'

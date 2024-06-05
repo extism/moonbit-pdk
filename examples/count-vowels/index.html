@@ -13,7 +13,7 @@
     WebAssembly.instantiateStreaming(fetch(wasmUnderTest), importObject).then(
       (obj) => {
         console.log('Using simulated Extism SDK...')
-        obj.instance.exports._start()
+        obj.instance.exports._initialize()
         // configs.vowels = 'aeiouyAEIOUY'
         inputString.value = 'Once upon a dream'
         obj.instance.exports['count_vowels']()
