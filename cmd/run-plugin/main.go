@@ -1,3 +1,5 @@
+// -*- compile-command: "go run main.go -wasm ../../target/wasm/release/build/examples/count-vowels/count-vowels.wasm"; -*-
+
 // run-plugin is a simple Go script that calls a Extism plugin.
 // In theory, it could be used to start up the delv debugger (https://github.com/go-delve/delve)
 // and allow you to step through the wasm code, although there must be a better way.
@@ -33,7 +35,8 @@ func main() {
 
 	ctx := context.Background()
 	config := extism.PluginConfig{
-		LogLevel: extism.LogLevelTrace,
+		EnableWasi: true,
+		LogLevel:   extism.LogLevelTrace,
 	}
 	plugin, err := extism.NewPlugin(ctx, manifest, config, []extism.HostFunction{})
 	if err != nil {

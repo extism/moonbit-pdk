@@ -4,10 +4,8 @@ pub struct Host {}
 pub fn Host::input() -> Bytes {
   let length = input_length().to_int()
   let value = Bytes::make(length)
-  let mut i = 0
-  while i < length {
+  for i = 0; i < length; i = i + 1 {
     value[i] = input_load_u8(i.to_int64())
-    i += 1
   }
   value
 }
@@ -20,10 +18,8 @@ pub fn Host::input_string() -> String {
 fn output_memory(b : Bytes) -> Memory {
   let length = b.length().to_int64()
   let offset = alloc(length)
-  let mut i = 0
-  while i < length.to_int() {
+  for i = 0; i < length.to_int(); i = i + 1 {
     store_u8(offset + i.to_int64(), b[i])
-    i += 1
   }
   { offset, length }
 }

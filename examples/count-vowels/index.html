@@ -29,7 +29,7 @@
 
     const plugin = await extism.createPlugin(
       fetch(wasmUnderTest),
-      { useWasi: false }
+      { useWasi: true }
     )
 
     console.log('Using official Extism JavaScript SDK...')

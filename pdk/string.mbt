@@ -9,11 +9,9 @@ pub fn ToUtf8::to_utf8(s : String) -> Bytes {
   let chars = s.to_array()
   // first, allocate the maximum possible length of the utf8 "string":
   let bytes = Bytes::make(4 * chars.length())
-  let mut i = 0
   let mut length = 0
-  while i < chars.length() {
+  for i = 0; i < chars.length(); i = i + 1 {
     length += bytes.set_utf8_char(length, chars[i])
-    i += 1
   }
   // now that the size is known exactly (length), make a blit_copy:
   let result = Bytes::make(length)
@@ -35,13 +33,11 @@ pub fn ToUtf16::to_utf16(b : Bytes) -> String {
   let length = b.length()
   Host::log_debug_str("ToUtf16::to_utf16: b.length=\(length)")
   let buf = Buffer::make(2 * length)
-  let mut i = 0
-  while i < length {
+  for i = 0; i < length; i = i + 1 {
     let byte = b[i].to_int()
     let char = Char::from_int(byte)
     // println("to_utf16: b[\(i)]=\(byte)=\(char)")
     buf.write_char(char)
-    i += 1
   }
   buf.to_string()
 }

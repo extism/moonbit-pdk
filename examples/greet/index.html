@@ -25,7 +25,7 @@
 
     const plugin = await extism.createPlugin(
       fetch(wasmUnderTest),
-      { useWasi: false }
+      { useWasi: true }
     )
 
     let out = await plugin.call('greet', 'from official Extism JavaScript SDK')

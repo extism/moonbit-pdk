@@ -23,10 +23,8 @@ pub fn Memory::allocate_bytes(bytes : Bytes) -> Memory {
   let length = bytes.length().to_int64()
   Host::log_debug_str("ENTER Memory::allocate_bytes: length=\(length)")
   let offset = alloc(length)
-  let mut i = 0L
-  while i < length {
+  for i = 0L; i < length; i = i + 1L {
     store_u8(offset + i, bytes[i.to_int()])
-    i += 1L
   }
   Host::log_debug_str(
     "LEAVE Memory::allocate_bytes: offset=\(offset), length=\(length)",
@@ -63,12 +61,10 @@ pub fn to_bytes(self : Memory) -> Bytes {
   // println("Memory.to_bytes: offset=\(offset), length=\(length)")
   //
   let bytes = Bytes::make(self.length.to_int())
-  let mut i = 0L
-  while i < self.length {
+  for i = 0L; i < self.length; i = i + 1L {
     let byte = load_u8(self.offset + i)
     // println("Memory.to_bytes: bytes[\(i)]=\(byte)")
     bytes[i.to_int()] = byte
-    i += 1L
   }
   bytes
 }
