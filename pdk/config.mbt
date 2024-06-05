@@ -1,29 +1,27 @@
+/// `Config` provides methods to get "config" data from the host.
 pub struct Config {}
 
+/// `Config::get_memory` returns a "config" Memory block from the host that is keyed by `key`.
+/// Note that no processing is performed on this block of memory.
 pub fn Config::get_memory(key : String) -> Memory? {
-  // Host::log_debug_str("Config::get_memory(key=\(key))")
   let mem = Memory::allocate_string(key)
-  let offset = config_get(mem.offset)
-  // let mem_offset = mem.offset // MoonBit workaround
-  // Host::log_debug_str("Config::get_memory: config_get(\(mem_offset))=\(offset)")
+  let offset = extism_config_get(mem.offset)
   if offset == 0L {
-    // Host::log_debug_str("Config::get_memory(key=\(key)) is uninitialized.")
     return None
   }
-  let length = length(offset)
+  let length = extism_length(offset)
   if length == 0L {
-    // Host::log_debug_str("Config::get_memory(key=\(key)) has zero length.")
     return None
   }
-  // Host::log_debug_str("Config::get_memory(key=\(key)) has offset=\(offset) and length=\(length).")
   Some({ offset, length })
 }
 
+/// `Config::get` returns a "config" String from the host that is keyed by `key`.
+/// Note that the Extism host strings are UTF-8 and therefore the returned
+/// String is encoded as UTF-16 in compliance with MoonBit Strings.
 pub fn Config::get(key : String) -> String? {
   match Config::get_memory(key) {
     Some(mem) => Some(mem.to_string())
-    None =>
-      // Host::log_debug_str("Config::get(key=\(key)) is uninitialized.")
-      None
+    None => None
   }
 }

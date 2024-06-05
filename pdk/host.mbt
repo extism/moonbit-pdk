@@ -1,38 +1,36 @@
+/// `Host` provides methods used to communicate with the Extism SDK host.
 pub struct Host {}
 
-/// Host::input returns a sequence of bytes from the host.
+/// `Host::input` returns a sequence of (unprocessed) bytes from the host.
 pub fn Host::input() -> Bytes {
-  let length = input_length().to_int()
+  let length = extism_input_length().to_int()
   let value = Bytes::make(length)
   for i = 0; i < length; i = i + 1 {
-    value[i] = input_load_u8(i.to_int64())
+    value[i] = extism_input_load_u8(i.to_int64())
   }
   value
 }
 
-/// Host::input_string returns a (utf-16) String from the host.
+/// `Host::input_string` returns a (UTF-16) String from the host.
 pub fn Host::input_string() -> String {
   Host::input() |> ToUtf16::to_utf16()
 }
 
-fn output_memory(b : Bytes) -> Memory {
+// `output_bytes_to_memory` writes the (unprocessed) bytes to a Memory buffer on the host.
+fn output_bytes_to_memory(b : Bytes) -> Memory {
   let length = b.length().to_int64()
-  let offset = alloc(length)
+  let offset = extism_alloc(length)
   for i = 0; i < length.to_int(); i = i + 1 {
-    store_u8(offset + i.to_int64(), b[i])
+    extism_store_u8(offset + i.to_int64(), b[i])
   }
   { offset, length }
 }
 
-/// Host::output sends a sequence of bytes to the host.
+/// `Host::output` sends a sequence of (unprocessed) bytes to the host as the plugin's "output".
 pub fn Host::output(b : Bytes) -> Unit {
-  let { offset, length } = output_memory(b)
-  output_set(offset, length)
+  let { offset, length } = output_bytes_to_memory(b)
+  extism_output_set(offset, length)
 }
-
-// pub fn Host::outputMemory(s : Memory) -> Unit {
-//   output_set(s.offset, s.length)
-// }
 
 /// Host::output_string converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
 /// and sends it to the host.
@@ -48,28 +46,28 @@ pub fn Host::output_json_value(j : @json.JsonValue) -> Unit {
 
 /// Host::log_warn_str is a helper function to log a warn string to the host.
 pub fn Host::log_warn_str(s : String) -> Unit {
-  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
-  log_warn(offset)
-  free(offset)
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_bytes_to_memory()
+  extism_log_warn(offset)
+  extism_free(offset)
 }
 
 /// Host::log_info_str is a helper function to log a info string to the host.
 pub fn Host::log_info_str(s : String) -> Unit {
-  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
-  log_info(offset)
-  free(offset)
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_bytes_to_memory()
+  extism_log_info(offset)
+  extism_free(offset)
 }
 
 /// Host::log_debug_str is a helper function to log a debug string to the host.
 pub fn Host::log_debug_str(s : String) -> Unit {
-  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
-  log_debug(offset)
-  free(offset)
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_bytes_to_memory()
+  extism_log_debug(offset)
+  extism_free(offset)
 }
 
 /// Host::log_error_str is a helper function to log a error string to the host.
 pub fn Host::log_error_str(s : String) -> Unit {
-  let { offset, .. } = ToUtf8::to_utf8(s) |> output_memory()
-  log_error(offset)
-  free(offset)
+  let { offset, .. } = ToUtf8::to_utf8(s) |> output_bytes_to_memory()
+  extism_log_error(offset)
+  extism_free(offset)
 }
