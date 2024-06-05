@@ -25,8 +25,9 @@ var (
 )
 
 const (
-	exportStart = `(export "_start" `
-	exportInit  = `(export "_initialize" `
+	exportStart  = `(export "_start" `
+	exportInit   = `(export "_initialize" `
+	exportMemory = "\n" + `(export "memory" (memory $moonbit.memory))` + "\n"
 )
 
 func main() {
@@ -51,7 +52,8 @@ func processFile(path string) {
 	b, err := os.ReadFile(path)
 	must(err)
 
-	finalOut := strings.ReplaceAll(string(b), exportStart, exportInit)
+	finalOut := strings.ReplaceAll(string(b), exportStart, exportInit) +
+		exportMemory
 
 	must(os.WriteFile(path, []byte(finalOut), 0644))
 
