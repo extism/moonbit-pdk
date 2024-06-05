@@ -60,34 +60,10 @@ Here's the current situation with `count-vowels`:
 * running `count-vowels` with the Extism Go SDK _FAILS_: `./scripts/go-run-count-vowels.sh`
 * running `count-vowels` with the Extism CLI _FAILS_: `./run.sh`
 
-So apparently I'm not understanding something about Extism that I need to know
-because it appears that Chrome allows the wasm module to access all its memory
-but Extism doesn't.
-
-This section of code is somehow causing an out-of-bounds memory access:
-https://github.com/gmlewis/moonbit-pdk/blob/8682675a16ac3c461237a5a4665a580befca5f20/examples/count-vowels/count-vowels.mbt#L28-L37
-
-This demonstrates the current failure with the error message:
+This demonstrates the current problem:
 
 ```bash
 $ ./build.sh && ./scripts/go-run-count-vowels.sh
 ...
-2024/06/02 20:29:22 No runtime detected
-2024/06/02 20:29:22 Calling function : count_vowels
-2024/06/02 20:29:22 ENTER count_vowels
-2024/06/02 20:29:22 ToUtf16::to_utf16: b.length=13
-2024/06/02 20:29:22 count_vowels: input=Hello, World!
-2024/06/02 20:29:22 Config::get_memory(key=vowels)
-2024/06/02 20:29:22 ENTER Memory::allocate_bytes: length=6
-2024/06/02 20:29:22 LEAVE Memory::allocate_bytes: offset=311, length=6
-2024/06/02 20:29:22 Config::get_memory: config_get(311)=0
-2024/06/02 20:29:22 Config::get_memory(key=vowels) is uninitialized.
-2024/06/02 20:29:22 Config::get(key=vowels) is uninitialized.
-2024/06/02 20:29:22 exit code=1: wasm error: out of bounds memory access
-wasm stack trace:
-	.$49(i32,i32) i32
-	.$172() i32
-	.$173() i32
-plugin.Call output:
-exit status 1
+{"count":null,"total":null,"vowels":null}
 ```
