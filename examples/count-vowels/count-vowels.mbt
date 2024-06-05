@@ -1,5 +1,3 @@
-let default_vowels = "aeiouAEIOU"
-
 pub struct VowelReport {
   count : Int
   total : Int
@@ -30,6 +28,8 @@ fn get_vowels() -> String {
       s
     }
     None => {
+      // defining default_vowels in the global scope causes problems with Extism.
+      let default_vowels = "aeiouAEIOU"
       @pdk.Host::log_debug_str(
         "get_vowels: defaulting to built-in vowels: \(default_vowels)",
       )
