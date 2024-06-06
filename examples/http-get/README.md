@@ -5,10 +5,5 @@ typing:
 
 ```bash
 $ ./build.sh
-$ ./scripts/python-server.sh
+$ ./scripts/http-get.sh
 ```
-
-Then open your browser window to:
-http://localhost:8080/examples/http-get
-
-![http-get demo](http-get-demo.png)
