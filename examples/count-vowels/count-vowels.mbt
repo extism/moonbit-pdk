@@ -13,25 +13,25 @@ impl @jsonutil.ToJson for VowelReport with to_json(self) {
 }
 
 fn get_total() -> Int {
-  match @pdk.Var::get_int("total") {
+  match @var.get_int("total") {
     Some(total) => total
     None => 0
   }
 }
 
 fn store_total(total : Int) -> Unit {
-  @pdk.Var::set_int("total", total)
+  @var.set_int("total", total)
 }
 
 fn get_vowels() -> String {
-  match @pdk.Config::get("vowels") {
+  match @config.get("vowels") {
     Some(s) => s
     None => default_vowels
   }
 }
 
 pub fn count_vowels() -> Int {
-  let input = @pdk.Host::input_string()
+  let input = @host.input_string()
   //
   let vowels = get_vowels()
   let vowels_arr = vowels.to_array()
@@ -40,8 +40,6 @@ pub fn count_vowels() -> Int {
   let total = get_total() + count
   store_total(total)
   //
-  { count, total, vowels }
-  |> @jsonutil.to_json()
-  |> @pdk.Host::output_json_value()
+  { count, total, vowels } |> @jsonutil.to_json() |> @host.output_json_value()
   0 // success
 }

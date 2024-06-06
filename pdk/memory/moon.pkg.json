@@ -1,0 +1,9 @@
+{
+  "import": [
+    "gmlewis/moonbit-pdk/pdk",
+    {
+      "path": "gmlewis/json",
+      "alias": "jsonutil"
+    }
+  ]
+}
