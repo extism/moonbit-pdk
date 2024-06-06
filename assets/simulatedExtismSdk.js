@@ -1,6 +1,20 @@
 // This is a simulated Extism SDK written in JavaScript in order to assist
 // in the debugging of the MoonBit Extism PDK.
 
+// Adapted from: https://dmitripavlutin.com/timeout-fetch-request/
+export const fetchWithTimeout = async (resource, options = {}) => {
+  const { timeout = 8000 } = options  // 8000 ms = 8 seconds
+
+  const controller = new AbortController()
+  const id = setTimeout(() => controller.abort(), timeout)
+  const response = await fetch(resource, {
+    ...options,
+    signal: controller.signal,
+  })
+  clearTimeout(id)
+  return response
+}
+
 // `log` and `flust` are useful for debugging the wasm-gc or wasm targets with `println()`:
 export const [log, flush] = (() => {
   var buffer = []
@@ -39,6 +53,25 @@ const allocAndCopy = (str) => {
   return offsetBigInt
 }
 const decodeOffset = (offset) => new TextDecoder().decode(fakeAlloc.buffers[offset].buffer)
+const lastHttpResponse = { statusCode: 0 }
+const http_request = async (reqOffsetBigInt, bodyOffsetBigInt) => {
+  const req = JSON.parse(decodeOffset(reqOffsetBigInt))
+  const body = bodyOffsetBigInt ? decodeOffset(bodyOffsetBigInt) : ''
+  console.log(`http_request: req=${JSON.stringify(req)}`)
+  console.log(`http_request: body=${body}`)
+  const fetchParams = {
+    method: req.method,
+    headers: req.header,
+  }
+  if (body) { fetchParams.body = body }
+  const response = await fetchWithTimeout(req.url, fetchParams)
+  const result = await response.text()
+  console.log(`result=${result}`)
+  lastHttpResponse.statusCode = response.status
+  return allocAndCopy(result)
+}
+const http_status_code = () => lastHttpResponse.statusCode
+
 export const configs = {}  // no configs to start with
 export const vars = {}  // no vars to start with
 
@@ -55,6 +88,8 @@ export const importObject = {
       return allocAndCopy(configs[key])
     },
     free: () => { }, // noop for now.
+    http_request,
+    http_status_code,
     input_length: () => BigInt(inputString.value.length),
     input_load_u8: (offsetBigInt) => {
       const offset = Number(offsetBigInt)

@@ -27,13 +27,32 @@ pub fn new_request(method : Method, url : String) -> Request {
 
 /// `send` sends the `Request` to the host, waits for a response,
 /// and returns it to the caller.
-pub fn send(self : Request) -> Response {
-  let status_code = 0
-  let body = "not implemented yet"
-  { status_code, body }
+/// Note that the (optional) `body` is freed by this call.
+pub fn send(self : Request, ~body : @host.Memory? = None) -> Response {
+  let meta = self |> @jsonutil.to_json() |> @host.allocate_json_value()
+  let body_memory_offset = match body {
+    Some(v) => v.offset
+    None => 0L
+  }
+  //
+  let response_offset = @extism.http_request(meta.offset, body_memory_offset)
+  let response_length = @extism.length(response_offset)
+  let status_code = @extism.http_status_code()
+  //
+  meta.free()
+  match body {
+    Some(v) => v.free()
+    None => ()
+  }
+  //
+  let response_body : @host.Memory = {
+    offset: response_offset,
+    length: response_length,
+  }
+  { status_code, body: response_body }
 }
 
-/// `output` sends the `Response` to the Extism host "output" as a JSON blob.
+/// `output` sends the (unprocessed) `Response` body to the Extism host "output".
 pub fn output(self : Response) -> Unit {
-  // TODO
+  @host.output_memory(self.body)
 }

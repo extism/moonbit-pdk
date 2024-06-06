@@ -38,6 +38,12 @@ pub fn Memory::allocate_string(s : String) -> Memory {
   @pdk.ToUtf8::to_utf8(s) |> allocate_bytes()
 }
 
+/// `Memory::allocate_json_value` allocates and initializes a UTF-8 string
+/// in host memory that is converted from this `@json.JsonValue`.
+pub fn Memory::allocate_json_value(j : @json.JsonValue) -> Memory {
+  @jsonutil.stringify(j, spaces=0, newline=false) |> Memory::allocate_string()
+}
+
 /// `to_string` reads and converts the UTF-8 string residing in the host memory
 /// to a UTF-16 MoonBit String.
 pub fn to_string(self : Memory) -> String {

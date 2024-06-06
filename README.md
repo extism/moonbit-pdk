@@ -53,3 +53,7 @@ only ASCII input currently works for strings):
 * [count-vowels](examples/count-vowels/)
 
   e.g. `./scripts/count-vowels.sh 'Once upon a dream'
+
+* [http-get](examples/http-get/)
+
+  e.g. `./scripts/http-get.sh`
