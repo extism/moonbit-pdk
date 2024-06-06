@@ -4,12 +4,12 @@ pub fn http_get() -> Int {
     @http.Method::GET,
     "https://jsonplaceholder.typicode.com/todos/1",
   )
-  req.header.add("some-name", "some-value")
-  req.header.add("another", "again")
-  // send the request, get response back (can check status on response via res.status())
+  req.header.set("some-name", "some-value")
+  req.header.set("another", "again")
+  // send the request, get response back
   let res = req.send()
 
-  // send output to host
+  // zero-copy send output to host
   res.output()
   return 0 // success
 }

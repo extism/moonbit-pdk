@@ -5,10 +5,16 @@ pub struct Request {
   url : String
 }
 
+impl @jsonutil.ToJson for Request with to_json(self) {
+  @jsonutil.from_entries(
+    [("method", self.method), ("header", self.header), ("url", self.url)],
+  )
+}
+
 /// `Response` represents an HTTP response from the Extism host.
 pub struct Response {
   status_code : Int
-  body : String
+  body : @host.Memory
 }
 
 /// `new_request` returns a new `Request` using the provided
