@@ -1,8 +1,8 @@
 {
   "import": [
-    "gmlewis/moonbit-pdk/pdk/config",
-    "gmlewis/moonbit-pdk/pdk/host",
-    "gmlewis/moonbit-pdk/pdk/var",
+    "extism/moonbit-pdk/pdk/config",
+    "extism/moonbit-pdk/pdk/host",
+    "extism/moonbit-pdk/pdk/var",
     {
       "path": "gmlewis/json",
       "alias": "jsonutil"

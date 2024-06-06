@@ -1,6 +1,6 @@
 {
   "import": [
-    "gmlewis/moonbit-pdk/pdk/extism",
-    "gmlewis/moonbit-pdk/pdk/host"
+    "extism/moonbit-pdk/pdk/extism",
+    "extism/moonbit-pdk/pdk/host"
   ]
 }

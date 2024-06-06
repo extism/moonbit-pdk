@@ -1,4 +1,4 @@
-# gmlewis/moonbit-pdk
+# extism/moonbit-pdk
 
 This is an experimental [Extism PDK] for the [MoonBit] programming language.
 

@@ -1,6 +1,6 @@
-module github.com/gmlewis/moonbit-pdk
+module github.com/extism/moonbit-pdk
 
-go 1.22.3
+go 1.22.4
 
 require github.com/extism/go-sdk v1.2.0
 
