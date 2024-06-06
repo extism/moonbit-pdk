@@ -37,6 +37,7 @@ fn get_vowels() -> String {
 /// config from the host, then counts the number of vowels in the input
 /// string and keeps a running total (over multiple iterations)
 /// in the host's "total" var.
+/// It sends the JSON `VowelReport` to the host via its output data channel.
 /// It returns 0 to the host on success.
 pub fn count_vowels() -> Int {
   let input = @host.input_string()
