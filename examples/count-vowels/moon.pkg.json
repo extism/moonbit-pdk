@@ -10,12 +10,14 @@
     "wasm": {
       "exports": [
         "count_vowels"
-      ]
+      ],
+      "export-memory-name": "memory"
     },
     "wasm-gc": {
       "exports": [
         "count_vowels"
-      ]
+      ],
+      "export-memory-name": "memory"
     }
   }
 }

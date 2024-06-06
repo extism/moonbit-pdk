@@ -6,12 +6,14 @@
     "wasm": {
       "exports": [
         "greet"
-      ]
+      ],
+      "export-memory-name": "memory"
     },
     "wasm-gc": {
       "exports": [
         "greet"
-      ]
+      ],
+      "export-memory-name": "memory"
     }
   }
 }
