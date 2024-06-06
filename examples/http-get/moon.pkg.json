@@ -1,0 +1,19 @@
+{
+  "import": [
+    "gmlewis/moonbit-pdk/pdk"
+  ],
+  "link": {
+    "wasm": {
+      "exports": [
+        "http_get"
+      ],
+      "export-memory-name": "memory"
+    },
+    "wasm-gc": {
+      "exports": [
+        "http_get"
+      ],
+      "export-memory-name": "memory"
+    }
+  }
+}
