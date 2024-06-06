@@ -3,8 +3,8 @@ pub struct Config {}
 
 /// `Config::get_memory` returns a "config" Memory block from the host that is keyed by `key`.
 /// Note that no processing is performed on this block of memory.
-pub fn Config::get_memory(key : String) -> @memory.Memory? {
-  let mem = @memory.allocate_string(key)
+pub fn Config::get_memory(key : String) -> @host.Memory? {
+  let mem = @host.allocate_string(key)
   let offset = @pdk.extism_config_get(mem.offset)
   if offset == 0L {
     return None

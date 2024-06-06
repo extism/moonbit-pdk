@@ -1,7 +1,7 @@
 {
   "import": [
     "gmlewis/moonbit-pdk/pdk",
-    "gmlewis/moonbit-pdk/pdk/memory",
+    "gmlewis/moonbit-pdk/pdk/host",
     {
       "path": "gmlewis/json",
       "alias": "jsonutil"

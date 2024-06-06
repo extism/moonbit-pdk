@@ -14,7 +14,7 @@ pub fn input_string() -> String {
 }
 
 // `output_bytes_to_memory` writes the (unprocessed) bytes to a Memory buffer on the host.
-fn output_bytes_to_memory(b : Bytes) -> @memory.Memory {
+fn output_bytes_to_memory(b : Bytes) -> Memory {
   let length = b.length().to_int64()
   let offset = @pdk.extism_alloc(length)
   for i = 0; i < length.to_int(); i = i + 1 {
