@@ -1,6 +1,7 @@
 {
   "import": [
     "gmlewis/moonbit-pdk/pdk",
+    "gmlewis/moonbit-pdk/pdk/extism",
     {
       "path": "gmlewis/json",
       "alias": "jsonutil"

@@ -5,11 +5,11 @@ pub struct Config {}
 /// Note that no processing is performed on this block of memory.
 pub fn Config::get_memory(key : String) -> @host.Memory? {
   let mem = @host.allocate_string(key)
-  let offset = @pdk.extism_config_get(mem.offset)
+  let offset = @extism.config_get(mem.offset)
   if offset == 0L {
     return None
   }
-  let length = @pdk.extism_length(offset)
+  let length = @extism.length(offset)
   if length == 0L {
     return None
   }

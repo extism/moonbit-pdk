@@ -2,11 +2,11 @@
 /// the provided `key`.
 pub fn get_memory(key : String) -> @host.Memory? {
   let mem = @host.allocate_string(key)
-  let offset = @pdk.extism_var_get(mem.offset)
+  let offset = @extism.var_get(mem.offset)
   if offset == 0L {
     return None
   }
-  let length = @pdk.extism_length(offset)
+  let length = @extism.length(offset)
   if length == 0L {
     return None
   }
@@ -45,7 +45,7 @@ pub fn get_string(key : String) -> String? {
 pub fn set_bytes(key : String, value : Bytes) -> Unit {
   let keyMem = @host.allocate_string(key)
   let valMem = @host.allocate_bytes(value)
-  @pdk.extism_var_set(keyMem.offset, valMem.offset)
+  @extism.var_set(keyMem.offset, valMem.offset)
 }
 
 /// `set_int` sets the host's "var" Int associated with the provided `key`.
@@ -57,11 +57,11 @@ pub fn set_int(key : String, value : Int) -> Unit {
   bytes[2] = value.lsr(16).land(255).to_byte()
   bytes[3] = value.lsr(24).land(255).to_byte()
   let valMem = @host.allocate_bytes(bytes)
-  @pdk.extism_var_set(keyMem.offset, valMem.offset)
+  @extism.var_set(keyMem.offset, valMem.offset)
 }
 
 /// `remove` deletes the value in the host's "var" memory associated with the provided `key`.
 pub fn remove(key : String) -> Unit {
   let mem = @host.allocate_string(key)
-  @pdk.extism_var_set(mem.offset, 0L)
+  @extism.var_set(mem.offset, 0L)
 }

@@ -7,29 +7,29 @@ pub struct Memory {
 
 /// `free` releases this Memory from the host.
 pub fn free(self : Memory) -> Unit {
-  @pdk.extism_free(self.offset)
+  @extism.free(self.offset)
 }
 
 /// `Memory::allocate` allocates an uninitialized (determined by host)
 /// area of shared memory on the host.
 pub fn Memory::allocate(length : Int64) -> Memory {
-  { offset: @pdk.extism_alloc(length), length }
+  { offset: @extism.alloc(length), length }
 }
 
 /// `Memory::allocate_bytes` allocates and initializes host memory
 /// with the provided (unprocessed) bytes.
 pub fn Memory::allocate_bytes(bytes : Bytes) -> Memory {
   let length = bytes.length().to_int64()
-  let offset = @pdk.extism_alloc(length)
+  let offset = @extism.alloc(length)
   for i = 0L; i < length; i = i + 1L {
-    @pdk.extism_store_u8(offset + i, bytes[i.to_int()])
+    @extism.store_u8(offset + i, bytes[i.to_int()])
   }
   { offset, length }
 }
 
 /// `output_memory` sets the host's "output" to be the contents of this Memory data.
 pub fn output_memory(self : Memory) -> Unit {
-  @pdk.extism_output_set(self.offset, self.length)
+  @extism.output_set(self.offset, self.length)
 }
 
 /// `Memory::allocate_string` allocates and initializes a UTF-8 string
@@ -58,7 +58,7 @@ pub fn to_int(self : Memory) -> Int {
 pub fn to_bytes(self : Memory) -> Bytes {
   let bytes = Bytes::make(self.length.to_int())
   for i = 0L; i < self.length; i = i + 1L {
-    let byte = @pdk.extism_load_u8(self.offset + i)
+    let byte = @extism.load_u8(self.offset + i)
     bytes[i.to_int()] = byte
   }
   bytes
