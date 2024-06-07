@@ -1,6 +1,6 @@
 {
   "import": [
-    "gmlewis/moonbit-pdk/pdk/http"
+    "extism/moonbit-pdk/pdk/http"
   ],
   "link": {
     "wasm": {
