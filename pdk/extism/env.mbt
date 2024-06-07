@@ -76,7 +76,12 @@ pub fn store_u64(offset : Int64, v : Int64) = "extism:host/env" "store_u64"
 /// The user of this PDK will typically not call this method directly.
 pub fn load_u64(offset : Int64) -> Int64 = "extism:host/env" "load_u64"
 
-pub fn http_request(offset : Int64, b : Int64) -> Int64 = "extism:host/env" "http_request"
+/// `http_request` sends the HTTP request to the Extism host and returns back the
+/// memory offset to the response body.
+pub fn http_request(req : Int64, body : Int64) -> Int64 = "extism:host/env" "http_request"
+
+/// `http_status_code` returns the status code for the last-sent `http_request` call.
+pub fn http_status_code() -> Int = "extism:host/env" "http_status_code"
 
 /// `log_warn` logs a "warning" string to the host from the previously-written UTF-8 string written to `offset`.
 /// The user of this PDK will typically not call this method directly.

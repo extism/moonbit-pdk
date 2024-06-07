@@ -1,0 +1,19 @@
+{
+  "import": [
+    "extism/moonbit-pdk/pdk/http"
+  ],
+  "link": {
+    "wasm": {
+      "exports": [
+        "http_get"
+      ],
+      "export-memory-name": "memory"
+    },
+    "wasm-gc": {
+      "exports": [
+        "http_get"
+      ],
+      "export-memory-name": "memory"
+    }
+  }
+}
