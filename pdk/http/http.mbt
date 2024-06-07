@@ -20,8 +20,7 @@ pub struct Response {
 /// `new_request` returns a new `Request` using the provided
 /// `method` and `url`.
 pub fn new_request(method : Method, url : String) -> Request {
-  // let header : Header = Map::new()
-  let header : Header = { map: Map::new() } // compiler workaround
+  let header = Header::new()
   { method, header, url }
 }
 
