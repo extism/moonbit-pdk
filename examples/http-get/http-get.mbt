@@ -14,5 +14,5 @@ pub fn http_get() -> Int {
 
   // zero-copy send output to host
   res.output()
-  return 0 // success
+  0 // success
 }
