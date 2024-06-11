@@ -11,7 +11,7 @@ impl @jsonutil.ToJson for Header with to_json(self) {
   let pairs = self.0.as_iter().map(
       fn { (k, v) => (k, @json.JsonValue::String(v)) },
     ).collect()
-    |> @immut/sorted_map.Map::from_array()
+    |> Map::from_array()
   @json.JsonValue::Object(pairs)
 }
 
