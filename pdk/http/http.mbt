@@ -28,19 +28,22 @@ pub fn new_request(method : Method, url : String) -> Request {
 /// and returns it to the caller.
 /// Note that the (optional) `body` is freed by this call.
 pub fn send(self : Request, ~body : @host.Memory? = None) -> Response {
-  let meta = self |> @jsonutil.to_json() |> @host.allocate_json_value()
+  let meta_mem = self |> @jsonutil.to_json() |> @host.allocate_json_value()
   let body_memory_offset = match body {
     Some(v) => v.offset
     None => 0L
   }
   //
-  let response_offset = @extism.http_request(meta.offset, body_memory_offset)
+  let response_offset = @extism.http_request(
+    meta_mem.offset,
+    body_memory_offset,
+  )
   let response_length = @extism.length(response_offset)
   let status_code = @extism.http_status_code()
   //
-  meta.free()
+  meta_mem.free()
   match body {
-    Some(v) => v.free()
+    Some(body_mem) => body_mem.free()
     None => ()
   }
   //

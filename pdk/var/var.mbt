@@ -1,8 +1,9 @@
 /// `get_memory` returns the (unprocessed) host Memory block for the "var" data associated with
 /// the provided `key`.
 pub fn get_memory(key : String) -> @host.Memory? {
-  let mem = @host.allocate_string(key)
-  let offset = @extism.var_get(mem.offset)
+  let key_mem = @host.allocate_string(key)
+  let offset = @extism.var_get(key_mem.offset)
+  key_mem.free()
   if offset == 0L {
     return None
   }
@@ -43,25 +44,28 @@ pub fn get_string(key : String) -> String? {
 /// `set_bytes` sets the (unprocessed) host Memory block for the "var" data associated with
 /// the provided `key`.
 pub fn set_bytes(key : String, value : Bytes) -> Unit {
-  let keyMem = @host.allocate_string(key)
-  let valMem = @host.allocate_bytes(value)
-  @extism.var_set(keyMem.offset, valMem.offset)
+  let key_mem = @host.allocate_string(key)
+  let val_mem = @host.allocate_bytes(value)
+  @extism.var_set(key_mem.offset, val_mem.offset)
+  key_mem.free()
 }
 
 /// `set_int` sets the host's "var" Int associated with the provided `key`.
 pub fn set_int(key : String, value : Int) -> Unit {
-  let keyMem = @host.allocate_string(key)
+  let key_mem = @host.allocate_string(key)
   let bytes = Bytes::make(4)
   bytes[0] = value.land(255).to_byte()
   bytes[1] = value.lsr(8).land(255).to_byte()
   bytes[2] = value.lsr(16).land(255).to_byte()
   bytes[3] = value.lsr(24).land(255).to_byte()
-  let valMem = @host.allocate_bytes(bytes)
-  @extism.var_set(keyMem.offset, valMem.offset)
+  let val_mem = @host.allocate_bytes(bytes)
+  @extism.var_set(key_mem.offset, val_mem.offset)
+  key_mem.free()
 }
 
 /// `remove` deletes the value in the host's "var" memory associated with the provided `key`.
 pub fn remove(key : String) -> Unit {
-  let mem = @host.allocate_string(key)
-  @extism.var_set(mem.offset, 0L)
+  let key_mem = @host.allocate_string(key)
+  @extism.var_set(key_mem.offset, 0L)
+  key_mem.free()
 }
