@@ -22,7 +22,11 @@ pub fn Config::get_memory(key : String) -> @host.Memory? {
 /// String is encoded as UTF-16 in compliance with MoonBit Strings.
 pub fn Config::get(key : String) -> String? {
   match Config::get_memory(key) {
-    Some(mem) => Some(mem.to_string())
+    Some(mem) => {
+      let s = mem.to_string()
+      mem.free()
+      Some(s)
+    }
     None => None
   }
 }

@@ -25,8 +25,9 @@ fn output_bytes_to_memory(b : Bytes) -> Memory {
 
 /// `output` sends a sequence of (unprocessed) bytes to the host as the plugin's "output".
 pub fn output(b : Bytes) -> Unit {
-  let { offset, length } = output_bytes_to_memory(b)
-  @extism.output_set(offset, length)
+  let mem = output_bytes_to_memory(b)
+  @extism.output_set(mem.offset, mem.length)
+  mem.free()
 }
 
 /// output_string converts a MoonBit String (UTF-16) to an Extism string (UTF-8)

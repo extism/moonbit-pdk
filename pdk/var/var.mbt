@@ -48,6 +48,7 @@ pub fn set_bytes(key : String, value : Bytes) -> Unit {
   let val_mem = @host.allocate_bytes(value)
   @extism.var_set(key_mem.offset, val_mem.offset)
   key_mem.free()
+  val_mem.free()
 }
 
 /// `set_int` sets the host's "var" Int associated with the provided `key`.
@@ -61,6 +62,7 @@ pub fn set_int(key : String, value : Int) -> Unit {
   let val_mem = @host.allocate_bytes(bytes)
   @extism.var_set(key_mem.offset, val_mem.offset)
   key_mem.free()
+  val_mem.free()
 }
 
 /// `remove` deletes the value in the host's "var" memory associated with the provided `key`.
