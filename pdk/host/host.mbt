@@ -30,40 +30,40 @@ pub fn output(b : Bytes) -> Unit {
   mem.free()
 }
 
-/// output_string converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
+/// `output_string` converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
 /// and sends it to the host.
 pub fn output_string(s : String) -> Unit {
   @pdk.ToUtf8::to_utf8(s) |> output()
 }
 
-/// output_json_value converts a MoonBit @json.JsonValue to an Extism JSON string
+/// `output_json_value` converts a MoonBit @json.JsonValue to an Extism JSON string
 /// and sends it to the host.
 pub fn output_json_value(j : @json.JsonValue) -> Unit {
   @jsonutil.stringify(j, spaces=0, newline=false) |> output_string()
 }
 
-/// log_warn_str is a helper function to log a warn string to the host.
+/// `log_warn_str` is a helper function to log a warn string to the host.
 pub fn log_warn_str(s : String) -> Unit {
   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()
   @extism.log_warn(offset)
   @extism.free(offset)
 }
 
-/// log_info_str is a helper function to log a info string to the host.
+/// `log_info_str` is a helper function to log an info string to the host.
 pub fn log_info_str(s : String) -> Unit {
   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()
   @extism.log_info(offset)
   @extism.free(offset)
 }
 
-/// log_debug_str is a helper function to log a debug string to the host.
+/// `log_debug_str` is a helper function to log a debug string to the host.
 pub fn log_debug_str(s : String) -> Unit {
   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()
   @extism.log_debug(offset)
   @extism.free(offset)
 }
 
-/// log_error_str is a helper function to log a error string to the host.
+/// `log_error_str` is a helper function to log an error string to the host.
 pub fn log_error_str(s : String) -> Unit {
   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()
   @extism.log_error(offset)
