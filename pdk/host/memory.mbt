@@ -5,6 +5,12 @@ pub struct Memory {
   length : Int64
 }
 
+/// `find_memory` returns a `Memory` struct from an offset provided by the host.
+pub fn find_memory(offset : Int64) -> Memory {
+  let length = @extism.length(offset)
+  { offset, length }
+}
+
 /// `free` releases this Memory from the host.
 pub fn free(self : Memory) -> Unit {
   @extism.free(self.offset)

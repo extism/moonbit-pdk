@@ -40,7 +40,7 @@ The code has been updated to support compiler version:
 
 ```bash
 $ moon version
-moon 0.1.20240624 (e25afbc 2024-06-24)
+moon 0.1.20240625 (187c34f 2024-06-25)
 ```
 
 These plugins work (with the caveat that full UTF-8 input is not yet supported,
