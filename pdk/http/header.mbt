@@ -8,7 +8,7 @@ pub fn Header::new() -> Header {
 }
 
 impl @jsonutil.ToJson for Header with to_json(self) {
-  let pairs = self.0.as_iter().map(
+  let pairs = self.0.iter().map(
       fn { (k, v) => (k, @json.JsonValue::String(v)) },
     ).collect()
     |> Map::from_array()

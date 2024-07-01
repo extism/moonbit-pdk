@@ -44,7 +44,7 @@ pub fn count_vowels() -> Int {
   //
   let vowels = get_vowels()
   let vowels_arr = vowels.to_array()
-  let count = input.as_iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
+  let count = input.iter().filter(fn(ch) { vowels_arr.contains(ch) }).count()
   //
   let total = get_total() + count
   store_total(total)

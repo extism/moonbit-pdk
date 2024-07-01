@@ -32,7 +32,7 @@ pub fn get_int(key : String) -> Int? {
 }
 
 /// `get_string` returns the host's "var" String associated with the provided `key`.
-/// Note that the Extism host string is in UTF-8 and the string is converted to
+/// Note that the Extism host string is UTF-8 and the string is converted to
 /// a MoonBit (UTF-16) String.
 pub fn get_string(key : String) -> String? {
   match get_memory(key) {
@@ -60,6 +60,18 @@ pub fn set_int(key : String, value : Int) -> Unit {
   bytes[2] = value.lsr(16).land(255).to_byte()
   bytes[3] = value.lsr(24).land(255).to_byte()
   let val_mem = @host.allocate_bytes(bytes)
+  @extism.var_set(key_mem.offset, val_mem.offset)
+  key_mem.free()
+  val_mem.free()
+}
+
+/// `set_string` sets the host Memory block for the "var" data associated with
+/// the provided `key`.
+/// Note that the MoonBit String is UTF-16 and the string is converted to
+/// a UTF-8 string for the Extism host.
+pub fn set_string(key : String, value : String) -> Unit {
+  let key_mem = @host.allocate_string(key)
+  let val_mem = @host.allocate_string(value)
   @extism.var_set(key_mem.offset, val_mem.offset)
   key_mem.free()
   val_mem.free()
