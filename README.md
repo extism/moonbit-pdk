@@ -63,17 +63,16 @@ the project:
 ```bash
 moon new greet
 cd greet
-moon update && moon install
 ```
 
-Next, add this Extism PDK to the project and remove the "hello" examples:
+Next, add this Extism PDK to the project and remove the default "lib" example:
 
 ```bash
 moon add extism/moonbit-pdk
-rm lib/hello*
+rm -rf lib
 ```
 
-Now paste this into your `lib/main.mbt` file:
+Now paste this into your `main/main.mbt` file:
 
 ```rust
 pub fn greet() -> Int {
@@ -82,13 +81,18 @@ pub fn greet() -> Int {
   @host.output_string(greeting)
   0 // success
 }
+
+fn main {
+
+}
 ```
 
-Then paste this into your `lib/moon.pkg.json` file to export the `greet` function
+Then paste this into your `main/moon.pkg.json` file to export the `greet` function
 and include the `@host` import into your plugin:
 
 ```json
 {
+  "is-main": true,
   "import": [
     "extism/moonbit-pdk/pdk/host"
   ],
@@ -106,8 +110,9 @@ and include the `@host` import into your plugin:
 Some things to note about this code:
 
 1. The `moon.pkg.json` file is required. This marks the greet function as an export with the name `greet` that can be called by the host.
-2. Exports in the MoonBit PDK are coded to the raw ABI. You get parameters from the host by calling [`@host.input*` functions](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=input) and you send return values back with the [`@host.output*` functions](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=output).
-3. An Extism export expects an i32 (a MoonBit `Int`) return code. `0` is success and `1` (or any other value) is a failure.
+2. We need a `main` but it is unused.
+3. Exports in the MoonBit PDK are coded to the raw ABI. You get parameters from the host by calling [`@host.input*` functions](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=input) and you send return values back with the [`@host.output*` functions](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=output).
+4. An Extism export expects an i32 (a MoonBit `Int`) return code. `0` is success and `1` (or any other value) is a failure.
 
 Finally, compile this with the command:
 
@@ -119,7 +124,7 @@ We can now test `plugin.wasm` using the [Extism CLI](https://github.com/extism/c
 command:
 
 ```bash
-extism call plugin.wasm greet --input "Benjamin" --wasi
+extism call target/wasm/release/build/main/main.wasm greet --input "Benjamin" --wasi
 # => Hello, Benjamin!
 ```
 
