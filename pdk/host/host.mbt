@@ -42,6 +42,18 @@ pub fn output_json_value(j : @json.JsonValue) -> Unit {
   @jsonutil.stringify(j, spaces=0, newline=false) |> output_string()
 }
 
+fn set_error_bytes(b : Bytes) -> Unit {
+  let mem = output_bytes_to_memory(b)
+  @extism.error_set(mem.offset)
+  mem.free()
+}
+
+/// `set_error` converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
+/// and sends it to the host as its error output.
+pub fn set_error(s : String) -> Unit {
+  @pdk.ToUtf8::to_utf8(s) |> set_error_bytes()
+}
+
 /// `log_warn_str` is a helper function to log a warn string to the host.
 pub fn log_warn_str(s : String) -> Unit {
   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()

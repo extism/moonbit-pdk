@@ -76,8 +76,8 @@ Now paste this into your `main/main.mbt` file:
 
 ```rust
 pub fn greet() -> Int {
-  let input = @host.input_string()
-  let greeting = "Hello, \(input)!"
+  let name = @host.input_string()
+  let greeting = "Hello, \(name)!"
   @host.output_string(greeting)
   0 // success
 }
@@ -129,6 +129,38 @@ extism call target/wasm/release/build/main/main.wasm greet --input "Benjamin" --
 ```
 
 > **Note**: We also have a web-based, plug-in tester called the [Extism Playground](https://playground.extism.org/)
+
+### More Exports: Error Handling
+
+Suppose we want to re-write our greeting module to never greet Benjamins.
+We can use [`@host.set_error`](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=set_error):
+
+```rust
+pub fn greet() -> Int {
+  let name = @host.input_string()
+  if name == "Benjamin" {
+    @host.set_error("Sorry, we don't greet Benjamins!")
+    return 1 // failure
+  }
+  let greeting = "Hello, \(name)!"
+  @host.output_string(greeting)
+  0 // success
+}
+```
+
+Now when we try again:
+
+```bash
+moon build --target wasm
+extism call target/wasm/release/build/main/main.wasm greet --input "Benjamin" --wasi
+# => Error: Sorry, we don't greet Benjamins!
+echo $? # print last status code
+# => 1
+extism call target/wasm/release/build/main/main.wasm greet --input "Zach" --wasi
+# => Hello, Zach!
+echo $?
+# => 0
+```
 
 ## For PDK Devs: Building the PDK locally
 
