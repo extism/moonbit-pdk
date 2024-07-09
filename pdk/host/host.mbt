@@ -45,7 +45,13 @@ pub fn output_json_value(j : @json.JsonValue) -> Unit {
 fn set_error_bytes(b : Bytes) -> Unit {
   let mem = output_bytes_to_memory(b)
   @extism.error_set(mem.offset)
-  mem.free()
+  // If the following line is uncommented, the Extism CLI fails with this example:
+  // $ extism call target/wasm/release/build/main/main.wasm greet --input "Benjamin" --wasi
+  // Error: Encountered an unknown error in call to Extism plugin function greet
+  // However, with the line commented out, the Extism CLI responds correctly:
+  // $ extism call target/wasm/release/build/main/main.wasm greet --input "Benjamin" --wasi
+  // Error: Sorry, we don't greet Benjamins!
+  // mem.free()
 }
 
 /// `set_error` converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
