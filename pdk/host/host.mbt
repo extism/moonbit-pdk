@@ -81,6 +81,13 @@ pub fn log_debug_str(s : String) -> Unit {
   @extism.free(offset)
 }
 
+// /// `log_trace_str` is a helper function to log a trace string to the host.
+// pub fn log_trace_str(s : String) -> Unit {
+//   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()
+//   @extism.log_trace(offset)
+//   @extism.free(offset)
+// }
+
 /// `log_error_str` is a helper function to log an error string to the host.
 pub fn log_error_str(s : String) -> Unit {
   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()
