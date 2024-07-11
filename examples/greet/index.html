@@ -12,7 +12,6 @@
     // First, use the simulated Extism SDK written in JavaScript:
     WebAssembly.instantiateStreaming(fetch(wasmUnderTest), importObject).then(
       (obj) => {
-        obj.instance.exports._initialize()
         inputString.value = 'from simulated Extism SDK'
         obj.instance.exports['greet']()
         flush()
@@ -29,7 +28,7 @@
     )
 
     let out = await plugin.call('greet', 'from official Extism JavaScript SDK')
-    console.log(out.text());
+    console.log(out.text())
   </script>
 </body>
 

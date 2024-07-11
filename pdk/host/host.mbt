@@ -27,7 +27,9 @@ fn output_bytes_to_memory(b : Bytes) -> Memory {
 pub fn output(b : Bytes) -> Unit {
   let mem = output_bytes_to_memory(b)
   @extism.output_set(mem.offset, mem.length)
-  mem.free()
+  // 2024-07-11: There is currently an issue with the JS SDK where if memory is
+  // freed in the next line, the host receives a null from the `await plugin.call` function.
+  // mem.free()
 }
 
 /// `output_string` converts a MoonBit String (UTF-16) to an Extism string (UTF-8)
@@ -80,13 +82,6 @@ pub fn log_debug_str(s : String) -> Unit {
   @extism.log_debug(offset)
   @extism.free(offset)
 }
-
-// /// `log_trace_str` is a helper function to log a trace string to the host.
-// pub fn log_trace_str(s : String) -> Unit {
-//   let { offset, .. } = @pdk.ToUtf8::to_utf8(s) |> output_bytes_to_memory()
-//   @extism.log_trace(offset)
-//   @extism.free(offset)
-// }
 
 /// `log_error_str` is a helper function to log an error string to the host.
 pub fn log_error_str(s : String) -> Unit {

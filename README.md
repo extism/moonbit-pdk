@@ -544,7 +544,7 @@ To run the examples, type:
 The code has been updated to support compiler `moon version`:
 
 ```bash
-moon 0.1.20240708 (4e51712 2024-07-08)
+moon 0.1.20240711 (84f6b86 2024-07-11)
 ```
 
 ## Reach Out!

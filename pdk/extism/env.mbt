@@ -98,7 +98,3 @@ pub fn log_debug(offset : Int64) = "extism:host/env" "log_debug"
 /// `log_error` logs an "error" string to the host from the previously-written UTF-8 string written to `offset`.
 /// The user of this PDK will typically not call this method directly.
 pub fn log_error(offset : Int64) = "extism:host/env" "log_error"
-
-// /// `log_trace` logs a "trace" string to the host from the previously-written UTF-8 string written to `offset`.
-// /// The user of this PDK will typically not call this method directly.
-// pub fn log_trace(offset : Int64) = "extism:host/env" "log_trace"
