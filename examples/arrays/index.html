@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+  <script type="module">
+    import { configs, flush, importObject, inputString } from '/assets/simulatedExtismSdk.js'
+
+    const wasmUnderTest = '/target/wasm/release/build/examples/arrays/arrays.wasm'
+
+    // WebAssembly.instantiateStreaming(fetch("/target/wasm-gc/release/build/examples/arrays/arrays.wasm"), importObject).then(
+    WebAssembly.instantiateStreaming(fetch(wasmUnderTest), importObject).then(
+      (obj) => {
+        console.log('Using simulated Extism SDK...')
+        console.log('ints:')
+        inputString.value = '[0,1,2,3,4,5,6]'
+        obj.instance.exports['progressive_sum_ints']()
+
+        console.log('floats:')
+        inputString.value = '[0,0.1,0.2,0.3,0.4,0.5,0.6]'
+        obj.instance.exports['progressive_sum_floats']()
+
+        console.log('strings:')
+        inputString.value = '["0","1","2","3","4","5","6"]'
+        obj.instance.exports['progressive_concat_strings']()
+        flush()
+      }
+    )
+
+    // Next, use the official Extism JavaScript SDK:
+    // Read the JS SDK docs at: https://extism.github.io/js-sdk/
+    const extism = await import('https://esm.sh/@extism/extism')
+
+    const plugin = await extism.createPlugin(
+      fetch(wasmUnderTest),
+      { useWasi: true }
+    )
+
+    console.log('Using official Extism JavaScript SDK...')
+    console.log('ints:')
+    let out = await plugin.call('progressive_sum_ints', '[0,1,2,3,4,5,6]')
+    console.log(out.text())
+
+    console.log('floats:')
+    out = await plugin.call('progressive_sum_floats', '[0,0.1,0.2,0.3,0.4,0.5,0.6]')
+    console.log(out.text())
+
+    console.log('strings:')
+    out = await plugin.call('progressive_concat_strings', '["0","1","2","3","4","5","6"]')
+    console.log(out.text())
+  </script>
+</body>
+
+</html>

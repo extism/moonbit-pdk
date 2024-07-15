@@ -125,6 +125,7 @@ export const importObject = {
     log_error: (offset) => console.error(`log_error: ${decodeOffset(offset)}`),
     log_warn: (offset) => console.warn(`log_warn: ${decodeOffset(offset)}`),
     output_set: (offset) => console.log(decodeOffset(offset)),
+    error_set: (offset) => console.error(decodeOffset(offset)),
     store_u8: (offsetBigInt, byte) => {
       const offset = Number(offsetBigInt)
       Object.keys(fakeAlloc.buffers).forEach((key) => {
