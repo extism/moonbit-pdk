@@ -6,3 +6,4 @@
 # moon build --target wasm --output-wat
 
 moon build --target wasm
+moon test

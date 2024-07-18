@@ -54,7 +54,7 @@ pub fn set_bytes(key : String, value : Bytes) -> Unit {
 /// `set_int` sets the host's "var" Int associated with the provided `key`.
 pub fn set_int(key : String, value : Int) -> Unit {
   let key_mem = @host.allocate_string(key)
-  let bytes = Bytes::make(4)
+  let bytes = Bytes::new(4)
   bytes[0] = value.land(255).to_byte()
   bytes[1] = value.lsr(8).land(255).to_byte()
   bytes[2] = value.lsr(16).land(255).to_byte()

@@ -1,7 +1,7 @@
 /// `input` returns a sequence of (unprocessed) bytes from the host.
 pub fn input() -> Bytes {
   let length = @extism.input_length().to_int()
-  let value = Bytes::make(length)
+  let value = Bytes::new(length)
   for i = 0; i < length; i = i + 1 {
     value[i] = @extism.input_load_u8(i.to_int64())
   }

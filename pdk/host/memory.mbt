@@ -68,7 +68,7 @@ pub fn to_int(self : Memory) -> Int {
 /// `to_bytes` reads the (unprocessed) bytes residing in the host memory
 /// to a MoonBit Bytes.
 pub fn to_bytes(self : Memory) -> Bytes {
-  let bytes = Bytes::make(self.length.to_int())
+  let bytes = Bytes::new(self.length.to_int())
   for i = 0L; i < self.length; i = i + 1L {
     let byte = @extism.load_u8(self.offset + i)
     bytes[i.to_int()] = byte
