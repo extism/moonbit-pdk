@@ -2,7 +2,7 @@
   "name": "extism/moonbit-pdk",
   "version": "0.23.0",
   "deps": {
-    "gmlewis/json": "0.15.0"
+    "gmlewis/jsonutil": "0.16.0"
   },
   "readme": "README.md",
   "repository": "https://github.com/extism/moonbit-pdk",
