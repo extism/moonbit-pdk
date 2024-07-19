@@ -5,5 +5,6 @@
 # moon build --target wasm-gc
 # moon build --target wasm --output-wat
 
+moon fmt
 moon build --target wasm
 moon test

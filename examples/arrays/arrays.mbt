@@ -2,7 +2,7 @@
 pub fn progressive_sum_ints() -> Int {
   let s = @host.input_string()
   let jv = try {
-    @json.parse(s)!
+    @json.parse!(s)
   } catch {
     e => {
       @host.set_error("unable to parse input: \(e)")
@@ -34,7 +34,7 @@ pub fn progressive_sum_ints() -> Int {
 pub fn progressive_sum_floats() -> Int {
   let s = @host.input_string()
   let jv = try {
-    @json.parse(s)!
+    @json.parse!(s)
   } catch {
     e => {
       @host.set_error("unable to parse input: \(e)")
@@ -66,7 +66,7 @@ pub fn progressive_sum_floats() -> Int {
 pub fn progressive_concat_strings() -> Int {
   let s = @host.input_string()
   let jv = try {
-    @json.parse(s)!
+    @json.parse!(s)
   } catch {
     e => {
       @host.set_error("unable to parse input: \(e)")
