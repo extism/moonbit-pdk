@@ -17,15 +17,10 @@ pub fn progressive_sum_ints() -> Int {
       return 1 // failure
     }
   }
-  let mut sum = 0
-  ints.eachi(
-    fn(index, value) {
-      sum += value
-      ints[index] = sum
-    },
-  )
   //
-  let jv = @jsonutil.to_json(ints)
+  let result = process_ints(ints)
+  //
+  let jv = @jsonutil.to_json(result)
   @host.output_json_value(jv)
   0 // success
 }
@@ -49,15 +44,10 @@ pub fn progressive_sum_floats() -> Int {
       return 1 // failure
     }
   }
-  let mut sum = 0.0
-  floats.eachi(
-    fn(index, value) {
-      sum += value
-      floats[index] = sum
-    },
-  )
   //
-  let jv = @jsonutil.to_json(floats)
+  let result = process_floats(floats)
+  //
+  let jv = @jsonutil.to_json(result)
   @host.output_json_value(jv)
   0 // success
 }
@@ -81,15 +71,54 @@ pub fn progressive_concat_strings() -> Int {
       return 1 // failure
     }
   }
-  let parts = []
-  strings.eachi(
-    fn(index, value) {
-      parts.push(value)
-      strings[index] = parts.join("|")
-    },
-  )
   //
-  let jv = @jsonutil.to_json(strings)
+  let result = process_strings(strings)
+  //
+  let jv = @jsonutil.to_json(result)
+  @host.output_json_value(jv)
+  0 // success
+}
+
+/// `all_three_object` tests passing an object of all three arrays.
+pub fn all_three_object() -> Int {
+  let s = @host.input_string()
+  let jv = try {
+    @json.parse!(s)
+  } catch {
+    e => {
+      @host.set_error("unable to parse input: \(e)")
+      return 1 // failure
+    }
+  }
+  //
+  let all_three : AllThree = match jv {
+    Object(
+      {
+        "ints": Some(Array(ints)),
+        "floats": Some(Array(floats)),
+        "strings": Some(Array(strings)),
+      }
+    ) => {
+      let ints : Array[Int] = ints.map(fn { n => n.as_number() }).filter(
+        fn { n => not(n.is_empty()) },
+      ).map(fn { n => n.unwrap().to_int() })
+      let floats : Array[Double] = floats.map(fn { n => n.as_number() }).filter(
+        fn { n => not(n.is_empty()) },
+      ).map(fn { n => n.unwrap() })
+      let strings : Array[String] = strings.map(fn { n => n.as_string() }).filter(
+        fn { n => not(n.is_empty()) },
+      ).map(fn { n => n.unwrap() })
+      { ints, floats, strings }
+    }
+    _ => {
+      @host.set_error("unable to parse input: \(s)")
+      return 1 // failure
+    }
+  }
+  //
+  let result = process_all_three(all_three)
+  //
+  let jv = @jsonutil.to_json(result)
   @host.output_json_value(jv)
   0 // success
 }

@@ -24,6 +24,10 @@
         console.log('strings:')
         inputString.value = '["0","1","2","3","4","5","6"]'
         obj.instance.exports['progressive_concat_strings']()
+
+        console.log('all three:')
+        inputString.value = '{"ints":[0,1,2,3,4,5,6],"floats":[0,0.1,0.2,0.3,0.4,0.5,0.6],"strings":["0","1","2","3","4","5","6"]}'
+        obj.instance.exports['all_three_object']()
         flush()
       }
     )
@@ -48,6 +52,10 @@
 
     console.log('strings:')
     out = await plugin.call('progressive_concat_strings', '["0","1","2","3","4","5","6"]')
+    console.log(out.text())
+
+    console.log('all three:')
+    out = await plugin.call('all_three_object', '{"ints":[0,1,2,3,4,5,6],"floats":[0,0.1,0.2,0.3,0.4,0.5,0.6],"strings":["0","1","2","3","4","5","6"]}')
     console.log(out.text())
   </script>
 </body>

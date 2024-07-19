@@ -8,6 +8,7 @@
   "link": {
     "wasm": {
       "exports": [
+        "all_three_object",
         "progressive_sum_ints",
         "progressive_sum_floats",
         "progressive_concat_strings"
@@ -16,6 +17,7 @@
     },
     "wasm-gc": {
       "exports": [
+        "all_three_object",
         "progressive_sum_ints",
         "progressive_sum_floats",
         "progressive_concat_strings"

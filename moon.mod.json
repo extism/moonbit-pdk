@@ -1,6 +1,6 @@
 {
   "name": "extism/moonbit-pdk",
-  "version": "0.26.0",
+  "version": "0.27.0",
   "deps": {
     "gmlewis/jsonutil": "0.17.0"
   },
