@@ -19,7 +19,7 @@ pub enum Method {
   TRACE
   // The PATCH method applies partial modifications to a resource.
   PATCH
-} derive(Debug, Show)
+} derive(Show)
 
 impl @jsonutil.ToJson for Method with to_json(self) {
   @json.JsonValue::String(self.to_string())

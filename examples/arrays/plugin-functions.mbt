@@ -94,9 +94,9 @@ pub fn all_three_object() -> Int {
   let all_three : AllThree = match jv {
     Object(
       {
-        "ints": Some(Array(ints)),
-        "floats": Some(Array(floats)),
-        "strings": Some(Array(strings)),
+        "ints": Array(ints),
+        "floats": Array(floats),
+        "strings": Array(strings),
       }
     ) => {
       let ints : Array[Int] = ints.map(fn { n => n.as_number() }).filter(

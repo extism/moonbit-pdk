@@ -3,7 +3,7 @@ pub struct AllThree {
   ints : Array[Int]
   floats : Array[Double]
   strings : Array[String]
-} derive(Debug, Eq, Show)
+} derive(Eq, Show)
 
 pub impl @jsonutil.ToJson for AllThree with to_json(self) {
   let fields : Array[(String, @jsonutil.ToJson)] = [

@@ -172,7 +172,7 @@ hopefully this situation will improve as the standard library is fleshed out.)
 struct Add {
   a : Int
   b : Int
-} derive(Debug)
+}
 
 pub fn Add::from_json(value : @json.JsonValue) -> Add? {
   let value = value.as_object()?
@@ -201,7 +201,7 @@ pub fn Add::parse(s : String) -> Add!String {
 
 struct Sum {
   sum : Int
-} derive(Debug)
+}
 
 pub impl @jsonutil.ToJson for Sum with to_json(self) {
   @jsonutil.from_entries([("sum", self.sum)])
@@ -542,8 +542,8 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20240722 (1aa2132 2024-07-22) ~/.moon/bin/moon
-moonc v0.1.20240722+695ec21e1 ~/.moon/bin/moonc
+moon 0.1.20240723 (2c8c62f 2024-07-23) ~/.moon/bin/moon
+moonc v0.1.20240723+155a870f3 ~/.moon/bin/moonc
 moonrun 0.1.20240716 (08bce9c 2024-07-16) ~/.moon/bin/moonrun
 ```
 
