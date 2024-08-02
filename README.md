@@ -542,8 +542,8 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20240726 (67f143f 2024-07-26) ~/.moon/bin/moon
-moonc v0.1.20240729+3efb92d5a ~/.moon/bin/moonc
+moon 0.1.20240802 (be3ee4c 2024-08-02) ~/.moon/bin/moon
+moonc v0.1.20240802+b0ab1523a ~/.moon/bin/moonc
 moonrun 0.1.20240716 (08bce9c 2024-07-16) ~/.moon/bin/moonrun
 ```
 
