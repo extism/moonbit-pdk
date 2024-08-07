@@ -76,7 +76,7 @@ Now paste this into your `main/main.mbt` file:
 ```rust
 pub fn greet() -> Int {
   let name = @host.input_string()
-  let greeting = "Hello, \(name)!"
+  let greeting = "Hello, \{name}!"
   @host.output_string(greeting)
   0 // success
 }
@@ -141,7 +141,7 @@ pub fn greet() -> Int {
     @host.set_error("Sorry, we don't greet Benjamins!")
     return 1 // failure
   }
-  let greeting = "Hello, \(name)!"
+  let greeting = "Hello, \{name}!"
   @host.output_string(greeting)
   0 // success
 }
@@ -190,11 +190,11 @@ pub fn Add::parse(s : String) -> Add!String {
       match Add::from_json(jv) {
         Some(value) => value
         None => {
-          raise "unable to parse Add \(s)"
+          raise "unable to parse Add \{s}"
         }
       }
     Err(e) => {
-      raise "unable to parse Add \(s): \(e)"
+      raise "unable to parse Add \{s}: \{e}"
     }
   }
 }
@@ -277,7 +277,7 @@ pub fn greet() -> Int {
       return 1 // failure
     }
   }
-  let greeting = "Hello, \(user)!"
+  let greeting = "Hello, \{user}!"
   @host.output_string(greeting)
   0 // success
 }
@@ -542,8 +542,8 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20240802 (be3ee4c 2024-08-02) ~/.moon/bin/moon
-moonc v0.1.20240802+b0ab1523a ~/.moon/bin/moonc
+moon 0.1.20240807 (235e4bc 2024-08-07) ~/.moon/bin/moon
+moonc v0.1.20240807+41236f720 ~/.moon/bin/moonc
 moonrun 0.1.20240716 (08bce9c 2024-07-16) ~/.moon/bin/moonrun
 ```
 

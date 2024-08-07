@@ -5,7 +5,7 @@ pub fn progressive_sum_ints() -> Int {
     @json.parse!(s)
   } catch {
     e => {
-      @host.set_error("unable to parse input: \(e)")
+      @host.set_error("unable to parse input: \{e}")
       return 1 // failure
     }
   }
@@ -32,7 +32,7 @@ pub fn progressive_sum_floats() -> Int {
     @json.parse!(s)
   } catch {
     e => {
-      @host.set_error("unable to parse input: \(e)")
+      @host.set_error("unable to parse input: \{e}")
       return 1 // failure
     }
   }
@@ -59,7 +59,7 @@ pub fn progressive_concat_strings() -> Int {
     @json.parse!(s)
   } catch {
     e => {
-      @host.set_error("unable to parse input: \(e)")
+      @host.set_error("unable to parse input: \{e}")
       return 1 // failure
     }
   }
@@ -86,7 +86,7 @@ pub fn all_three_object() -> Int {
     @json.parse!(s)
   } catch {
     e => {
-      @host.set_error("unable to parse input: \(e)")
+      @host.set_error("unable to parse input: \{e}")
       return 1 // failure
     }
   }
@@ -99,19 +99,22 @@ pub fn all_three_object() -> Int {
         "strings": Array(strings),
       }
     ) => {
-      let ints : Array[Int] = ints.map(fn { n => n.as_number() }).filter(
-        fn { n => not(n.is_empty()) },
-      ).map(fn { n => n.unwrap().to_int() })
-      let floats : Array[Double] = floats.map(fn { n => n.as_number() }).filter(
-        fn { n => not(n.is_empty()) },
-      ).map(fn { n => n.unwrap() })
-      let strings : Array[String] = strings.map(fn { n => n.as_string() }).filter(
-        fn { n => not(n.is_empty()) },
-      ).map(fn { n => n.unwrap() })
+      let ints : Array[Int] = ints
+        .map(fn { n => n.as_number() })
+        .filter(fn { n => not(n.is_empty()) })
+        .map(fn { n => n.unwrap().to_int() })
+      let floats : Array[Double] = floats
+        .map(fn { n => n.as_number() })
+        .filter(fn { n => not(n.is_empty()) })
+        .map(fn { n => n.unwrap() })
+      let strings : Array[String] = strings
+        .map(fn { n => n.as_string() })
+        .filter(fn { n => not(n.is_empty()) })
+        .map(fn { n => n.unwrap() })
       { ints, floats, strings }
     }
     _ => {
-      @host.set_error("unable to parse input: \(s)")
+      @host.set_error("unable to parse input: \{s}")
       return 1 // failure
     }
   }

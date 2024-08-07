@@ -8,9 +8,10 @@ pub fn Header::new() -> Header {
 }
 
 impl @jsonutil.ToJson for Header with to_json(self) {
-  let pairs = self.0.iter().map(
-      fn { (k, v) => (k, @json.JsonValue::String(v)) },
-    ).collect()
+  let pairs = self.0
+    .iter()
+    .map(fn { (k, v) => (k, @json.JsonValue::String(v)) })
+    .collect()
     |> Map::from_array()
   @json.JsonValue::Object(pairs)
 }
@@ -19,7 +20,7 @@ impl @jsonutil.ToJson for Header with to_json(self) {
 /// If the header key already exists, the value is appended after a comma.
 pub fn add(self : Header, key : String, value : String) -> Unit {
   match self.0.get(key) {
-    Some(v) => self.0[key] = "\(v),\(value)"
+    Some(v) => self.0[key] = "\{v},\{value}"
     None => self.0[key] = value
   }
 }
