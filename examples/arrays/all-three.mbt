@@ -15,10 +15,10 @@ pub impl @jsonutil.ToJson for AllThree with to_json(self) {
 }
 
 /// `process_all_three` processes all three array types.
-pub fn process_all_three(in : AllThree) -> AllThree {
+pub fn process_all_three(all3 : AllThree) -> AllThree {
   {
-    ints: process_ints(in.ints),
-    floats: process_floats(in.floats),
-    strings: process_strings(in.strings),
+    ints: process_ints(all3.ints),
+    floats: process_floats(all3.floats),
+    strings: process_strings(all3.strings),
   }
 }
