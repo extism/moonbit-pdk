@@ -36,7 +36,7 @@ test "add" {
   h.add("key2", "one")
   h.add("key2", "two")
   h.add("key2", "two")
-  @test.eq!(h.0.get("nokey"), None)
-  @test.eq!(h.0.get("key1"), Some("one"))
-  @test.eq!(h.0.get("key2"), Some("one,two,two"))
+  assert_eq!(h.0.get("nokey"), None)
+  assert_eq!(h.0.get("key1"), Some("one"))
+  assert_eq!(h.0.get("key2"), Some("one,two,two"))
 }
