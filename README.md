@@ -9,7 +9,7 @@ This is an [Extism PDK] that can be used to write [Extism Plug-ins] using the [M
 
 ## Install
 
-Add the library to your projext as a dependency with the `moon` tool:
+Add the library to your project as a dependency with the `moon` tool:
 
 ```bash
 moon add extism/moonbit-pdk
