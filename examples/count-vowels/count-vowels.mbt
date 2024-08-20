@@ -7,12 +7,14 @@ pub struct VowelReport {
   count : Int
   total : Int
   vowels : String
-}
+} derive(Show, Eq)
 
-impl @jsonutil.ToJson for VowelReport with to_json(self) {
-  @jsonutil.from_entries(
-    [("count", self.count), ("total", self.total), ("vowels", self.vowels)],
-  )
+pub fn to_json(self : VowelReport) -> Json {
+  {
+    "count": self.count.to_json(),
+    "total": self.total.to_json(),
+    "vowels": self.vowels.to_json(),
+  }
 }
 
 fn get_total() -> Int {
@@ -49,6 +51,6 @@ pub fn count_vowels() -> Int {
   let total = get_total() + count
   store_total(total)
   //
-  { count, total, vowels } |> @jsonutil.to_json() |> @host.output_json_value()
+  { count, total, vowels }.to_json() |> @host.output_json_value()
   0 // success
 }

@@ -21,6 +21,6 @@ pub enum Method {
   PATCH
 } derive(Show)
 
-impl @jsonutil.ToJson for Method with to_json(self) {
-  @json.JsonValue::String(self.to_string())
+pub fn to_json(self : Method) -> Json {
+  self.to_string().to_json()
 }

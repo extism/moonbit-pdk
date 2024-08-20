@@ -7,13 +7,8 @@ pub fn Header::new() -> Header {
   Header(Map::new())
 }
 
-impl @jsonutil.ToJson for Header with to_json(self) {
-  let pairs = self.0
-    .iter()
-    .map(fn { (k, v) => (k, @json.JsonValue::String(v)) })
-    .collect()
-    |> Map::from_array()
-  @json.JsonValue::Object(pairs)
+pub fn to_json(self : Header) -> Json {
+  self.0.to_json()
 }
 
 /// `add` adds a value to a named (by `key`) header field.

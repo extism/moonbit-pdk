@@ -41,7 +41,7 @@ pub fn output_string(s : String) -> Unit {
 /// `output_json_value` converts a MoonBit @json.JsonValue to an Extism JSON string
 /// and sends it to the host.
 pub fn output_json_value(j : @json.JsonValue) -> Unit {
-  @jsonutil.stringify(j, spaces=0, newline=false) |> output_string()
+  j.stringify() |> output_string()
 }
 
 fn set_error_bytes(b : Bytes) -> Unit {

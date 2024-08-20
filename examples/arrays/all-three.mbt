@@ -5,13 +5,17 @@ pub struct AllThree {
   strings : Array[String]
 } derive(Eq, Show)
 
-pub impl @jsonutil.ToJson for AllThree with to_json(self) {
-  let fields : Array[(String, @jsonutil.ToJson)] = [
-    ("ints", self.ints),
-    ("floats", self.floats),
-    ("strings", self.strings),
-  ]
-  @jsonutil.from_entries(fields)
+fn array_to_json[T](arr : Array[T], ~f : (T) -> Json) -> Json {
+  Array(arr.map(f))
+}
+
+fn to_json(self : AllThree) -> Json {
+  let { ints, floats, strings } = self
+  {
+    "ints": ints |> array_to_json(f=fn { x => Number(x.to_double()) }),
+    "floats": floats |> array_to_json(f=fn { x => Number(x) }),
+    "strings": strings |> array_to_json(f=fn { x => String(x) }),
+  }
 }
 
 /// `process_all_three` processes all three array types.

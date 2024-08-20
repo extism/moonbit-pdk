@@ -20,7 +20,7 @@ pub fn progressive_sum_ints() -> Int {
   //
   let result = process_ints(ints)
   //
-  let jv = @jsonutil.to_json(result)
+  let jv = result.to_json()
   @host.output_json_value(jv)
   0 // success
 }
@@ -47,7 +47,7 @@ pub fn progressive_sum_floats() -> Int {
   //
   let result = process_floats(floats)
   //
-  let jv = @jsonutil.to_json(result)
+  let jv = result.to_json()
   @host.output_json_value(jv)
   0 // success
 }
@@ -74,7 +74,7 @@ pub fn progressive_concat_strings() -> Int {
   //
   let result = process_strings(strings)
   //
-  let jv = @jsonutil.to_json(result)
+  let jv = result.to_json()
   @host.output_json_value(jv)
   0 // success
 }
@@ -121,7 +121,7 @@ pub fn all_three_object() -> Int {
   //
   let result = process_all_three(all_three)
   //
-  let jv = @jsonutil.to_json(result)
+  let jv = result.to_json()
   @host.output_json_value(jv)
   0 // success
 }

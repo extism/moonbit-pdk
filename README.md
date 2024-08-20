@@ -203,10 +203,6 @@ struct Sum {
   sum : Int
 }
 
-pub impl @jsonutil.ToJson for Sum with to_json(self) {
-  @jsonutil.from_entries([("sum", self.sum)])
-}
-
 pub fn add() -> Int {
   let input = @host.input_string()
   let params = try {
@@ -219,26 +215,19 @@ pub fn add() -> Int {
   }
   //
   let sum = { sum: params.a + params.b }
-  let json_value = @jsonutil.to_json(sum)
+  let json_value = sum.to_json()
   @host.output_json_value(json_value)
   0 // success
 }
 ```
 
-Add the `gmlewis/json` package to your project:
 
-```bash
-moon add gmlewis/json
-```
-
-And import it into `main/moon.pkg.json` as `jsonutil`, remembering also to
-export your `add` function in `main/moon.pkg.json`:
+Export your `add` function in `main/moon.pkg.json`:
 
 ```json
 {
   "is-main": true,
   "import": [
-    "gmlewis/jsonutil",
     "extism/moonbit-pdk/pdk/host"
   ],
   "link": {
@@ -542,9 +531,9 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20240813 (8b14470 2024-08-13) ~/.moon/bin/moon
-moonc v0.1.20240813+4025fe3de ~/.moon/bin/moonc
-moonrun 0.1.20240716 (08bce9c 2024-07-16) ~/.moon/bin/moonrun
+moon 0.1.20240819 (284058b 2024-08-19) ~/.moon/bin/moon
+moonc v0.1.20240820+85e9a0dc8 ~/.moon/bin/moonc
+moonrun 0.1.20240820 (ecf5abc 2024-08-20) ~/.moon/bin/moonrun
 ```
 
 Use [`moonup`] to manage `moon` compiler versions:

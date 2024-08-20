@@ -5,10 +5,12 @@ pub struct Request {
   url : String
 }
 
-impl @jsonutil.ToJson for Request with to_json(self) {
-  @jsonutil.from_entries(
-    [("method", self.method), ("header", self.header), ("url", self.url)],
-  )
+pub fn to_json(self : Request) -> Json {
+  {
+    "method": self.method.to_json(),
+    "header": self.header.to_json(),
+    "url": self.url.to_json(),
+  }
 }
 
 /// `Response` represents an HTTP response from the Extism host.
@@ -28,7 +30,7 @@ pub fn new_request(method : Method, url : String) -> Request {
 /// and returns it to the caller.
 /// Note that the (optional) `body` is freed by this call.
 pub fn send(self : Request, ~body : @host.Memory? = None) -> Response {
-  let meta_mem = self |> @jsonutil.to_json() |> @host.allocate_json_value()
+  let meta_mem = self.to_json() |> @host.allocate_json_value()
   let body_memory_offset = match body {
     Some(v) => v.offset
     None => 0L
