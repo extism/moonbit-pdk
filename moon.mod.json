@@ -4,6 +4,7 @@
   "deps": {
     "gmlewis/jsonutil": "0.22.0"
   },
+  "__mark__": "gmlewis/jsonutil is not available!!!",
   "readme": "README.md",
   "repository": "https://github.com/extism/moonbit-pdk",
   "license": "Apache-2.0",
