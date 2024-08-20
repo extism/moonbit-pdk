@@ -203,6 +203,10 @@ struct Sum {
   sum : Int
 }
 
+pub fn to_json(self: Sum) -> Json {
+  { "sum": self.sum.to_json() }
+}
+
 pub fn add() -> Int {
   let input = @host.input_string()
   let params = try {
