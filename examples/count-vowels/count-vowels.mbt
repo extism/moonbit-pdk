@@ -7,21 +7,10 @@ pub struct VowelReport {
   count : Int
   total : Int
   vowels : String
-} derive(Show, Eq)
-
-pub fn to_json(self : VowelReport) -> Json {
-  {
-    "count": self.count.to_json(),
-    "total": self.total.to_json(),
-    "vowels": self.vowels.to_json(),
-  }
-}
+} derive(Show, Eq, ToJson)
 
 fn get_total() -> Int {
-  match @var.get_int("total") {
-    Some(total) => total
-    None => 0
-  }
+  @var.get_int("total").or_default()
 }
 
 fn store_total(total : Int) -> Unit {
@@ -29,10 +18,7 @@ fn store_total(total : Int) -> Unit {
 }
 
 fn get_vowels() -> String {
-  match @config.get("vowels") {
-    Some(s) => s
-    None => default_vowels
-  }
+  @config.get("vowels").or(default_vowels)
 }
 
 /// `count_vowels` reads the input string from the host, reads the "vowels"
@@ -53,4 +39,14 @@ pub fn count_vowels() -> Int {
   //
   { count, total, vowels }.to_json() |> @host.output_json_value()
   0 // success
+}
+
+test "VowelReport::to_json works as expected" {
+  let vowel_report = { count: 1, total: 2, vowels: "some string" }
+  let got = vowel_report.to_json().stringify()
+  // See: https://github.com/moonbitlang/core/issues/878
+  // for trailing ".0" on the integers.
+  let want =
+    #|{"count":1.0,"total":2.0,"vowels":"some string"}
+  assert_eq!(got, want)
 }

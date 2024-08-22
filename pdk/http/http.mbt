@@ -3,15 +3,7 @@ pub struct Request {
   method : Method
   header : Header
   url : String
-}
-
-pub fn to_json(self : Request) -> Json {
-  {
-    "method": self.method.to_json(),
-    "header": self.header.to_json(),
-    "url": self.url.to_json(),
-  }
-}
+} derive(ToJson)
 
 /// `Response` represents an HTTP response from the Extism host.
 pub struct Response {
@@ -59,4 +51,26 @@ pub fn send(self : Request, ~body : @host.Memory? = None) -> Response {
 /// `output` sends the (unprocessed) `Response` body to the Extism host "output".
 pub fn output(self : Response) -> Unit {
   @host.output_memory(self.body)
+}
+
+test "Request::to_json works as expected" {
+  let request = {
+    method: GET,
+    header: { "key1": "one", "key2": "two" },
+    url: "https://example.com",
+  }
+  let got = request.to_json().stringify()
+  // See: https://github.com/moonbitlang/core/issues/893
+  let want =
+    #|{"method":"GET","header":{"key1":"one","key2":"two"},"url":"https:\/\/example.com"}
+  assert_eq!(got, want)
+}
+
+test "Json::stringify works on strings" {
+  let url = "https://example.com"
+  let got = url.to_json().stringify()
+  // See: https://github.com/moonbitlang/core/issues/893
+  let want =
+    #|"https:\/\/example.com"
+  assert_eq!(got, want)
 }

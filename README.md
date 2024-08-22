@@ -213,11 +213,7 @@ pub fn Add::parse(s : String) -> Add!ParseError {
 
 struct Sum {
   sum : Int
-}
-
-pub fn to_json(self : Sum) -> Json {
-  { "sum": self.sum.to_json() }
-}
+} derive(ToJson)
 
 pub fn add() -> Int {
   let input = @host.input_string()

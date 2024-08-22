@@ -39,11 +39,7 @@ pub fn Add::parse(s : String) -> Add!ParseError {
 
 struct Sum {
   sum : Int
-}
-
-pub fn to_json(self : Sum) -> Json {
-  { "sum": self.sum.to_json() }
-}
+} derive(ToJson)
 
 pub fn add() -> Int {
   let input = @host.input_string()
@@ -60,4 +56,14 @@ pub fn add() -> Int {
   let json_value = sum.to_json()
   @host.output_json_value(json_value)
   0 // success
+}
+
+test "Sum::to_json works as expected" {
+  let sum = { sum: 42 }
+  let got = sum.to_json().stringify()
+  // See: https://github.com/moonbitlang/core/issues/878
+  // for trailing ".0" on the integers.
+  let want =
+    #|{"sum":42.0}
+  assert_eq!(got, want)
 }

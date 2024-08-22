@@ -21,6 +21,7 @@ pub enum Method {
   PATCH
 } derive(Show)
 
+/// `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.
 pub fn to_json(self : Method) -> Json {
   self.to_string().to_json()
 }

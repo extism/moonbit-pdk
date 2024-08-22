@@ -1,14 +1,10 @@
 /// `Header` represents an HTTP Request header.
 /// Multiple values for a single key are not deduped.
-pub type Header Map[String, String]
+pub type Header Map[String, String] derive(Show, Eq, ToJson)
 
 /// `Header::new` returns a new Header.
 pub fn Header::new() -> Header {
   Header(Map::new())
-}
-
-pub fn to_json(self : Header) -> Json {
-  self.0.to_json()
 }
 
 /// `add` adds a value to a named (by `key`) header field.
@@ -25,7 +21,7 @@ pub fn set(self : Header, key : String, value : String) -> Unit {
   self.0[key] = value
 }
 
-test "add" {
+test "Header::add" {
   let h = Header::new()
   h.add("key1", "one")
   h.add("key2", "one")
@@ -34,4 +30,12 @@ test "add" {
   assert_eq!(h.0.get("nokey"), None)
   assert_eq!(h.0.get("key1"), Some("one"))
   assert_eq!(h.0.get("key2"), Some("one,two,two"))
+}
+
+test "Header::to_json works as expected" {
+  let header : Header = { "key1": "one", "key2": "two" }
+  let got = header.to_json().stringify()
+  let want =
+    #|{"key1":"one","key2":"two"}
+  assert_eq!(got, want)
 }
