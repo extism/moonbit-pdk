@@ -545,7 +545,7 @@ moonc v0.1.20240820+85e9a0dc8 ~/.moon/bin/moonc
 moonrun 0.1.20240820 (ecf5abc 2024-08-20) ~/.moon/bin/moonrun
 ```
 
-Use [`moonup`] to manage `moon` compiler versions:
+Use `moonup` to manage `moon` compiler versions:
 https://github.com/chawyehsu/moonup
 
 ## Reach Out!
