@@ -45,8 +45,8 @@ pub fn Memory::allocate_string(s : String) -> Memory {
 }
 
 /// `Memory::allocate_json_value` allocates and initializes a UTF-8 string
-/// in host memory that is converted from this `@json.JsonValue`.
-pub fn Memory::allocate_json_value(j : @json.JsonValue) -> Memory {
+/// in host memory that is converted from this `Json`.
+pub fn Memory::allocate_json_value(j : Json) -> Memory {
   j.stringify() |> Memory::allocate_string()
 }
 

@@ -38,9 +38,9 @@ pub fn output_string(s : String) -> Unit {
   @pdk.ToUtf8::to_utf8(s) |> output()
 }
 
-/// `output_json_value` converts a MoonBit @json.JsonValue to an Extism JSON string
+/// `output_json_value` converts a MoonBit `Json` to an Extism JSON string
 /// and sends it to the host.
-pub fn output_json_value(j : @json.JsonValue) -> Unit {
+pub fn output_json_value(j : Json) -> Unit {
   j.stringify() |> output_string()
 }
 

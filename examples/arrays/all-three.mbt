@@ -17,9 +17,7 @@ pub fn process_all_three(all3 : AllThree) -> AllThree {
 test "AllThree::to_json works as expected" {
   let all3 = { ints: [1, 2, 3], floats: [1, 2, 3], strings: ["1", "2", "3"] }
   let got = all3.to_json().stringify()
-  // See: https://github.com/moonbitlang/core/issues/878
-  // for trailing ".0" on the integers.
   let want =
-    #|{"ints":[1.0,2.0,3.0],"floats":[1.0,2.0,3.0],"strings":["1","2","3"]}
+    #|{"ints":[1,2,3],"floats":[1,2,3],"strings":["1","2","3"]}
   assert_eq!(got, want)
 }

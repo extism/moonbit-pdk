@@ -177,23 +177,10 @@ struct Add {
   b : Int
 }
 
-pub fn Add::from_json(value : @json.JsonValue) -> Add? {
-  let value = match value.as_object() {
-    Some(v) => v
-    _ => return None
-  }
-  let a = match value.get("a") {
-    Some(v) => v
-    _ => return None
-  }
-  let a = a.as_number()
-  let b = match value.get("b") {
-    Some(v) => v
-    _ => return None
-  }
-  let b = b.as_number()
-  match (a, b) {
-    (Some(a), Some(b)) => Some({ a: a.to_int(), b: b.to_int() })
+pub fn Add::from_json(value : Json) -> Add? {
+  // From: https://github.com/moonbitlang/core/issues/892#issuecomment-2306068783
+  match value {
+    { "a": Number(a), "b": Number(b) } => Some({ a: a.to_int(), b: b.to_int() })
     _ => None
   }
 }
@@ -540,9 +527,9 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20240819 (284058b 2024-08-19) ~/.moon/bin/moon
-moonc v0.1.20240820+85e9a0dc8 ~/.moon/bin/moonc
-moonrun 0.1.20240820 (ecf5abc 2024-08-20) ~/.moon/bin/moonrun
+moon 0.1.20240823 (f608aa3 2024-08-23) ~/.moon/bin/moon
+moonc v0.1.20240823+c622a5ab0 ~/.moon/bin/moonc
+moonrun 0.1.20240822 (efda7a5 2024-08-22) ~/.moon/bin/moonrun
 ```
 
 Use `moonup` to manage `moon` compiler versions:

@@ -44,9 +44,7 @@ pub fn count_vowels() -> Int {
 test "VowelReport::to_json works as expected" {
   let vowel_report = { count: 1, total: 2, vowels: "some string" }
   let got = vowel_report.to_json().stringify()
-  // See: https://github.com/moonbitlang/core/issues/878
-  // for trailing ".0" on the integers.
   let want =
-    #|{"count":1.0,"total":2.0,"vowels":"some string"}
+    #|{"count":1,"total":2,"vowels":"some string"}
   assert_eq!(got, want)
 }

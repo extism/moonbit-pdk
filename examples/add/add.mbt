@@ -3,23 +3,10 @@ struct Add {
   b : Int
 }
 
-pub fn Add::from_json(value : @json.JsonValue) -> Add? {
-  let value = match value.as_object() {
-    Some(v) => v
-    _ => return None
-  }
-  let a = match value.get("a") {
-    Some(v) => v
-    _ => return None
-  }
-  let a = a.as_number()
-  let b = match value.get("b") {
-    Some(v) => v
-    _ => return None
-  }
-  let b = b.as_number()
-  match (a, b) {
-    (Some(a), Some(b)) => Some({ a: a.to_int(), b: b.to_int() })
+pub fn Add::from_json(value : Json) -> Add? {
+  // From: https://github.com/moonbitlang/core/issues/892#issuecomment-2306068783
+  match value {
+    { "a": Number(a), "b": Number(b) } => Some({ a: a.to_int(), b: b.to_int() })
     _ => None
   }
 }
@@ -61,9 +48,7 @@ pub fn add() -> Int {
 test "Sum::to_json works as expected" {
   let sum = { sum: 42 }
   let got = sum.to_json().stringify()
-  // See: https://github.com/moonbitlang/core/issues/878
-  // for trailing ".0" on the integers.
   let want =
-    #|{"sum":42.0}
+    #|{"sum":42}
   assert_eq!(got, want)
 }

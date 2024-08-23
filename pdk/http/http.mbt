@@ -59,18 +59,16 @@ test "Request::to_json works as expected" {
     header: { "key1": "one", "key2": "two" },
     url: "https://example.com",
   }
-  let got = request.to_json().stringify()
-  // See: https://github.com/moonbitlang/core/issues/893
+  let got = request.to_json().stringify(escape_slash=false)
   let want =
-    #|{"method":"GET","header":{"key1":"one","key2":"two"},"url":"https:\/\/example.com"}
+    #|{"method":"GET","header":{"key1":"one","key2":"two"},"url":"https://example.com"}
   assert_eq!(got, want)
 }
 
 test "Json::stringify works on strings" {
   let url = "https://example.com"
-  let got = url.to_json().stringify()
-  // See: https://github.com/moonbitlang/core/issues/893
+  let got = url.to_json().stringify(escape_slash=false)
   let want =
-    #|"https:\/\/example.com"
+    #|"https://example.com"
   assert_eq!(got, want)
 }
