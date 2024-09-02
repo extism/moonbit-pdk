@@ -20,7 +20,7 @@ jobs:
       - name: install-ubuntu
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
-          /bin/bash -c "$(curl -fsSL https://cli.moonbitlang.com/ubuntu_x86_64_moon_setup.sh)"
+          /bin/bash -c "$(curl -fsSL https://cli.moonbitlang.com/install/unix.sh)"
           echo "/home/runner/.moon/bin" >> $GITHUB_PATH
       # - name: install-macos
       #   if: ${{ matrix.os == 'macos-latest' }}
