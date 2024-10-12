@@ -4,7 +4,7 @@ pub fn process_strings(strings : Array[String]) -> Array[String] {
   strings.eachi(
     fn(index, value) {
       parts.push(value)
-      strings[index] = parts.join("|")
+      strings[index] = String::concat(parts, separator="|")
     },
   )
   strings

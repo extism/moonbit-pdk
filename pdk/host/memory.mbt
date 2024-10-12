@@ -61,9 +61,9 @@ pub fn to_string(self : Memory) -> String {
 pub fn to_int(self : Memory) -> Int {
   let bytes = self.to_bytes()
   bytes[0].to_int() +
-  bytes[1].to_int().lsl(8) +
-  bytes[2].to_int().lsl(16) +
-  bytes[3].to_int().lsl(24)
+  (bytes[1].to_int() << 8) +
+  (bytes[2].to_int() << 16) +
+  (bytes[3].to_int() << 24)
 }
 
 /// `to_bytes` reads the (unprocessed) bytes residing in the host memory

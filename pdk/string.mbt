@@ -33,7 +33,7 @@ pub impl ToUtf16 for Bytes with to_utf16(b : Bytes) -> String {
   // For now, support ASCII.
   // https://github.com/moonbitlang/core/issues/484
   let length = b.length()
-  let buf = Buffer::new(size_hint=2 * length)
+  let buf = @buffer.new(size_hint=2 * length)
   for i = 0; i < length; i = i + 1 {
     let byte = b[i].to_int()
     let char = Char::from_int(byte)
