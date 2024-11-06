@@ -1,8 +1,6 @@
 {
   "import": [
-    "extism/moonbit-pdk/pdk/config",
-    "extism/moonbit-pdk/pdk/host",
-    "extism/moonbit-pdk/pdk/var"
+    "extism/moonbit-pdk/pdk/host"
   ],
   "link": {
     "wasm": {
