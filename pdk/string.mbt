@@ -1,7 +1,7 @@
 /// ToUtf8 is a workaround since the standard library does not make
 /// it easy to write a standard UTF-8 string.
 /// https://github.com/moonbitlang/core/issues/484
-pub trait ToUtf8 {
+pub(open) trait ToUtf8 {
   to_utf8(Self) -> Bytes
 }
 
@@ -23,7 +23,7 @@ pub impl ToUtf8 for String with to_utf8(s : String) -> Bytes {
 /// ToUtf16 is a workaround since the standard library does not make
 /// it easy to write a standard UTF-16 string from UTF-8.
 /// https://github.com/moonbitlang/core/issues/484
-pub trait ToUtf16 {
+pub(open) trait ToUtf16 {
   to_utf16(Self) -> String
 }
 
