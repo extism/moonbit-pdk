@@ -1,6 +1,6 @@
 /// `Method` represents an HTTP method.
 /// Descriptions are from: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
-pub enum Method {
+pub(all) enum Method {
   // The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
   GET
   // The HEAD method asks for a response identical to a GET request, but without the response body.

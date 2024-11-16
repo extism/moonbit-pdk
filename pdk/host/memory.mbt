@@ -1,6 +1,6 @@
 /// `Memory` represents memory allocated by (and shared with) the host.
 /// TODO: What kind of error checking needs to happen here?
-pub struct Memory {
+pub(all) struct Memory {
   offset : Int64
   length : Int64
 }

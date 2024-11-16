@@ -1,5 +1,5 @@
 /// `Config` provides methods to get "config" data from the host.
-pub struct Config {}
+pub(all) struct Config {}
 
 /// `Config::get_memory` returns a "config" Memory block from the host that is keyed by `key`.
 /// Note that no processing is performed on this block of memory.

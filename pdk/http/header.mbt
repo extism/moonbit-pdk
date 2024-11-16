@@ -1,6 +1,6 @@
 /// `Header` represents an HTTP Request header.
 /// Multiple values for a single key are not deduped.
-pub type Header Map[String, String] derive(Show, Eq, ToJson)
+pub(all) type Header Map[String, String] derive(Show, Eq, ToJson)
 
 /// `Header::new` returns a new Header.
 pub fn Header::new() -> Header {

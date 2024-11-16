@@ -3,7 +3,7 @@
 let default_vowels = "aeiouAEIOU"
 
 /// `VowelReport` represents the JSON struct returned to the host.
-pub struct VowelReport {
+pub(all) struct VowelReport {
   count : Int
   total : Int
   vowels : String

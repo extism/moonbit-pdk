@@ -1,27 +1,27 @@
 /// `Request` represents an HTTP request made by the Extism host.
-pub struct Request {
-  method : Method
+pub(all) struct Request {
+  http_method : Method
   header : Header
   url : String
 } derive(ToJson)
 
 /// `Response` represents an HTTP response from the Extism host.
-pub struct Response {
+pub(all) struct Response {
   status_code : Int
   body : @host.Memory
 }
 
 /// `new_request` returns a new `Request` using the provided
 /// `method` and `url`.
-pub fn new_request(method : Method, url : String) -> Request {
+pub fn new_request(http_method : Method, url : String) -> Request {
   let header = Header::new()
-  { method, header, url }
+  { http_method, header, url }
 }
 
 /// `send` sends the `Request` to the host, waits for a response,
 /// and returns it to the caller.
 /// Note that the (optional) `body` is freed by this call.
-pub fn send(self : Request, ~body : @host.Memory? = None) -> Response {
+pub fn send(self : Request, body~ : @host.Memory? = None) -> Response {
   let meta_mem = self.to_json() |> @host.allocate_json_value()
   let body_memory_offset = match body {
     Some(v) => v.offset
@@ -55,13 +55,13 @@ pub fn output(self : Response) -> Unit {
 
 test "Request::to_json works as expected" {
   let request = {
-    method: GET,
+    http_method: GET,
     header: { "key1": "one", "key2": "two" },
     url: "https://example.com",
   }
   let got = request.to_json().stringify(escape_slash=false)
   let want =
-    #|{"method":"GET","header":{"key1":"one","key2":"two"},"url":"https://example.com"}
+    #|{"http_method":"GET","header":{"key1":"one","key2":"two"},"url":"https://example.com"}
   assert_eq!(got, want)
 }
 

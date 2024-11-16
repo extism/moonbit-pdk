@@ -39,5 +39,5 @@ pub impl ToUtf16 for Bytes with to_utf16(b : Bytes) -> String {
     let char = Char::from_int(byte)
     buf.write_char(char)
   }
-  buf.to_string()
+  buf.to_unchecked_string()
 }

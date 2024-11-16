@@ -1,5 +1,5 @@
 /// `AllThree` represents a JSON object with all three array types.
-pub struct AllThree {
+pub(all) struct AllThree {
   ints : Array[Int]
   floats : Array[Double]
   strings : Array[String]
