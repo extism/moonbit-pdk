@@ -1,11 +1,11 @@
-/// `AllThree` represents a JSON object with all three array types.
+///| `AllThree` represents a JSON object with all three array types.
 pub(all) struct AllThree {
   ints : Array[Int]
   floats : Array[Double]
   strings : Array[String]
 } derive(Eq, Show, ToJson)
 
-/// `process_all_three` processes all three array types.
+///| `process_all_three` processes all three array types.
 pub fn process_all_three(all3 : AllThree) -> AllThree {
   {
     ints: process_ints(all3.ints),

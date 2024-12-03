@@ -1,24 +1,24 @@
-/// `Request` represents an HTTP request made by the Extism host.
+///| `Request` represents an HTTP request made by the Extism host.
 pub(all) struct Request {
   http_method : Method
   header : Header
   url : String
 } derive(ToJson)
 
-/// `Response` represents an HTTP response from the Extism host.
+///| `Response` represents an HTTP response from the Extism host.
 pub(all) struct Response {
   status_code : Int
   body : @host.Memory
 }
 
-/// `new_request` returns a new `Request` using the provided
+///| `new_request` returns a new `Request` using the provided
 /// `method` and `url`.
 pub fn new_request(http_method : Method, url : String) -> Request {
   let header = Header::new()
   { http_method, header, url }
 }
 
-/// `send` sends the `Request` to the host, waits for a response,
+///| `send` sends the `Request` to the host, waits for a response,
 /// and returns it to the caller.
 /// Note that the (optional) `body` is freed by this call.
 pub fn send(self : Request, body~ : @host.Memory? = None) -> Response {
@@ -48,7 +48,7 @@ pub fn send(self : Request, body~ : @host.Memory? = None) -> Response {
   { status_code, body: response_body }
 }
 
-/// `output` sends the (unprocessed) `Response` body to the Extism host "output".
+///| `output` sends the (unprocessed) `Response` body to the Extism host "output".
 pub fn output(self : Response) -> Unit {
   @host.output_memory(self.body)
 }

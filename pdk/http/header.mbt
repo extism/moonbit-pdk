@@ -1,13 +1,13 @@
-/// `Header` represents an HTTP Request header.
+///| `Header` represents an HTTP Request header.
 /// Multiple values for a single key are not deduped.
 pub(all) type Header Map[String, String] derive(Show, Eq, ToJson)
 
-/// `Header::new` returns a new Header.
+///| `Header::new` returns a new Header.
 pub fn Header::new() -> Header {
   Header(Map::new())
 }
 
-/// `add` adds a value to a named (by `key`) header field.
+///| `add` adds a value to a named (by `key`) header field.
 /// If the header key already exists, the value is appended after a comma.
 pub fn add(self : Header, key : String, value : String) -> Unit {
   match self._.get(key) {
@@ -16,7 +16,7 @@ pub fn add(self : Header, key : String, value : String) -> Unit {
   }
 }
 
-/// `set` overwrites a value to a named (by `key`) header field.
+///| `set` overwrites a value to a named (by `key`) header field.
 pub fn set(self : Header, key : String, value : String) -> Unit {
   self._[key] = value
 }

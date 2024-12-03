@@ -1,4 +1,4 @@
-/// `Method` represents an HTTP method.
+///| `Method` represents an HTTP method.
 /// Descriptions are from: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 pub(all) enum Method {
   // The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
@@ -21,7 +21,7 @@ pub(all) enum Method {
   PATCH
 } derive(Show)
 
-/// `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.
+///| `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.
 pub fn to_json(self : Method) -> Json {
   self.to_string().to_json()
 }

@@ -1,4 +1,4 @@
-/// `progressive_sum_ints` tests passing arrays of ints.
+///| `progressive_sum_ints` tests passing arrays of ints.
 pub fn progressive_sum_ints() -> Int {
   let s = @host.input_string()
   let jv = try {
@@ -25,7 +25,7 @@ pub fn progressive_sum_ints() -> Int {
   0 // success
 }
 
-/// `progressive_sum_floats` tests passing arrays of floats.
+///| `progressive_sum_floats` tests passing arrays of floats.
 pub fn progressive_sum_floats() -> Int {
   let s = @host.input_string()
   let jv = try {
@@ -52,7 +52,7 @@ pub fn progressive_sum_floats() -> Int {
   0 // success
 }
 
-/// `progressive_concat_strings` tests passing arrays of strings.
+///| `progressive_concat_strings` tests passing arrays of strings.
 pub fn progressive_concat_strings() -> Int {
   let s = @host.input_string()
   let jv = try {
@@ -79,7 +79,7 @@ pub fn progressive_concat_strings() -> Int {
   0 // success
 }
 
-/// `all_three_object` tests passing an object of all three arrays.
+///| `all_three_object` tests passing an object of all three arrays.
 pub fn all_three_object() -> Int {
   let s = @host.input_string()
   let jv = try {

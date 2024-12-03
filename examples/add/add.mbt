@@ -1,8 +1,10 @@
+///|
 struct Add {
   a : Int
   b : Int
 }
 
+///|
 pub fn Add::from_json(value : Json) -> Add? {
   // From: https://github.com/moonbitlang/core/issues/892#issuecomment-2306068783
   match value {
@@ -11,8 +13,10 @@ pub fn Add::from_json(value : Json) -> Add? {
   }
 }
 
+///|
 type! ParseError String derive(Show)
 
+///|
 pub fn Add::parse(s : String) -> Add!ParseError {
   match @json.parse?(s) {
     Ok(jv) =>
@@ -24,10 +28,12 @@ pub fn Add::parse(s : String) -> Add!ParseError {
   }
 }
 
+///|
 struct Sum {
   sum : Int
 } derive(ToJson)
 
+///|
 pub fn add() -> Int {
   let input = @host.input_string()
   let params = try {

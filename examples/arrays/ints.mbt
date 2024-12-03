@@ -1,4 +1,4 @@
-/// `process_ints` sums up an array of ints.
+///| `process_ints` sums up an array of ints.
 pub fn process_ints(ints : Array[Int]) -> Array[Int] {
   let mut sum = 0
   ints.eachi(

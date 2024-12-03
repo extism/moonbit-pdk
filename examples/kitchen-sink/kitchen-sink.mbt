@@ -1,3 +1,4 @@
+///|
 pub fn kitchen_sink() -> Int {
   // Input
   let input = @host.input_string()

@@ -1,7 +1,7 @@
-/// `Config` provides methods to get "config" data from the host.
+///| `Config` provides methods to get "config" data from the host.
 pub(all) struct Config {}
 
-/// `Config::get_memory` returns a "config" Memory block from the host that is keyed by `key`.
+///| `Config::get_memory` returns a "config" Memory block from the host that is keyed by `key`.
 /// Note that no processing is performed on this block of memory.
 pub fn Config::get_memory(key : String) -> @host.Memory? {
   let key_mem = @host.allocate_string(key)
@@ -17,7 +17,7 @@ pub fn Config::get_memory(key : String) -> @host.Memory? {
   Some({ offset, length })
 }
 
-/// `Config::get` returns a "config" String from the host that is keyed by `key`.
+///| `Config::get` returns a "config" String from the host that is keyed by `key`.
 /// Note that the Extism host strings are UTF-8 and therefore the returned
 /// String is encoded as UTF-16 in compliance with MoonBit Strings.
 pub fn Config::get(key : String) -> String? {
