@@ -59,5 +59,5 @@ pub impl ToUtf16 for Bytes with to_utf16(b : Bytes) -> String {
     buf.write_char(Char::from_int(code))
     i += 1
   }
-  buf.to_unchecked_string()
+  buf.contents().to_unchecked_string()
 }
