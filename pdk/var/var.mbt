@@ -54,12 +54,10 @@ pub fn set_bytes(key : String, value : Bytes) -> Unit {
 ///| `set_int` sets the host's "var" Int associated with the provided `key`.
 pub fn set_int(key : String, value : Int) -> Unit {
   let key_mem = @host.allocate_string(key)
-  let bytes = Bytes::new(4)
-  bytes[0] = value.land(255).to_byte()
-  bytes[1] = (value >> 8).land(255).to_byte()
-  bytes[2] = (value >> 16).land(255).to_byte()
-  bytes[3] = (value >> 24).land(255).to_byte()
-  let val_mem = @host.allocate_bytes(bytes)
+  let bytes = FixedArray::makei(4, fn(i) {
+    (value >> (i * 8)).land(255).to_byte()
+  })
+  let val_mem = @host.allocate_bytes(Bytes::from_fixedarray(bytes))
   @extism.var_set(key_mem.offset, val_mem.offset)
   key_mem.free()
   val_mem.free()

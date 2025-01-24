@@ -16,18 +16,18 @@ pub fn free(self : Memory) -> Unit {
   @extism.free(self.offset)
 }
 
-///| `Memory::allocate` allocates an uninitialized (determined by host)
+///| `allocate` allocates an uninitialized (determined by host)
 /// area of shared memory on the host.
-pub fn Memory::allocate(length : Int64) -> Memory {
+pub fn allocate(length : Int64) -> Memory {
   { offset: @extism.alloc(length), length }
 }
 
-///| `Memory::allocate_bytes` allocates and initializes host memory
+///| `allocate_bytes` allocates and initializes host memory
 /// with the provided (unprocessed) bytes.
-pub fn Memory::allocate_bytes(bytes : Bytes) -> Memory {
+pub fn allocate_bytes(bytes : Bytes) -> Memory {
   let length = bytes.length().to_int64()
   let offset = @extism.alloc(length)
-  for i = 0L; i < length; i = i + 1L {
+  for i in 0L..<length {
     @extism.store_u8(offset + i, bytes[i.to_int()])
   }
   { offset, length }
@@ -38,16 +38,16 @@ pub fn output_memory(self : Memory) -> Unit {
   @extism.output_set(self.offset, self.length)
 }
 
-///| `Memory::allocate_string` allocates and initializes a UTF-8 string
+///| `allocate_string` allocates and initializes a UTF-8 string
 /// in host memory that is converted from this UTF-16 MoonBit String.
-pub fn Memory::allocate_string(s : String) -> Memory {
+pub fn allocate_string(s : String) -> Memory {
   @pdk.ToUtf8::to_utf8(s) |> allocate_bytes()
 }
 
-///| `Memory::allocate_json_value` allocates and initializes a UTF-8 string
+///| `allocate_json_value` allocates and initializes a UTF-8 string
 /// in host memory that is converted from this `Json`.
-pub fn Memory::allocate_json_value(j : Json) -> Memory {
-  j.stringify() |> Memory::allocate_string()
+pub fn allocate_json_value(j : Json) -> Memory {
+  j.stringify() |> allocate_string()
 }
 
 ///| `to_string` reads and converts the UTF-8 string residing in the host memory
@@ -69,10 +69,8 @@ pub fn to_int(self : Memory) -> Int {
 ///| `to_bytes` reads the (unprocessed) bytes residing in the host memory
 /// to a MoonBit Bytes.
 pub fn to_bytes(self : Memory) -> Bytes {
-  let bytes = Bytes::new(self.length.to_int())
-  for i = 0L; i < self.length; i = i + 1L {
-    let byte = @extism.load_u8(self.offset + i)
-    bytes[i.to_int()] = byte
-  }
-  bytes
+  let bytes = FixedArray::makei(self.length.to_int(), fn(i) {
+    @extism.load_u8(self.offset + i.to_int64())
+  })
+  Bytes::from_fixedarray(bytes)
 }
