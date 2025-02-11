@@ -1,0 +1,19 @@
+package extism/moonbit-pdk/pdk
+
+// Values
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+pub(open) trait ToUtf16 {
+  to_utf16(Self) -> String
+}
+impl ToUtf16 for Bytes
+
+pub(open) trait ToUtf8 {
+  to_utf8(Self) -> Bytes
+}
+impl ToUtf8 for String
+

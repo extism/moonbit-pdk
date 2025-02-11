@@ -1,3 +1,4 @@
+///|
 test "simple ASCII utf-8 and utf-16 conversions work" {
   let orig = "This is a simple ASCII string"
   let utf8 = @pdk.ToUtf8::to_utf8(orig)
@@ -6,6 +7,7 @@ test "simple ASCII utf-8 and utf-16 conversions work" {
   assert_eq!(got, orig)
 }
 
+///|
 test "non-trivial utf-8 and utf-16 conversions work" {
   let orig = "这是一个不平凡的 UTF-16 字符串"
   let utf8 = @pdk.ToUtf8::to_utf8(orig)

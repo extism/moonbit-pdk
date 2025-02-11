@@ -53,6 +53,7 @@ pub fn output(self : Response) -> Unit {
   @host.output_memory(self.body)
 }
 
+///|
 test "Request::to_json works as expected" {
   let request = {
     http_method: GET,
@@ -65,6 +66,7 @@ test "Request::to_json works as expected" {
   assert_eq!(got, want)
 }
 
+///|
 test "Json::stringify works on strings" {
   let url = "https://example.com"
   let got = url.to_json().stringify(escape_slash=false)

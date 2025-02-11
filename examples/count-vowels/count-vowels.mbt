@@ -44,6 +44,7 @@ pub fn count_vowels() -> Int {
   0 // success
 }
 
+///|
 test "VowelReport::to_json works as expected" {
   let vowel_report = { count: 1, total: 2, vowels: "some string" }
   let got = vowel_report.to_json().stringify()

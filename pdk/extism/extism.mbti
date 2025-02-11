@@ -1,0 +1,51 @@
+package extism/moonbit-pdk/pdk/extism
+
+// Values
+fn alloc(Int64) -> Int64
+
+fn config_get(Int64) -> Int64
+
+fn error_set(Int64) -> Unit
+
+fn free(Int64) -> Unit
+
+fn http_request(Int64, Int64) -> Int64
+
+fn http_status_code() -> Int
+
+fn input_length() -> Int64
+
+fn input_load_u64(Int64) -> Int64
+
+fn input_load_u8(Int64) -> Byte
+
+fn length(Int64) -> Int64
+
+fn load_u64(Int64) -> Int64
+
+fn load_u8(Int64) -> Byte
+
+fn log_debug(Int64) -> Unit
+
+fn log_error(Int64) -> Unit
+
+fn log_info(Int64) -> Unit
+
+fn log_warn(Int64) -> Unit
+
+fn output_set(Int64, Int64) -> Unit
+
+fn store_u64(Int64, Int64) -> Unit
+
+fn store_u8(Int64, Byte) -> Unit
+
+fn var_get(Int64) -> Int64
+
+fn var_set(Int64, Int64) -> Unit
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

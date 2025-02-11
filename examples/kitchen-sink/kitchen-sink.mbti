@@ -1,0 +1,11 @@
+package extism/moonbit-pdk/examples/kitchen-sink
+
+// Values
+fn kitchen_sink() -> Int
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

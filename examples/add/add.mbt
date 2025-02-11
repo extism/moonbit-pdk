@@ -51,6 +51,7 @@ pub fn add() -> Int {
   0 // success
 }
 
+///|
 test "Sum::to_json works as expected" {
   let sum = { sum: 42 }
   let got = sum.to_json().stringify()

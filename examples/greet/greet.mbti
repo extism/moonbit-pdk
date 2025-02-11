@@ -1,0 +1,11 @@
+package extism/moonbit-pdk/examples/greet
+
+// Values
+fn greet() -> Int
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

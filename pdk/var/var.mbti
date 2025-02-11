@@ -1,0 +1,27 @@
+package extism/moonbit-pdk/pdk/var
+
+alias @extism/moonbit-pdk/pdk/host as @host
+
+// Values
+fn get_bytes(String) -> Bytes?
+
+fn get_int(String) -> Int?
+
+fn get_memory(String) -> @host.Memory?
+
+fn get_string(String) -> String?
+
+fn remove(String) -> Unit
+
+fn set_bytes(String, Bytes) -> Unit
+
+fn set_int(String, Int) -> Unit
+
+fn set_string(String, String) -> Unit
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

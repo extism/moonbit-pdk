@@ -1,0 +1,56 @@
+package extism/moonbit-pdk/pdk/http
+
+alias @extism/moonbit-pdk/pdk/host as @host
+
+// Values
+fn new_request(Method, String) -> Request
+
+// Types and methods
+pub(all) type Header Map[String, String]
+impl Header {
+  add(Self, String, String) -> Unit
+  new() -> Self
+  set(Self, String, String) -> Unit
+}
+impl Eq for Header
+impl Show for Header
+impl ToJson for Header
+
+pub(all) enum Method {
+  GET
+  HEAD
+  POST
+  PUT
+  DELETE
+  CONNECT
+  OPTIONS
+  TRACE
+  PATCH
+}
+impl Method {
+  to_json(Self) -> Json
+}
+impl Show for Method
+
+pub(all) struct Request {
+  http_method : Method
+  header : Header
+  url : String
+}
+impl Request {
+  send(Self, body~ : @host.Memory? = ..) -> Response
+}
+impl ToJson for Request
+
+pub(all) struct Response {
+  status_code : Int
+  body : @host.Memory
+}
+impl Response {
+  output(Self) -> Unit
+}
+
+// Type aliases
+
+// Traits
+

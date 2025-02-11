@@ -21,6 +21,7 @@ pub fn set(self : Header, key : String, value : String) -> Unit {
   self._[key] = value
 }
 
+///|
 test "Header::add" {
   let h = Header::new()
   h.add("key1", "one")
@@ -32,6 +33,7 @@ test "Header::add" {
   assert_eq!(h._.get("key2"), Some("one,two,two"))
 }
 
+///|
 test "Header::to_json works as expected" {
   let header : Header = { "key1": "one", "key2": "two" }
   let got = header.to_json().stringify()
