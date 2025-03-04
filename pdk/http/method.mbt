@@ -22,6 +22,6 @@ pub(all) enum Method {
 } derive(Show)
 
 ///| `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.
-pub fn to_json(self : Method) -> Json {
+pub impl ToJson for Method with to_json(self) {
   self.to_string().to_json()
 }

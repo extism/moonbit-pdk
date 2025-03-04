@@ -27,10 +27,8 @@ pub(all) enum Method {
   TRACE
   PATCH
 }
-impl Method {
-  to_json(Self) -> Json
-}
 impl Show for Method
+impl ToJson for Method
 
 pub(all) struct Request {
   http_method : Method

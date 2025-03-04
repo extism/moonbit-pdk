@@ -97,6 +97,7 @@ pub fn all_three_object() -> Int {
         "ints": Array(ints),
         "floats": Array(floats),
         "strings": Array(strings),
+        ..
       }
     ) => {
       let ints : Array[Int] = ints

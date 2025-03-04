@@ -4,17 +4,6 @@ package extism/moonbit-pdk/examples/add
 fn add() -> Int
 
 // Types and methods
-type Add
-impl Add {
-  from_json(Json) -> Self?
-  parse(String) -> Self!ParseError
-}
-
-type ParseError
-impl Show for ParseError
-
-type Sum
-impl ToJson for Sum
 
 // Type aliases
 
