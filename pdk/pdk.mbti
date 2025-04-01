@@ -1,4 +1,4 @@
-package extism/moonbit-pdk/pdk
+package "extism/moonbit-pdk/pdk"
 
 // Values
 

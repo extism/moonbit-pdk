@@ -1,4 +1,4 @@
-package extism/moonbit-pdk/pdk/host
+package "extism/moonbit-pdk/pdk/host"
 
 // Values
 fn allocate(Int64) -> Memory

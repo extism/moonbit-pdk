@@ -1,4 +1,4 @@
-package extism/moonbit-pdk/examples/arrays
+package "extism/moonbit-pdk/examples/arrays"
 
 // Values
 fn all_three_object() -> Int

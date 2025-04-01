@@ -1,6 +1,8 @@
-package extism/moonbit-pdk/pdk/http
+package "extism/moonbit-pdk/pdk/http"
 
-alias @extism/moonbit-pdk/pdk/host as @host
+import(
+  "extism/moonbit-pdk/pdk/host"
+)
 
 // Values
 fn add(Header, String, String) -> Unit

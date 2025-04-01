@@ -1,4 +1,4 @@
-package extism/moonbit-pdk/examples/http-get
+package "extism/moonbit-pdk/examples/http-get"
 
 // Values
 fn http_get() -> Int
