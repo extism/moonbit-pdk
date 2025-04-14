@@ -1,8 +1,10 @@
-///| `default_vowels` represents the default set of vowels
+///|
+/// `default_vowels` represents the default set of vowels
 /// if the host provides no "config.vowels" string.
 let default_vowels = "aeiouAEIOU"
 
-///| `VowelReport` represents the JSON struct returned to the host.
+///|
+/// `VowelReport` represents the JSON struct returned to the host.
 pub(all) struct VowelReport {
   count : Int
   total : Int
@@ -24,7 +26,8 @@ fn get_vowels() -> String {
   @config.get("vowels").or(default_vowels)
 }
 
-///| `count_vowels` reads the input string from the host, reads the "vowels"
+///|
+/// `count_vowels` reads the input string from the host, reads the "vowels"
 /// config from the host, then counts the number of vowels in the input
 /// string and keeps a running total (over multiple iterations)
 /// in the host's "total" var.

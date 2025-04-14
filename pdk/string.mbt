@@ -1,11 +1,13 @@
-///| ToUtf8 is a workaround since the standard library does not make
+///|
+/// ToUtf8 is a workaround since the standard library does not make
 /// it easy to write a standard UTF-8 string.
 /// https://github.com/moonbitlang/core/issues/484
 pub(open) trait ToUtf8 {
   to_utf8(Self) -> Bytes
 }
 
-///| `to_utf8` converts the MoonBit (UTF-16) `String` to a UTF-8 encoded `Bytes`.
+///|
+/// `to_utf8` converts the MoonBit (UTF-16) `String` to a UTF-8 encoded `Bytes`.
 pub impl ToUtf8 for String with to_utf8(s : String) -> Bytes {
   let chars = s.to_array()
   // first, allocate the maximum possible length of the UTF-8 "string":
@@ -17,14 +19,16 @@ pub impl ToUtf8 for String with to_utf8(s : String) -> Bytes {
   Bytes::from_fixedarray(arr, len~)
 }
 
-///| ToUtf16 is a workaround since the standard library does not make
+///|
+/// ToUtf16 is a workaround since the standard library does not make
 /// it easy to write a standard UTF-16 string from UTF-8.
 /// https://github.com/moonbitlang/core/issues/484
 pub(open) trait ToUtf16 {
   to_utf16(Self) -> String
 }
 
-///| `to_utf16` converts a UTF-8 encoded `Bytes` to a MoonBit (UTF-16) `String`.
+///|
+/// `to_utf16` converts a UTF-8 encoded `Bytes` to a MoonBit (UTF-16) `String`.
 pub impl ToUtf16 for Bytes with to_utf16(b : Bytes) -> String {
   // TODO: Make a real UTF-8 => UTF-16 converter.
   // https://github.com/moonbitlang/core/issues/484

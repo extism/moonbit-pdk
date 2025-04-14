@@ -1,4 +1,5 @@
-///| `process_strings` concatenates an array of strings.
+///|
+/// `process_strings` concatenates an array of strings.
 pub fn process_strings(strings : Array[String]) -> Array[String] {
   let parts = []
   strings.eachi(fn(index, value) {
