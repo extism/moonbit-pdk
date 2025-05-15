@@ -41,7 +41,7 @@ pub impl ToUtf16 for Bytes with to_utf16(b : Bytes) -> String {
         ((b[i + 1].to_int() & 0x3F) << 12) |
         ((b[i + 2].to_int() & 0x3F) << 6) |
         (b[i + 3].to_int() & 0x3F)
-      buf.write_char(Char::from_int(code))
+      buf.write_char(Int::unsafe_to_char(code))
       i += 4
       continue
     }
@@ -49,18 +49,18 @@ pub impl ToUtf16 for Bytes with to_utf16(b : Bytes) -> String {
       let code = ((b[i].to_int() & 0x0F) << 12) |
         ((b[i + 1].to_int() & 0x3F) << 6) |
         (b[i + 2].to_int() & 0x3F)
-      buf.write_char(Char::from_int(code))
+      buf.write_char(Int::unsafe_to_char(code))
       i += 3
       continue
     }
     if (b[i] & 0xC0) == 0xC0 {
       let code = ((b[i].to_int() & 0x1F) << 6) | (b[i + 1].to_int() & 0x3F)
-      buf.write_char(Char::from_int(code))
+      buf.write_char(Int::unsafe_to_char(code))
       i += 2
       continue
     }
     let code = b[i].to_int() & 0x7F
-    buf.write_char(Char::from_int(code))
+    buf.write_char(Int::unsafe_to_char(code))
     i += 1
   }
   buf.contents().to_unchecked_string()
