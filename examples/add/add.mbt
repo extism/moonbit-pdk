@@ -12,9 +12,7 @@ priv struct Sum {
 ///|
 pub fn add() -> Int {
   let input = @host.input_string()
-  let params : Add = try {
-    @json.from_json!(@json.parse!(input))
-  } catch {
+  let params : Add = try @json.from_json!(@json.parse!(input)) catch {
     e => {
       @host.set_error(e.to_string())
       return 1

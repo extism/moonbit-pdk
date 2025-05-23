@@ -2,9 +2,7 @@
 /// `progressive_sum_ints` tests passing arrays of ints.
 pub fn progressive_sum_ints() -> Int {
   let s = @host.input_string()
-  let jv = try {
-    @json.parse!(s)
-  } catch {
+  let jv = try @json.parse!(s) catch {
     e => {
       @host.set_error("unable to parse input: \{e}")
       return 1 // failure
@@ -30,9 +28,7 @@ pub fn progressive_sum_ints() -> Int {
 /// `progressive_sum_floats` tests passing arrays of floats.
 pub fn progressive_sum_floats() -> Int {
   let s = @host.input_string()
-  let jv = try {
-    @json.parse!(s)
-  } catch {
+  let jv = try @json.parse!(s) catch {
     e => {
       @host.set_error("unable to parse input: \{e}")
       return 1 // failure
@@ -58,9 +54,7 @@ pub fn progressive_sum_floats() -> Int {
 /// `progressive_concat_strings` tests passing arrays of strings.
 pub fn progressive_concat_strings() -> Int {
   let s = @host.input_string()
-  let jv = try {
-    @json.parse!(s)
-  } catch {
+  let jv = try @json.parse!(s) catch {
     e => {
       @host.set_error("unable to parse input: \{e}")
       return 1 // failure
@@ -86,9 +80,7 @@ pub fn progressive_concat_strings() -> Int {
 /// `all_three_object` tests passing an object of all three arrays.
 pub fn all_three_object() -> Int {
   let s = @host.input_string()
-  let jv = try {
-    @json.parse!(s)
-  } catch {
+  let jv = try @json.parse!(s) catch {
     e => {
       @host.set_error("unable to parse input: \{e}")
       return 1 // failure
