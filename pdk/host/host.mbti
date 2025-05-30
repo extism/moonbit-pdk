@@ -46,13 +46,11 @@ pub(all) struct Memory {
   offset : Int64
   length : Int64
 }
-impl Memory {
-  free(Self) -> Unit
-  output_memory(Self) -> Unit
-  to_bytes(Self) -> Bytes
-  to_int(Self) -> Int
-  to_string(Self) -> String
-}
+fn Memory::free(Self) -> Unit
+fn Memory::output_memory(Self) -> Unit
+fn Memory::to_bytes(Self) -> Bytes
+fn Memory::to_int(Self) -> Int
+fn Memory::to_string(Self) -> String
 
 // Type aliases
 

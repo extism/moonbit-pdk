@@ -17,11 +17,9 @@ fn set(Header, String, String) -> Unit
 
 // Types and methods
 pub(all) type Header Map[String, String]
-impl Header {
-  add(Self, String, String) -> Unit
-  new() -> Self
-  set(Self, String, String) -> Unit
-}
+fn Header::add(Self, String, String) -> Unit
+fn Header::new() -> Self
+fn Header::set(Self, String, String) -> Unit
 impl Eq for Header
 impl Show for Header
 impl ToJson for Header
@@ -45,18 +43,14 @@ pub(all) struct Request {
   header : Header
   url : String
 }
-impl Request {
-  send(Self, body~ : @host.Memory? = ..) -> Response
-}
+fn Request::send(Self, body~ : @host.Memory? = ..) -> Response
 impl ToJson for Request
 
 pub(all) struct Response {
   status_code : Int
   body : @host.Memory
 }
-impl Response {
-  output(Self) -> Unit
-}
+fn Response::output(Self) -> Unit
 
 // Type aliases
 

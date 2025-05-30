@@ -55,7 +55,7 @@ pub fn send(self : Request, body~ : @host.Memory? = None) -> Response {
 ///|
 /// `output` sends the (unprocessed) `Response` body to the Extism host "output".
 pub fn output(self : Response) -> Unit {
-  @host.output_memory(self.body)
+  self.body.output_memory()
 }
 
 ///|
