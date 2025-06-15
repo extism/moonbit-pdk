@@ -12,7 +12,7 @@ priv struct Sum {
 ///|
 pub fn add() -> Int {
   let input = @host.input_string()
-  let params : Add = try @json.from_json!(@json.parse!(input)) catch {
+  let params : Add = @json.from_json(@json.parse(input)) catch {
     e => {
       @host.set_error(e.to_string())
       return 1
@@ -30,5 +30,5 @@ test "Sum::to_json works as expected" {
   let got = sum.to_json().stringify()
   let want =
     #|{"sum":42}
-  assert_eq!(got, want)
+  assert_eq(got, want)
 }

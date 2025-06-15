@@ -32,9 +32,9 @@ test "Header::add" {
   h.add("key2", "one")
   h.add("key2", "two")
   h.add("key2", "two")
-  assert_eq!(h._.get("nokey"), None)
-  assert_eq!(h._.get("key1"), Some("one"))
-  assert_eq!(h._.get("key2"), Some("one,two,two"))
+  assert_eq(h._.get("nokey"), None)
+  assert_eq(h._.get("key1"), Some("one"))
+  assert_eq(h._.get("key2"), Some("one,two,two"))
 }
 
 ///|
@@ -43,5 +43,5 @@ test "Header::to_json works as expected" {
   let got = header.to_json().stringify()
   let want =
     #|{"key1":"one","key2":"two"}
-  assert_eq!(got, want)
+  assert_eq(got, want)
 }

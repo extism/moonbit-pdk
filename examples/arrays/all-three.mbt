@@ -22,5 +22,5 @@ test "AllThree::to_json works as expected" {
   let got = all3.to_json().stringify()
   let want =
     #|{"ints":[1,2,3],"floats":[1,2,3],"strings":["1","2","3"]}
-  assert_eq!(got, want)
+  assert_eq(got, want)
 }

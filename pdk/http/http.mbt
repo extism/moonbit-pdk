@@ -68,7 +68,7 @@ test "Request::to_json works as expected" {
   let got = request.to_json().stringify(escape_slash=false)
   let want =
     #|{"http_method":"GET","header":{"key1":"one","key2":"two"},"url":"https://example.com"}
-  assert_eq!(got, want)
+  assert_eq(got, want)
 }
 
 ///|
@@ -77,5 +77,5 @@ test "Json::stringify works on strings" {
   let got = url.to_json().stringify(escape_slash=false)
   let want =
     #|"https://example.com"
-  assert_eq!(got, want)
+  assert_eq(got, want)
 }

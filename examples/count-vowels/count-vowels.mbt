@@ -53,5 +53,5 @@ test "VowelReport::to_json works as expected" {
   let got = vowel_report.to_json().stringify()
   let want =
     #|{"count":1,"total":2,"vowels":"some string"}
-  assert_eq!(got, want)
+  assert_eq(got, want)
 }
