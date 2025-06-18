@@ -13,16 +13,16 @@ pub fn Header::new() -> Header {
 /// `add` adds a value to a named (by `key`) header field.
 /// If the header key already exists, the value is appended after a comma.
 pub fn add(self : Header, key : String, value : String) -> Unit {
-  match self._.get(key) {
-    Some(v) => self._[key] = "\{v},\{value}"
-    None => self._[key] = value
+  match self.inner().get(key) {
+    Some(v) => self.inner()[key] = "\{v},\{value}"
+    None => self.inner()[key] = value
   }
 }
 
 ///|
 /// `set` overwrites a value to a named (by `key`) header field.
 pub fn set(self : Header, key : String, value : String) -> Unit {
-  self._[key] = value
+  self.inner()[key] = value
 }
 
 ///|
@@ -32,9 +32,9 @@ test "Header::add" {
   h.add("key2", "one")
   h.add("key2", "two")
   h.add("key2", "two")
-  assert_eq(h._.get("nokey"), None)
-  assert_eq(h._.get("key1"), Some("one"))
-  assert_eq(h._.get("key2"), Some("one,two,two"))
+  assert_eq(h.inner().get("nokey"), None)
+  assert_eq(h.inner().get("key1"), Some("one"))
+  assert_eq(h.inner().get("key2"), Some("one,two,two"))
 }
 
 ///|

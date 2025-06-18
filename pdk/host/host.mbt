@@ -15,6 +15,7 @@ pub fn input_string() -> String {
 }
 
 // `output_bytes_to_memory` writes the (unprocessed) bytes to a Memory buffer on the host.
+
 ///|
 fn output_bytes_to_memory(b : Bytes) -> Memory {
   let length = b.length().to_int64()

@@ -11,7 +11,7 @@ pub(open) trait ToUtf8 {
 pub impl ToUtf8 for String with to_utf8(s : String) -> Bytes {
   let chars = s.to_array()
   // first, allocate the maximum possible length of the UTF-8 "string":
-  let arr = FixedArray::makei(4 * chars.length(), fn { _ => b'\x00' })
+  let arr = FixedArray::makei(4 * chars.length(), fn(_) { b'\x00' })
   let mut len = 0
   for i = 0; i < chars.length(); i = i + 1 {
     len += arr.set_utf8_char(len, chars[i])

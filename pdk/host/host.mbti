@@ -11,8 +11,6 @@ fn allocate_string(String) -> Memory
 
 fn find_memory(Int64) -> Memory
 
-fn free(Memory) -> Unit
-
 fn input() -> Bytes
 
 fn input_string() -> String
@@ -29,17 +27,9 @@ fn output(Bytes) -> Unit
 
 fn output_json_value(Json) -> Unit
 
-fn output_memory(Memory) -> Unit
-
 fn output_string(String) -> Unit
 
 fn set_error(String) -> Unit
-
-fn to_bytes(Memory) -> Bytes
-
-fn to_int(Memory) -> Int
-
-fn to_string(Memory) -> String
 
 // Types and methods
 pub(all) struct Memory {
