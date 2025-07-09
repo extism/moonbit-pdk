@@ -13,7 +13,7 @@ pub(all) struct VowelReport {
 
 ///|
 fn get_total() -> Int {
-  @var.get_int("total").or_default()
+  @var.get_int("total").unwrap_or_default()
 }
 
 ///|
@@ -23,7 +23,7 @@ fn store_total(total : Int) -> Unit {
 
 ///|
 fn get_vowels() -> String {
-  @config.get("vowels").or(default_vowels)
+  @config.get("vowels").unwrap_or(default_vowels)
 }
 
 ///|
