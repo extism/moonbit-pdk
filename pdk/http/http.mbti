@@ -8,6 +8,8 @@ import(
 // Values
 fn new_request(Method, String) -> Request
 
+// Errors
+
 // Types and methods
 pub(all) type Header Map[String, String]
 fn Header::add(Self, String, String) -> Unit

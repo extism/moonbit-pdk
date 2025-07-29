@@ -18,6 +18,8 @@ fn progressive_sum_floats() -> Int
 
 fn progressive_sum_ints() -> Int
 
+// Errors
+
 // Types and methods
 pub(all) struct AllThree {
   ints : Array[Int]

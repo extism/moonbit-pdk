@@ -4,6 +4,8 @@ package "extism/moonbit-pdk/examples/greet"
 // Values
 fn greet() -> Int
 
+// Errors
+
 // Types and methods
 
 // Type aliases

@@ -32,6 +32,8 @@ fn output_string(String) -> Unit
 
 fn set_error(String) -> Unit
 
+// Errors
+
 // Types and methods
 pub(all) struct Memory {
   offset : Int64

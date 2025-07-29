@@ -22,6 +22,8 @@ fn set_int(String, Int) -> Unit
 
 fn set_string(String, String) -> Unit
 
+// Errors
+
 // Types and methods
 
 // Type aliases

@@ -4,6 +4,8 @@ package "extism/moonbit-pdk/examples/count-vowels"
 // Values
 fn count_vowels() -> Int
 
+// Errors
+
 // Types and methods
 pub(all) struct VowelReport {
   count : Int

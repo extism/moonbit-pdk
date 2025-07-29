@@ -44,6 +44,8 @@ fn var_get(Int64) -> Int64
 
 fn var_set(Int64, Int64) -> Unit
 
+// Errors
+
 // Types and methods
 
 // Type aliases

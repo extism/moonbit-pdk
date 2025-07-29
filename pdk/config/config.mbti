@@ -10,6 +10,8 @@ fn get(String) -> String?
 
 fn get_memory(String) -> @host.Memory?
 
+// Errors
+
 // Types and methods
 pub(all) struct Config {
 }
