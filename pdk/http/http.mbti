@@ -11,14 +11,13 @@ fn new_request(Method, String) -> Request
 // Errors
 
 // Types and methods
-pub(all) type Header Map[String, String]
+pub(all) struct Header(Map[String, String])
 fn Header::add(Self, String, String) -> Unit
 fn Header::inner(Self) -> Map[String, String]
 fn Header::new() -> Self
 fn Header::set(Self, String, String) -> Unit
 impl Eq for Header
 impl Show for Header
-impl ToJson for Header
 
 pub(all) enum Method {
   GET
@@ -39,7 +38,7 @@ pub(all) struct Request {
   header : Header
   url : String
 }
-fn Request::send(Self, body~ : @host.Memory? = ..) -> Response
+fn Request::send(Self, body? : @host.Memory?) -> Response
 impl ToJson for Request
 
 pub(all) struct Response {

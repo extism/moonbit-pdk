@@ -1,7 +1,12 @@
 ///|
 /// `Header` represents an HTTP Request header.
 /// Multiple values for a single key are not deduped.
-pub(all) type Header Map[String, String] derive(Show, Eq, ToJson)
+pub(all) struct Header(Map[String, String]) derive(Show, Eq)
+
+///|
+impl ToJson for Header with to_json(self) {
+  self.inner().to_json()
+}
 
 ///|
 /// `Header::new` returns a new Header.
