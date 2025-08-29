@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "extism/moonbit-pdk/examples/arrays"
+
+// Values
+fn all_three_object() -> Int
+
+fn process_all_three(AllThree) -> AllThree
+
+fn process_floats(Array[Double]) -> Array[Double]
+
+fn process_ints(Array[Int]) -> Array[Int]
+
+fn process_strings(Array[String]) -> Array[String]
+
+fn progressive_concat_strings() -> Int
+
+fn progressive_sum_floats() -> Int
+
+fn progressive_sum_ints() -> Int
+
+// Errors
+
+// Types and methods
+pub(all) struct AllThree {
+  ints : Array[Int]
+  floats : Array[Double]
+  strings : Array[String]
+}
+impl Eq for AllThree
+impl Show for AllThree
+impl ToJson for AllThree
+
+// Type aliases
+
+// Traits
+

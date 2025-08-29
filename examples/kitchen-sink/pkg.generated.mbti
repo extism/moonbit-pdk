@@ -1,0 +1,14 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "extism/moonbit-pdk/examples/kitchen-sink"
+
+// Values
+fn kitchen_sink() -> Int
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

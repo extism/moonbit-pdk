@@ -25,7 +25,7 @@ pub fn new_request(http_method : Method, url : String) -> Request {
 /// `send` sends the `Request` to the host, waits for a response,
 /// and returns it to the caller.
 /// Note that the (optional) `body` is freed by this call.
-pub fn send(self : Request, body~ : @host.Memory? = None) -> Response {
+pub fn send(self : Request, body? : @host.Memory? = None) -> Response {
   let meta_mem = self.to_json() |> @host.allocate_json_value()
   let body_memory_offset = match body {
     Some(v) => v.offset

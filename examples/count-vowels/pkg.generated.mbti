@@ -1,0 +1,22 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "extism/moonbit-pdk/examples/count-vowels"
+
+// Values
+fn count_vowels() -> Int
+
+// Errors
+
+// Types and methods
+pub(all) struct VowelReport {
+  count : Int
+  total : Int
+  vowels : String
+}
+impl Eq for VowelReport
+impl Show for VowelReport
+impl ToJson for VowelReport
+
+// Type aliases
+
+// Traits
+
