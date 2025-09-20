@@ -13,6 +13,7 @@ fn new_request(Method, String) -> Request
 // Types and methods
 pub(all) struct Header(Map[String, String])
 fn Header::add(Self, String, String) -> Unit
+#deprecated
 fn Header::inner(Self) -> Map[String, String]
 fn Header::new() -> Self
 fn Header::set(Self, String, String) -> Unit
