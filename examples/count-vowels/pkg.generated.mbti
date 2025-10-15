@@ -12,6 +12,12 @@ pub(all) struct VowelReport {
   total : Int
   vowels : String
 }
+fn VowelReport::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn VowelReport::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn VowelReport::output(Self, &Logger) -> Unit // from trait `Show`
+fn VowelReport::to_json(Self) -> Json // from trait `ToJson`
+fn VowelReport::to_string(Self) -> String // from trait `Show`
 impl Eq for VowelReport
 impl Show for VowelReport
 impl ToJson for VowelReport

@@ -26,6 +26,12 @@ pub(all) struct AllThree {
   floats : Array[Double]
   strings : Array[String]
 }
+fn AllThree::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn AllThree::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn AllThree::output(Self, &Logger) -> Unit // from trait `Show`
+fn AllThree::to_json(Self) -> Json // from trait `ToJson`
+fn AllThree::to_string(Self) -> String // from trait `Show`
 impl Eq for AllThree
 impl Show for AllThree
 impl ToJson for AllThree
