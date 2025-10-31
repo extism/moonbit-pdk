@@ -15,7 +15,7 @@ pub fn find_memory(offset : Int64) -> Memory {
 
 ///|
 /// `free` releases this Memory from the host.
-pub fn free(self : Memory) -> Unit {
+pub fn Memory::free(self : Memory) -> Unit {
   @extism.free(self.offset)
 }
 
@@ -40,7 +40,7 @@ pub fn allocate_bytes(bytes : Bytes) -> Memory {
 
 ///|
 /// `output_memory` sets the host's "output" to be the contents of this Memory data.
-pub fn output_memory(self : Memory) -> Unit {
+pub fn Memory::output_memory(self : Memory) -> Unit {
   @extism.output_set(self.offset, self.length)
 }
 
@@ -61,14 +61,14 @@ pub fn allocate_json_value(j : Json) -> Memory {
 ///|
 /// `to_string` reads and converts the UTF-8 string residing in the host memory
 /// to a UTF-16 MoonBit String.
-pub fn to_string(self : Memory) -> String {
+pub fn Memory::to_string(self : Memory) -> String {
   self.to_bytes() |> @pdk.ToUtf16::to_utf16()
 }
 
 ///|
 /// `to_int` reads and converts the u32 residing in the host memory
 /// to a MoonBit Int.
-pub fn to_int(self : Memory) -> Int {
+pub fn Memory::to_int(self : Memory) -> Int {
   let bytes = self.to_bytes()
   bytes[0].to_int() +
   (bytes[1].to_int() << 8) +
@@ -79,7 +79,7 @@ pub fn to_int(self : Memory) -> Int {
 ///|
 /// `to_bytes` reads the (unprocessed) bytes residing in the host memory
 /// to a MoonBit Bytes.
-pub fn to_bytes(self : Memory) -> Bytes {
+pub fn Memory::to_bytes(self : Memory) -> Bytes {
   let bytes = FixedArray::makei(self.length.to_int(), fn(i) {
     @extism.load_u8(self.offset + i.to_int64())
   })

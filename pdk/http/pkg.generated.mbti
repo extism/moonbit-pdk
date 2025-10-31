@@ -13,15 +13,10 @@ fn new_request(Method, String) -> Request
 // Types and methods
 pub(all) struct Header(Map[String, String])
 fn Header::add(Self, String, String) -> Unit
-fn Header::equal(Self, Self) -> Bool // from trait `Eq`
 #deprecated
 fn Header::inner(Self) -> Map[String, String]
 fn Header::new() -> Self
-#deprecated
-fn Header::op_equal(Self, Self) -> Bool // from trait `Eq`
-fn Header::output(Self, &Logger) -> Unit // from trait `Show`
 fn Header::set(Self, String, String) -> Unit
-fn Header::to_string(Self) -> String // from trait `Show`
 impl Eq for Header
 impl Show for Header
 
@@ -36,9 +31,6 @@ pub(all) enum Method {
   TRACE
   PATCH
 }
-fn Method::output(Self, &Logger) -> Unit // from trait `Show`
-fn Method::to_json(Self) -> Json // from trait `ToJson`
-fn Method::to_string(Self) -> String // from trait `Show`
 impl Show for Method
 impl ToJson for Method
 
@@ -48,7 +40,6 @@ pub(all) struct Request {
   url : String
 }
 fn Request::send(Self, body? : @host.Memory?) -> Response
-fn Request::to_json(Self) -> Json // from trait `ToJson`
 impl ToJson for Request
 
 pub(all) struct Response {
