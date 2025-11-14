@@ -63,7 +63,7 @@ pub fn set_int(key : String, value : Int) -> Unit {
   let bytes = FixedArray::makei(4, fn(i) {
     (value >> (i * 8)).land(255).to_byte()
   })
-  let val_mem = @host.allocate_bytes(Bytes::from_fixedarray(bytes))
+  let val_mem = @host.allocate_bytes(Bytes::from_array(bytes))
   @extism.var_set(key_mem.offset, val_mem.offset)
   key_mem.free()
   val_mem.free()

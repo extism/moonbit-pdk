@@ -16,7 +16,7 @@ pub impl ToUtf8 for String with to_utf8(s : String) -> Bytes {
   for i = 0; i < chars.length(); i = i + 1 {
     len += arr.set_utf8_char(len, chars[i])
   }
-  Bytes::from_fixedarray(arr, len~)
+  Bytes::from_array(arr[:len])
 }
 
 ///|

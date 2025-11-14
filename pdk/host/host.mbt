@@ -5,7 +5,7 @@ pub fn input() -> Bytes {
   let value = FixedArray::makei(length, fn(i) {
     @extism.input_load_u8(i.to_int64())
   })
-  Bytes::from_fixedarray(value)
+  Bytes::from_array(value)
 }
 
 ///|

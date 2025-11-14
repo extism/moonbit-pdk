@@ -83,5 +83,5 @@ pub fn Memory::to_bytes(self : Memory) -> Bytes {
   let bytes = FixedArray::makei(self.length.to_int(), fn(i) {
     @extism.load_u8(self.offset + i.to_int64())
   })
-  Bytes::from_fixedarray(bytes)
+  Bytes::from_array(bytes)
 }
