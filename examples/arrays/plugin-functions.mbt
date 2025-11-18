@@ -98,15 +98,15 @@ pub fn all_three_object() -> Int {
     ) => {
       let ints : Array[Int] = ints
         .map(fn(n) { n.as_number() })
-        .filter(fn(n) { not(n.is_empty()) })
+        .filter(fn(n) { not(n is None) })
         .map(fn(n) { n.unwrap().to_int() })
       let floats : Array[Double] = floats
         .map(fn(n) { n.as_number() })
-        .filter(fn(n) { not(n.is_empty()) })
+        .filter(fn(n) { not(n is None) })
         .map(fn(n) { n.unwrap() })
       let strings : Array[String] = strings
         .map(fn(n) { n.as_string() })
-        .filter(fn(n) { not(n.is_empty()) })
+        .filter(fn(n) { not(n is None) })
         .map(fn(n) { n.unwrap() })
       { ints, floats, strings }
     }
