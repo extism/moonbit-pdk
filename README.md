@@ -527,10 +527,10 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20251117 (2a4820a 2025-11-17) ~/.moon/bin/moon
-moonc v0.6.32+6f48aae3f (2025-11-17) ~/.moon/bin/moonc
-moonrun 0.1.20251117 (2a4820a 2025-11-17) ~/.moon/bin/moonrun
-moon-pilot 0.0.1-df92511 (2025-11-17) ~/.moon/bin/moon-pilot
+moon 0.1.20251202 (1a59800 2025-12-02) ~/.moon/bin/moon
+moonc v0.6.33+b989ba000 (2025-12-02) ~/.moon/bin/moonc
+moonrun 0.1.20251202 (1a59800 2025-12-02) ~/.moon/bin/moonrun
+moon-pilot 0.0.1-df92511 (2025-12-02) ~/.moon/bin/moon-pilot
 ```
 
 ## Reach Out!

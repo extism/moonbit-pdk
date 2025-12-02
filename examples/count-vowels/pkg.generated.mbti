@@ -2,7 +2,7 @@
 package "extism/moonbit-pdk/examples/count-vowels"
 
 // Values
-fn count_vowels() -> Int
+pub fn count_vowels() -> Int
 
 // Errors
 
@@ -12,9 +12,9 @@ pub(all) struct VowelReport {
   total : Int
   vowels : String
 }
-impl Eq for VowelReport
-impl Show for VowelReport
-impl ToJson for VowelReport
+pub impl Eq for VowelReport
+pub impl Show for VowelReport
+pub impl ToJson for VowelReport
 
 // Type aliases
 

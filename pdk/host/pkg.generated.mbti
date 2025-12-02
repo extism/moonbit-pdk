@@ -2,35 +2,35 @@
 package "extism/moonbit-pdk/pdk/host"
 
 // Values
-fn allocate(Int64) -> Memory
+pub fn allocate(Int64) -> Memory
 
-fn allocate_bytes(Bytes) -> Memory
+pub fn allocate_bytes(Bytes) -> Memory
 
-fn allocate_json_value(Json) -> Memory
+pub fn allocate_json_value(Json) -> Memory
 
-fn allocate_string(String) -> Memory
+pub fn allocate_string(String) -> Memory
 
-fn find_memory(Int64) -> Memory
+pub fn find_memory(Int64) -> Memory
 
-fn input() -> Bytes
+pub fn input() -> Bytes
 
-fn input_string() -> String
+pub fn input_string() -> String
 
-fn log_debug_str(String) -> Unit
+pub fn log_debug_str(String) -> Unit
 
-fn log_error_str(String) -> Unit
+pub fn log_error_str(String) -> Unit
 
-fn log_info_str(String) -> Unit
+pub fn log_info_str(String) -> Unit
 
-fn log_warn_str(String) -> Unit
+pub fn log_warn_str(String) -> Unit
 
-fn output(Bytes) -> Unit
+pub fn output(Bytes) -> Unit
 
-fn output_json_value(Json) -> Unit
+pub fn output_json_value(Json) -> Unit
 
-fn output_string(String) -> Unit
+pub fn output_string(String) -> Unit
 
-fn set_error(String) -> Unit
+pub fn set_error(String) -> Unit
 
 // Errors
 
@@ -39,11 +39,11 @@ pub(all) struct Memory {
   offset : Int64
   length : Int64
 }
-fn Memory::free(Self) -> Unit
-fn Memory::output_memory(Self) -> Unit
-fn Memory::to_bytes(Self) -> Bytes
-fn Memory::to_int(Self) -> Int
-fn Memory::to_string(Self) -> String
+pub fn Memory::free(Self) -> Unit
+pub fn Memory::output_memory(Self) -> Unit
+pub fn Memory::to_bytes(Self) -> Bytes
+pub fn Memory::to_int(Self) -> Int
+pub fn Memory::to_string(Self) -> String
 
 // Type aliases
 

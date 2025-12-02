@@ -6,19 +6,19 @@ import(
 )
 
 // Values
-fn new_request(Method, String) -> Request
+pub fn new_request(Method, String) -> Request
 
 // Errors
 
 // Types and methods
 pub(all) struct Header(Map[String, String])
-fn Header::add(Self, String, String) -> Unit
+pub fn Header::add(Self, String, String) -> Unit
 #deprecated
-fn Header::inner(Self) -> Map[String, String]
-fn Header::new() -> Self
-fn Header::set(Self, String, String) -> Unit
-impl Eq for Header
-impl Show for Header
+pub fn Header::inner(Self) -> Map[String, String]
+pub fn Header::new() -> Self
+pub fn Header::set(Self, String, String) -> Unit
+pub impl Eq for Header
+pub impl Show for Header
 
 pub(all) enum Method {
   GET
@@ -31,22 +31,22 @@ pub(all) enum Method {
   TRACE
   PATCH
 }
-impl Show for Method
-impl ToJson for Method
+pub impl Show for Method
+pub impl ToJson for Method
 
 pub(all) struct Request {
   http_method : Method
   header : Header
   url : String
 }
-fn Request::send(Self, body? : @host.Memory?) -> Response
-impl ToJson for Request
+pub fn Request::send(Self, body? : @host.Memory?) -> Response
+pub impl ToJson for Request
 
 pub(all) struct Response {
   status_code : Int
   body : @host.Memory
 }
-fn Response::output(Self) -> Unit
+pub fn Response::output(Self) -> Unit
 
 // Type aliases
 

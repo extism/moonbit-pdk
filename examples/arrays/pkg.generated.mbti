@@ -2,21 +2,21 @@
 package "extism/moonbit-pdk/examples/arrays"
 
 // Values
-fn all_three_object() -> Int
+pub fn all_three_object() -> Int
 
-fn process_all_three(AllThree) -> AllThree
+pub fn process_all_three(AllThree) -> AllThree
 
-fn process_floats(Array[Double]) -> Array[Double]
+pub fn process_floats(Array[Double]) -> Array[Double]
 
-fn process_ints(Array[Int]) -> Array[Int]
+pub fn process_ints(Array[Int]) -> Array[Int]
 
-fn process_strings(Array[String]) -> Array[String]
+pub fn process_strings(Array[String]) -> Array[String]
 
-fn progressive_concat_strings() -> Int
+pub fn progressive_concat_strings() -> Int
 
-fn progressive_sum_floats() -> Int
+pub fn progressive_sum_floats() -> Int
 
-fn progressive_sum_ints() -> Int
+pub fn progressive_sum_ints() -> Int
 
 // Errors
 
@@ -26,9 +26,9 @@ pub(all) struct AllThree {
   floats : Array[Double]
   strings : Array[String]
 }
-impl Eq for AllThree
-impl Show for AllThree
-impl ToJson for AllThree
+pub impl Eq for AllThree
+pub impl Show for AllThree
+pub impl ToJson for AllThree
 
 // Type aliases
 

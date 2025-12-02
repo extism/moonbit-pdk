@@ -6,21 +6,21 @@ import(
 )
 
 // Values
-fn get_bytes(String) -> Bytes?
+pub fn get_bytes(String) -> Bytes?
 
-fn get_int(String) -> Int?
+pub fn get_int(String) -> Int?
 
-fn get_memory(String) -> @host.Memory?
+pub fn get_memory(String) -> @host.Memory?
 
-fn get_string(String) -> String?
+pub fn get_string(String) -> String?
 
-fn remove(String) -> Unit
+pub fn remove(String) -> Unit
 
-fn set_bytes(String, Bytes) -> Unit
+pub fn set_bytes(String, Bytes) -> Unit
 
-fn set_int(String, Int) -> Unit
+pub fn set_int(String, Int) -> Unit
 
-fn set_string(String, String) -> Unit
+pub fn set_string(String, String) -> Unit
 
 // Errors
 

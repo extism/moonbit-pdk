@@ -6,9 +6,9 @@ import(
 )
 
 // Values
-fn get(String) -> String?
+pub fn get(String) -> String?
 
-fn get_memory(String) -> @host.Memory?
+pub fn get_memory(String) -> @host.Memory?
 
 // Errors
 
