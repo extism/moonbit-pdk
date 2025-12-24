@@ -9,8 +9,8 @@ pub fn progressive_sum_ints() -> Int {
     }
   }
   //
-  let ints = match jv.as_array() {
-    Some(arr) => arr.map(fn(jv) { jv.as_number().unwrap().to_int() })
+  let ints = match as_array(jv) {
+    Some(arr) => arr.map(fn(jv) { as_number(jv).unwrap().to_int() })
     _ => {
       @host.set_error("could not parse array")
       return 1 // failure
@@ -35,8 +35,8 @@ pub fn progressive_sum_floats() -> Int {
     }
   }
   //
-  let floats = match jv.as_array() {
-    Some(arr) => arr.map(fn(jv) { jv.as_number().unwrap() })
+  let floats = match as_array(jv) {
+    Some(arr) => arr.map(fn(jv) { as_number(jv).unwrap() })
     _ => {
       @host.set_error("could not parse array")
       return 1 // failure
@@ -61,8 +61,8 @@ pub fn progressive_concat_strings() -> Int {
     }
   }
   //
-  let strings = match jv.as_array() {
-    Some(arr) => arr.map(fn(jv) { jv.as_string().unwrap() })
+  let strings = match as_array(jv) {
+    Some(arr) => arr.map(fn(jv) { as_string(jv).unwrap() })
     _ => {
       @host.set_error("could not parse array")
       return 1 // failure
@@ -97,15 +97,15 @@ pub fn all_three_object() -> Int {
       }
     ) => {
       let ints : Array[Int] = ints
-        .map(fn(n) { n.as_number() })
+        .map(fn(n) { as_number(n) })
         .filter(fn(n) { not(n is None) })
         .map(fn(n) { n.unwrap().to_int() })
       let floats : Array[Double] = floats
-        .map(fn(n) { n.as_number() })
+        .map(fn(n) { as_number(n) })
         .filter(fn(n) { not(n is None) })
         .map(fn(n) { n.unwrap() })
       let strings : Array[String] = strings
-        .map(fn(n) { n.as_string() })
+        .map(fn(n) { as_string(n) })
         .filter(fn(n) { not(n is None) })
         .map(fn(n) { n.unwrap() })
       { ints, floats, strings }
@@ -121,4 +121,31 @@ pub fn all_three_object() -> Int {
   let jv = result.to_json()
   @host.output_json_value(jv)
   0 // success
+}
+
+///|
+fn as_array(json : Json) -> Array[Json]? {
+  if json is Array(vs) {
+    Some(vs)
+  } else {
+    None
+  }
+}
+
+///|
+fn as_number(json : Json) -> Double? {
+  if json is Number(n, ..) {
+    Some(n)
+  } else {
+    None
+  }
+}
+
+///|
+fn as_string(json : Json) -> String? {
+  if json is String(s) {
+    Some(s)
+  } else {
+    None
+  }
 }
