@@ -1,6 +1,0 @@
-{
-  "import": [
-    "extism/moonbit-pdk/pdk",
-    "extism/moonbit-pdk/pdk/extism"
-  ]
-}

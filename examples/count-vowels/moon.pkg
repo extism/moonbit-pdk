@@ -1,0 +1,13 @@
+import {
+  "extism/moonbit-pdk/pdk/config",
+  "extism/moonbit-pdk/pdk/host",
+  "extism/moonbit-pdk/pdk/var",
+  "moonbitlang/core/builtin",
+}
+
+options(
+  link: {
+    "wasm": { "export-memory-name": "memory", "exports": [ "count_vowels" ] },
+    "wasm-gc": { "export-memory-name": "memory", "exports": [ "count_vowels" ] },
+  },
+)

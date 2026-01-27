@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "extism/moonbit-pdk/pdk/http"
 
-import(
-  "extism/moonbit-pdk/pdk/host"
-)
+import {
+  "extism/moonbit-pdk/pdk/host",
+}
 
 // Values
 pub fn new_request(Method, String) -> Request

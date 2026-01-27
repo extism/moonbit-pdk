@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "extism/moonbit-pdk/pdk/var"
 
-import(
-  "extism/moonbit-pdk/pdk/host"
-)
+import {
+  "extism/moonbit-pdk/pdk/host",
+}
 
 // Values
 pub fn get_bytes(String) -> Bytes?

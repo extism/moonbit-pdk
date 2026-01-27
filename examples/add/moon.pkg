@@ -1,0 +1,9 @@
+import {
+  "extism/moonbit-pdk/pdk/host",
+  "moonbitlang/core/builtin",
+  "moonbitlang/core/json",
+}
+
+options(
+  link: { "wasm": { "export-memory-name": "memory", "exports": [ "add" ] } },
+)
