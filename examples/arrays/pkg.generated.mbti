@@ -25,10 +25,7 @@ pub(all) struct AllThree {
   ints : Array[Int]
   floats : Array[Double]
   strings : Array[String]
-}
-pub impl Eq for AllThree
-pub impl Show for AllThree
-pub impl ToJson for AllThree
+} derive(Eq, Show, ToJson)
 
 // Type aliases
 

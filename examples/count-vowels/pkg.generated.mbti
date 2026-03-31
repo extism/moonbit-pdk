@@ -11,10 +11,7 @@ pub(all) struct VowelReport {
   count : Int
   total : Int
   vowels : String
-}
-pub impl Eq for VowelReport
-pub impl Show for VowelReport
-pub impl ToJson for VowelReport
+} derive(Eq, Show, ToJson)
 
 // Type aliases
 
