@@ -20,7 +20,24 @@ pub(all) enum Method {
   TRACE
   // The PATCH method applies partial modifications to a resource.
   PATCH
-} derive(Show)
+}
+
+///|
+impl Show for Method with output(self, logger) {
+  logger.write_string(
+    match self {
+      Method::GET => "GET"
+      Method::HEAD => "HEAD"
+      Method::POST => "POST"
+      Method::PUT => "PUT"
+      Method::DELETE => "DELETE"
+      Method::CONNECT => "CONNECT"
+      Method::OPTIONS => "OPTIONS"
+      Method::TRACE => "TRACE"
+      Method::PATCH => "PATCH"
+    },
+  )
+}
 
 ///|
 /// `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.

@@ -30,5 +30,5 @@ test "Sum::to_json works as expected" {
   let got = sum.to_json().stringify()
   let want =
     #|{"sum":42}
-  assert_eq(got, want)
+  inspect(got, content=want)
 }

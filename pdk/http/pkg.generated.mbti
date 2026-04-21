@@ -11,10 +11,8 @@ pub fn new_request(Method, String) -> Request
 // Errors
 
 // Types and methods
-pub(all) struct Header(Map[String, String]) derive(Eq, Show)
+pub(all) struct Header(Map[String, String]) derive(Eq)
 pub fn Header::add(Self, String, String) -> Unit
-#deprecated
-pub fn Header::inner(Self) -> Map[String, String]
 pub fn Header::new() -> Self
 pub fn Header::set(Self, String, String) -> Unit
 
@@ -28,7 +26,7 @@ pub(all) enum Method {
   OPTIONS
   TRACE
   PATCH
-} derive(Show)
+}
 pub impl ToJson for Method
 
 pub(all) struct Request {

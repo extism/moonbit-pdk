@@ -9,7 +9,16 @@ pub(all) struct VowelReport {
   count : Int
   total : Int
   vowels : String
-} derive(Show, Eq, ToJson)
+} derive(Eq, ToJson)
+
+///|
+impl Show for VowelReport with output(self, logger) {
+  logger.write_string(
+    (
+      $|{count: \{self.count}, total: \{self.total}, vowels: "\{self.vowels}"}
+    ),
+  )
+}
 
 ///|
 fn get_total() -> Int {
@@ -53,5 +62,11 @@ test "VowelReport::to_json works as expected" {
   let got = vowel_report.to_json().stringify()
   let want =
     #|{"count":1,"total":2,"vowels":"some string"}
-  assert_eq(got, want)
+  inspect(got, content=want)
+  inspect(
+    vowel_report,
+    content=(
+      #|{count: 1, total: 2, vowels: "some string"}
+    ),
+  )
 }

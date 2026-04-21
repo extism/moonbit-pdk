@@ -11,7 +11,7 @@ pub(all) struct VowelReport {
   count : Int
   total : Int
   vowels : String
-} derive(Eq, Show, ToJson)
+} derive(Eq, ToJson)
 
 // Type aliases
 
