@@ -23,7 +23,7 @@ pub(all) enum Method {
 }
 
 ///|
-impl Show for Method with output(self, logger) {
+pub impl Show for Method with output(self, logger) {
   logger.write_string(
     match self {
       Method::GET => "GET"

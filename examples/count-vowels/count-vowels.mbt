@@ -12,7 +12,7 @@ pub(all) struct VowelReport {
 } derive(Eq, ToJson)
 
 ///|
-impl Show for VowelReport with output(self, logger) {
+pub impl Show for VowelReport with output(self, logger) {
   logger.write_string(
     (
       $|{count: \{self.count}, total: \{self.total}, vowels: "\{self.vowels}"}

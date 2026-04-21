@@ -15,6 +15,7 @@ pub(all) struct Header(Map[String, String]) derive(Eq)
 pub fn Header::add(Self, String, String) -> Unit
 pub fn Header::new() -> Self
 pub fn Header::set(Self, String, String) -> Unit
+pub impl Show for Header
 
 pub(all) enum Method {
   GET
@@ -27,6 +28,7 @@ pub(all) enum Method {
   TRACE
   PATCH
 }
+pub impl Show for Method
 pub impl ToJson for Method
 
 pub(all) struct Request {

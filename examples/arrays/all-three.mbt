@@ -7,7 +7,7 @@ pub(all) struct AllThree {
 } derive(Eq, ToJson)
 
 ///|
-impl Show for AllThree with output(self, logger) {
+pub impl Show for AllThree with output(self, logger) {
   logger.write_string(
     (
       $|{ints: \{self.ints.to_string()}, floats: \{self.floats.to_string()}, strings: \{self.strings.to_string()}}

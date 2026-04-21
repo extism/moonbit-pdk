@@ -4,7 +4,7 @@
 pub(all) struct Header(Map[String, String]) derive(Eq)
 
 ///|
-impl Show for Header with output(self, logger) {
+pub impl Show for Header with output(self, logger) {
   logger.write_string(
     (
       $|Header(\{self.0.to_string()})
