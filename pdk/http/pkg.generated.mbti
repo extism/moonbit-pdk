@@ -3,6 +3,7 @@ package "extism/moonbit-pdk/pdk/http"
 
 import {
   "extism/moonbit-pdk/pdk/host",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -11,11 +12,10 @@ pub fn new_request(Method, String) -> Request
 // Errors
 
 // Types and methods
-pub(all) struct Header(Map[String, String]) derive(Eq)
+pub(all) struct Header(Map[String, String]) derive(Eq, @debug.Debug)
 pub fn Header::add(Self, String, String) -> Unit
 pub fn Header::new() -> Self
 pub fn Header::set(Self, String, String) -> Unit
-pub impl Show for Header
 
 pub(all) enum Method {
   GET

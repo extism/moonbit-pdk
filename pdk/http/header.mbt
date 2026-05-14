@@ -1,16 +1,7 @@
 ///|
 /// `Header` represents an HTTP Request header.
 /// Multiple values for a single key are not deduped.
-pub(all) struct Header(Map[String, String]) derive(Eq)
-
-///|
-pub impl Show for Header with output(self, logger) {
-  logger.write_string(
-    (
-      $|Header(\{self.0.to_string()})
-    ),
-  )
-}
+pub(all) struct Header(Map[String, String]) derive(Debug, Eq)
 
 ///|
 impl ToJson for Header with to_json(self) {
@@ -20,7 +11,7 @@ impl ToJson for Header with to_json(self) {
 ///|
 /// `Header::new` returns a new Header.
 pub fn Header::new() -> Header {
-  Header(Map::new())
+  Header(Map([]))
 }
 
 ///|
@@ -46,10 +37,10 @@ test "Header::add" {
   h.add("key2", "one")
   h.add("key2", "two")
   h.add("key2", "two")
-  inspect(
+  @debug.debug_inspect(
     h,
     content=(
-      #|Header({"key1": "one", "key2": "one,two,two"})
+      #|Header({ "key1": "one", "key2": "one,two,two" })
     ),
   )
 }

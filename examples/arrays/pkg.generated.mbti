@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "extism/moonbit-pdk/examples/arrays"
 
+import {
+  "moonbitlang/core/debug",
+}
+
 // Values
 pub fn all_three_object() -> Int
 
@@ -25,8 +29,7 @@ pub(all) struct AllThree {
   ints : Array[Int]
   floats : Array[Double]
   strings : Array[String]
-} derive(Eq, ToJson)
-pub impl Show for AllThree
+} derive(Eq, ToJson, @debug.Debug)
 
 // Type aliases
 
