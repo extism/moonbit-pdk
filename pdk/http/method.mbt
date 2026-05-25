@@ -23,7 +23,7 @@ pub(all) enum Method {
 }
 
 ///|
-pub impl Show for Method with output(self, logger) {
+pub impl Show for Method with fn output(self, logger) {
   logger.write_string(
     match self {
       Method::GET => "GET"
@@ -41,6 +41,6 @@ pub impl Show for Method with output(self, logger) {
 
 ///|
 /// `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.
-pub impl ToJson for Method with to_json(self) {
+pub impl ToJson for Method with fn to_json(self) {
   self.to_string().to_json()
 }

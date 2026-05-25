@@ -11,12 +11,12 @@ package "extism/moonbit-pdk/pdk"
 
 // Traits
 pub(open) trait ToUtf16 {
-  to_utf16(Self) -> String
+  fn to_utf16(Self) -> String
 }
 pub impl ToUtf16 for Bytes
 
 pub(open) trait ToUtf8 {
-  to_utf8(Self) -> Bytes
+  fn to_utf8(Self) -> Bytes
 }
 pub impl ToUtf8 for String
 

@@ -4,7 +4,7 @@
 pub(all) struct Header(Map[String, String]) derive(Debug, Eq)
 
 ///|
-impl ToJson for Header with to_json(self) {
+impl ToJson for Header with fn to_json(self) {
   self.0.to_json()
 }
 
