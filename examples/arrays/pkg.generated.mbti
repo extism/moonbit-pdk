@@ -30,6 +30,8 @@ pub(all) struct AllThree {
   floats : Array[Double]
   strings : Array[String]
 } derive(Eq, ToJson, @debug.Debug)
+pub fn AllThree::equal(Self, Self) -> Bool
+pub fn AllThree::to_json(Self) -> Json
 
 // Type aliases
 

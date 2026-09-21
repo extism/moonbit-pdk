@@ -7,7 +7,20 @@ pub(all) struct AllThree {
 } derive(Debug, Eq, ToJson)
 
 ///|
-extend AllThree with ToJson::{to_json}
+pub extend AllThree with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend AllThree with Eq::{not_equal}
+
+///|
+pub extend AllThree with ToJson::{to_json}
+
+///|
+#deprecated("Use `@debug.Debug::to_repr` via the trait instead", skip_current_package=true)
+#doc(hidden)
+pub extend AllThree with @debug.Debug::{to_repr}
 
 ///|
 /// `process_all_three` processes all three array types.

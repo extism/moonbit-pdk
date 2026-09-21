@@ -4,6 +4,19 @@
 pub(all) struct Header(Map[String, String]) derive(Debug, Eq)
 
 ///|
+pub extend Header with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Header with Eq::{not_equal}
+
+///|
+#deprecated("Use `@debug.Debug::to_repr` via the trait instead", skip_current_package=true)
+#doc(hidden)
+pub extend Header with @debug.Debug::{to_repr}
+
+///|
 impl ToJson for Header with fn to_json(self) {
   self.0.to_json()
 }

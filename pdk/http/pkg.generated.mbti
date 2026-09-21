@@ -14,6 +14,7 @@ pub fn new_request(Method, String) -> Request
 // Types and methods
 pub(all) struct Header(Map[String, String]) derive(Eq, @debug.Debug)
 pub fn Header::add(Self, String, String) -> Unit
+pub fn Header::equal(Self, Self) -> Bool
 pub fn Header::new() -> Self
 pub fn Header::set(Self, String, String) -> Unit
 
@@ -28,6 +29,8 @@ pub(all) enum Method {
   TRACE
   PATCH
 }
+pub fn Method::to_json(Self) -> Json
+pub fn Method::to_string(Self) -> String
 pub impl Show for Method
 pub impl ToJson for Method
 
@@ -37,6 +40,7 @@ pub(all) struct Request {
   url : String
 } derive(ToJson)
 pub fn Request::send(Self, body? : @host.Memory?) -> Response
+pub fn Request::to_json(Self) -> Json
 
 pub(all) struct Response {
   status_code : Int

@@ -12,6 +12,9 @@ pub(all) struct VowelReport {
   total : Int
   vowels : String
 } derive(Eq, ToJson)
+pub fn VowelReport::equal(Self, Self) -> Bool
+pub fn VowelReport::to_json(Self) -> Json
+pub fn VowelReport::to_string(Self) -> String
 pub impl Show for VowelReport
 
 // Type aliases

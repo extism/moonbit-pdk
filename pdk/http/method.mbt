@@ -23,6 +23,14 @@ pub(all) enum Method {
 }
 
 ///|
+pub extend Method with Show::{to_string}
+
+///|
+#deprecated("Use `Show::output` via the trait or `to_string` instead", skip_current_package=true)
+#doc(hidden)
+pub extend Method with Show::{output}
+
+///|
 pub impl Show for Method with fn output(self, logger) {
   logger.write_string(
     match self {
@@ -38,6 +46,9 @@ pub impl Show for Method with fn output(self, logger) {
     },
   )
 }
+
+///|
+pub extend Method with ToJson::{to_json}
 
 ///|
 /// `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.

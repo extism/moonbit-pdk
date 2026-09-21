@@ -12,7 +12,23 @@ pub(all) struct VowelReport {
 } derive(Eq, ToJson)
 
 ///|
-extend VowelReport with ToJson::{to_json}
+pub extend VowelReport with Eq::{equal}
+
+///|
+#deprecated("Use `!=` instead", skip_current_package=true)
+#doc(hidden)
+pub extend VowelReport with Eq::{not_equal}
+
+///|
+pub extend VowelReport with ToJson::{to_json}
+
+///|
+pub extend VowelReport with Show::{to_string}
+
+///|
+#deprecated("Use `Show::output` via the trait or `to_string` instead", skip_current_package=true)
+#doc(hidden)
+pub extend VowelReport with Show::{output}
 
 ///|
 pub impl Show for VowelReport with fn output(self, logger) {
