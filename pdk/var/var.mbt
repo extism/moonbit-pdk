@@ -27,7 +27,7 @@ pub fn get_bytes(key : String) -> Bytes? {
 
 ///|
 /// `get_int` returns the host's "var" Int associated with the provided `key`.
-pub fn get_int(key : String) -> Int? {
+pub fn get_int(key : String) -> Int32? {
   match get_memory(key) {
     Some(v) => Some(v.to_int())
     None => None
@@ -58,7 +58,7 @@ pub fn set_bytes(key : String, value : Bytes) -> Unit {
 
 ///|
 /// `set_int` sets the host's "var" Int associated with the provided `key`.
-pub fn set_int(key : String, value : Int) -> Unit {
+pub fn set_int(key : String, value : Int32) -> Unit {
   let key_mem = @host.allocate_string(key)
   let bytes = FixedArray::makei(4, fn(i) {
     (value >> (i * 8)).land(255).to_byte()

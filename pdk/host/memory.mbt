@@ -68,7 +68,7 @@ pub fn Memory::to_string(self : Memory) -> String {
 ///|
 /// `to_int` reads and converts the u32 residing in the host memory
 /// to a MoonBit Int.
-pub fn Memory::to_int(self : Memory) -> Int {
+pub fn Memory::to_int(self : Memory) -> Int32 {
   let bytes = self.to_bytes()
   bytes[0].to_int() +
   (bytes[1].to_int() << 8) +

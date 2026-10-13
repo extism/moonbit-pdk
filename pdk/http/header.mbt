@@ -18,7 +18,7 @@ pub extend Header with @debug.Debug::{to_repr}
 
 ///|
 impl ToJson for Header with fn to_json(self) {
-  self.0.to_json()
+  Json(self.0)
 }
 
 ///|

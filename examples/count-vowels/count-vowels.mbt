@@ -6,8 +6,8 @@ let default_vowels = "aeiouAEIOU"
 ///|
 /// `VowelReport` represents the JSON struct returned to the host.
 pub(all) struct VowelReport {
-  count : Int
-  total : Int
+  count : Int32
+  total : Int32
   vowels : String
 } derive(Eq, ToJson)
 
@@ -40,12 +40,12 @@ pub impl Show for VowelReport with fn output(self, logger) {
 }
 
 ///|
-fn get_total() -> Int {
+fn get_total() -> Int32 {
   @var.get_int("total").unwrap_or_default()
 }
 
 ///|
-fn store_total(total : Int) -> Unit {
+fn store_total(total : Int32) -> Unit {
   @var.set_int("total", total)
 }
 
@@ -61,7 +61,7 @@ fn get_vowels() -> String {
 /// in the host's "total" var.
 /// It sends the JSON `VowelReport` to the host via its output data channel.
 /// It returns 0 to the host on success.
-pub fn count_vowels() -> Int {
+pub fn count_vowels() -> Int32 {
   let input = @host.input_string()
   //
   let vowels = get_vowels()

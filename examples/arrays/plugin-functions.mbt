@@ -1,6 +1,6 @@
 ///|
 /// `progressive_sum_ints` tests passing arrays of ints.
-pub fn progressive_sum_ints() -> Int {
+pub fn progressive_sum_ints() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {
     e => {
@@ -19,14 +19,14 @@ pub fn progressive_sum_ints() -> Int {
   //
   let result = process_ints(ints)
   //
-  let jv = result.to_json()
+  let jv = Json(result)
   @host.output_json_value(jv)
   0 // success
 }
 
 ///|
 /// `progressive_sum_floats` tests passing arrays of floats.
-pub fn progressive_sum_floats() -> Int {
+pub fn progressive_sum_floats() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {
     e => {
@@ -45,14 +45,14 @@ pub fn progressive_sum_floats() -> Int {
   //
   let result = process_floats(floats)
   //
-  let jv = result.to_json()
+  let jv = Json(result)
   @host.output_json_value(jv)
   0 // success
 }
 
 ///|
 /// `progressive_concat_strings` tests passing arrays of strings.
-pub fn progressive_concat_strings() -> Int {
+pub fn progressive_concat_strings() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {
     e => {
@@ -71,14 +71,14 @@ pub fn progressive_concat_strings() -> Int {
   //
   let result = process_strings(strings)
   //
-  let jv = result.to_json()
+  let jv = Json(result)
   @host.output_json_value(jv)
   0 // success
 }
 
 ///|
 /// `all_three_object` tests passing an object of all three arrays.
-pub fn all_three_object() -> Int {
+pub fn all_three_object() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {
     e => {
@@ -96,7 +96,7 @@ pub fn all_three_object() -> Int {
         ..
       }
     ) => {
-      let ints : Array[Int] = ints
+      let ints : Array[Int32] = ints
         .map(fn(n) { as_number(n) })
         .filter(fn(n) { !(n is None) })
         .map(fn(n) { n.unwrap().to_int() })
@@ -118,7 +118,7 @@ pub fn all_three_object() -> Int {
   //
   let result = process_all_three(all_three)
   //
-  let jv = result.to_json()
+  let jv = Json(result)
   @host.output_json_value(jv)
   0 // success
 }

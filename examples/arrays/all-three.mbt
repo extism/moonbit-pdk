@@ -1,7 +1,7 @@
 ///|
 /// `AllThree` represents a JSON object with all three array types.
 pub(all) struct AllThree {
-  ints : Array[Int]
+  ints : Array[Int32]
   floats : Array[Double]
   strings : Array[String]
 } derive(Debug, Eq, ToJson)

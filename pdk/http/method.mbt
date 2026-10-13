@@ -53,5 +53,5 @@ pub extend Method with ToJson::{to_json}
 ///|
 /// `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.
 pub impl ToJson for Method with fn to_json(self) {
-  Show::to_string(self).to_json()
+  Json(Show::to_string(self))
 }

@@ -1,16 +1,16 @@
 ///|
 priv struct Add {
-  a : Int
-  b : Int
+  a : Int32
+  b : Int32
 } derive(FromJson)
 
 ///|
 priv struct Sum {
-  sum : Int
+  sum : Int32
 } derive(ToJson)
 
 ///|
-pub fn add() -> Int {
+pub fn add() -> Int32 {
   let input = @host.input_string()
   let params : Add = @json.from_json(@json.parse(input)) catch {
     e => {
