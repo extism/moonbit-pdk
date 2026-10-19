@@ -506,7 +506,7 @@ https://www.moonbitlang.com/download/
 Then, to build this PDK, clone the repo, and type:
 
 ```bash
-moon update && moon install
+moon update
 ./build.sh
 ```
 
