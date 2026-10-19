@@ -43,7 +43,7 @@ pub fn Request::send(Self, body? : @host.Memory?) -> Response
 pub fn Request::to_json(Self) -> Json
 
 pub(all) struct Response {
-  status_code : Int
+  status_code : Int32
   body : @host.Memory
 }
 pub fn Response::output(Self) -> Unit

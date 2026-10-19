@@ -12,7 +12,7 @@ pub fn free(Int64) -> Unit
 
 pub fn http_request(Int64, Int64) -> Int64
 
-pub fn http_status_code() -> Int
+pub fn http_status_code() -> Int32
 
 pub fn input_length() -> Int64
 

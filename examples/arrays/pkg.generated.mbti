@@ -6,27 +6,27 @@ import {
 }
 
 // Values
-pub fn all_three_object() -> Int
+pub fn all_three_object() -> Int32
 
 pub fn process_all_three(AllThree) -> AllThree
 
 pub fn process_floats(Array[Double]) -> Array[Double]
 
-pub fn process_ints(Array[Int]) -> Array[Int]
+pub fn process_ints(Array[Int32]) -> Array[Int32]
 
 pub fn process_strings(Array[String]) -> Array[String]
 
-pub fn progressive_concat_strings() -> Int
+pub fn progressive_concat_strings() -> Int32
 
-pub fn progressive_sum_floats() -> Int
+pub fn progressive_sum_floats() -> Int32
 
-pub fn progressive_sum_ints() -> Int
+pub fn progressive_sum_ints() -> Int32
 
 // Errors
 
 // Types and methods
 pub(all) struct AllThree {
-  ints : Array[Int]
+  ints : Array[Int32]
   floats : Array[Double]
   strings : Array[String]
 } derive(Eq, ToJson, @debug.Debug)

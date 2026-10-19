@@ -8,7 +8,7 @@ import {
 // Values
 pub fn get_bytes(String) -> Bytes?
 
-pub fn get_int(String) -> Int?
+pub fn get_int(String) -> Int32?
 
 pub fn get_memory(String) -> @host.Memory?
 
@@ -18,7 +18,7 @@ pub fn remove(String) -> Unit
 
 pub fn set_bytes(String, Bytes) -> Unit
 
-pub fn set_int(String, Int) -> Unit
+pub fn set_int(String, Int32) -> Unit
 
 pub fn set_string(String, String) -> Unit
 
