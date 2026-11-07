@@ -1,12 +1,16 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "extism/moonbit-pdk/pdk/host"
 
+import {
+  "moonbitlang/core/json",
+}
+
 // Values
 pub fn allocate(Int64) -> Memory
 
 pub fn allocate_bytes(Bytes) -> Memory
 
-pub fn allocate_json_value(Json) -> Memory
+pub fn allocate_json_value(@json.Json) -> Memory
 
 pub fn allocate_string(String) -> Memory
 
@@ -26,7 +30,7 @@ pub fn log_warn_str(String) -> Unit
 
 pub fn output(Bytes) -> Unit
 
-pub fn output_json_value(Json) -> Unit
+pub fn output_json_value(@json.Json) -> Unit
 
 pub fn output_string(String) -> Unit
 

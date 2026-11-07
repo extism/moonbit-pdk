@@ -5,11 +5,12 @@ let default_vowels = "aeiouAEIOU"
 
 ///|
 /// `VowelReport` represents the JSON struct returned to the host.
+#derive(Eq, ToJson)
 pub(all) struct VowelReport {
   count : Int32
   total : Int32
   vowels : String
-} derive(Eq, ToJson)
+}
 
 ///|
 pub extend VowelReport with Eq::{equal}

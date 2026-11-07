@@ -1,13 +1,15 @@
 ///|
+#derive(FromJson)
 priv struct Add {
   a : Int32
   b : Int32
-} derive(FromJson)
+}
 
 ///|
+#derive(ToJson)
 priv struct Sum {
   sum : Int32
-} derive(ToJson)
+}
 
 ///|
 pub fn add() -> Int32 {

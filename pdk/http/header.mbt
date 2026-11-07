@@ -1,7 +1,8 @@
 ///|
 /// `Header` represents an HTTP Request header.
 /// Multiple values for a single key are not deduped.
-pub(all) struct Header(Map[String, String]) derive(Debug, Eq)
+#derive(Debug, Eq)
+pub(all) struct Header(Map[String, String])
 
 ///|
 pub extend Header with Eq::{equal}

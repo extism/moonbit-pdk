@@ -1,19 +1,24 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "extism/moonbit-pdk/examples/count-vowels"
 
+import {
+  "moonbitlang/core/json",
+}
+
 // Values
 pub fn count_vowels() -> Int32
 
 // Errors
 
 // Types and methods
+#derive(Eq, @json.ToJson)
 pub(all) struct VowelReport {
   count : Int32
   total : Int32
   vowels : String
-} derive(Eq, ToJson)
+}
 pub fn VowelReport::equal(Self, Self) -> Bool
-pub fn VowelReport::to_json(Self) -> Json
+pub fn VowelReport::to_json(Self) -> @json.Json
 pub fn VowelReport::to_string(Self) -> String
 pub impl Show for VowelReport
 

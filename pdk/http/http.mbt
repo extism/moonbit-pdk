@@ -1,10 +1,11 @@
 ///|
 /// `Request` represents an HTTP request made by the Extism host.
+#derive(ToJson)
 pub(all) struct Request {
   http_method : Method
   header : Header
   url : String
-} derive(ToJson)
+}
 
 ///|
 pub extend Request with ToJson::{to_json}

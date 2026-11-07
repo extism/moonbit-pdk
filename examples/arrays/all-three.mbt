@@ -1,10 +1,11 @@
 ///|
 /// `AllThree` represents a JSON object with all three array types.
+#derive(Debug, Eq, ToJson)
 pub(all) struct AllThree {
   ints : Array[Int32]
   floats : Array[Double]
   strings : Array[String]
-} derive(Debug, Eq, ToJson)
+}
 
 ///|
 pub extend AllThree with Eq::{equal}

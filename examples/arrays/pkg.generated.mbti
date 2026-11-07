@@ -3,6 +3,7 @@ package "extism/moonbit-pdk/examples/arrays"
 
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
 }
 
 // Values
@@ -25,13 +26,14 @@ pub fn progressive_sum_ints() -> Int32
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug, @json.ToJson)
 pub(all) struct AllThree {
   ints : Array[Int32]
   floats : Array[Double]
   strings : Array[String]
-} derive(Eq, ToJson, @debug.Debug)
+}
 pub fn AllThree::equal(Self, Self) -> Bool
-pub fn AllThree::to_json(Self) -> Json
+pub fn AllThree::to_json(Self) -> @json.Json
 
 // Type aliases
 
