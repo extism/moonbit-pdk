@@ -94,7 +94,7 @@ pub fn all_three_object() -> Int32 {
         "floats": Array(floats),
         "strings": Array(strings),
         ..
-      }
+      },
     ) => {
       let ints : Array[Int32] = ints
         .map(fn(n) { as_number(n) })

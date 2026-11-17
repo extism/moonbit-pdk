@@ -33,7 +33,7 @@ pub impl ToUtf16 for Bytes with fn to_utf16(b : Bytes) -> String {
   // TODO: Make a real UTF-8 => UTF-16 converter.
   // https://github.com/moonbitlang/core/issues/484
   let length = b.length()
-  let buf = Buffer(size_hint=2 * length)
+  let buf = Buffer(capacity=2 * length)
   let mut i = 0
   while i < length {
     if (b[i] & 0xF0) == 0xF0 {
