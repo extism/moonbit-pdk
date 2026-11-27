@@ -1,5 +1,6 @@
 ///|
 /// `progressive_sum_ints` tests passing arrays of ints.
+#export_name("progressive_sum_ints")
 pub fn progressive_sum_ints() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {
@@ -26,6 +27,7 @@ pub fn progressive_sum_ints() -> Int32 {
 
 ///|
 /// `progressive_sum_floats` tests passing arrays of floats.
+#export_name("progressive_sum_floats")
 pub fn progressive_sum_floats() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {
@@ -52,6 +54,7 @@ pub fn progressive_sum_floats() -> Int32 {
 
 ///|
 /// `progressive_concat_strings` tests passing arrays of strings.
+#export_name("progressive_concat_strings")
 pub fn progressive_concat_strings() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {
@@ -78,6 +81,7 @@ pub fn progressive_concat_strings() -> Int32 {
 
 ///|
 /// `all_three_object` tests passing an object of all three arrays.
+#export_name("all_three_object")
 pub fn all_three_object() -> Int32 {
   let s = @host.input_string()
   let jv = @json.parse(s) catch {

@@ -1,3 +1,5 @@
+pkgtype(kind: "foreign_library")
+
 import {
   "extism/moonbit-pdk/pdk/config",
   "extism/moonbit-pdk/pdk/host",
@@ -5,9 +7,13 @@ import {
   "moonbitlang/core/builtin",
 }
 
+import {
+  "extism/moonbit-pdk/examples/count-vowels" @cv,
+} for "test"
+
 options(
   link: {
-    "wasm": { "export-memory-name": "memory", "exports": [ "count_vowels" ] },
-    "wasm-gc": { "export-memory-name": "memory", "exports": [ "count_vowels" ] },
+    "wasm": { "export-memory-name": "memory" },
+    "wasm-gc": { "export-memory-name": "memory" },
   },
 )

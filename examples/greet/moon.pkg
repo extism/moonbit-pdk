@@ -1,3 +1,5 @@
+pkgtype(kind: "foreign_library")
+
 import {
   "extism/moonbit-pdk/pdk/host",
   "moonbitlang/core/builtin",
@@ -5,7 +7,7 @@ import {
 
 options(
   link: {
-    "wasm": { "export-memory-name": "memory", "exports": [ "greet" ] },
-    "wasm-gc": { "export-memory-name": "memory", "exports": [ "greet" ] },
+    "wasm": { "export-memory-name": "memory" },
+    "wasm-gc": { "export-memory-name": "memory" },
   },
 )

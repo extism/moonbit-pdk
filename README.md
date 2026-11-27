@@ -78,6 +78,7 @@ rm -rf lib
 Now paste this into your `main/main.mbt` file:
 
 ```rust
+#export_name("greet")
 pub fn greet() -> Int {
   let name = @host.input_string()
   let greeting = "Hello, \{name}!"
@@ -90,29 +91,26 @@ fn main {
 }
 ```
 
-Then paste this into your `main/moon.pkg.json` file to export the `greet` function
-and include the `@host` import into your plugin:
+Then paste this into your `main/moon.pkg` file to declare the package as a
+foreign library, export the `greet` function, and include the `@host` import
+into your plugin:
 
-```json
-{
-  "import": [
-    "extism/moonbit-pdk/pdk/host"
-  ],
-  "link": {
-    "wasm": {
-      "exports": [
-        "greet"
-      ],
-      "export-memory-name": "memory"
-    }
-  }
+```
+pkgtype(kind: "foreign_library")
+
+import {
+  "extism/moonbit-pdk/pdk/host",
 }
+
+options(
+  link: { "wasm": { "export-memory-name": "memory" } },
+)
 ```
 
 Some things to note about this code:
 
-1. The `moon.pkg.json` file is required. This marks the greet function as an export with the name `greet` that can be called by the host.
-2. We need a `main` but it is unused.
+1. The `moon.pkg` file is required. `pkgtype(kind: "foreign_library")` marks the package as a foreign library, and the `#export_name("greet")` attribute on `greet` makes it callable by the host under the name `greet`.
+2. The `main` function is unused.
 3. Exports in the MoonBit PDK are coded to the raw ABI. You get parameters from the host by calling [`@host.input*` functions](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=input) and you send return values back with the [`@host.output*` functions](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=output).
 4. An Extism export expects an i32 (a MoonBit `Int`) return code. `0` is success and `1` (or any other value) is a failure.
 
@@ -138,6 +136,7 @@ Suppose we want to re-write our greeting module to never greet Benjamins.
 We can use [`@host.set_error`](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/host/members?id=set_error):
 
 ```rust
+#export_name("greet")
 pub fn greet() -> Int {
   let name = @host.input_string()
   if name == "Benjamin" {
@@ -202,6 +201,7 @@ struct Sum {
   sum : Int
 } derive(ToJson)
 
+#export_name("add")
 pub fn add() -> Int {
   let input = @host.input_string()
   let params = try {
@@ -221,22 +221,18 @@ pub fn add() -> Int {
 ```
 
 
-Export your `add` function in `main/moon.pkg.json`:
+Declare the package as a foreign library in `main/moon.pkg`:
 
-```json
-{
-  "import": [
-    "extism/moonbit-pdk/pdk/host"
-  ],
-  "link": {
-    "wasm": {
-      "exports": [
-        "add"
-      ],
-      "export-memory-name": "memory"
-    }
-  }
+```
+pkgtype(kind: "foreign_library")
+
+import {
+  "extism/moonbit-pdk/pdk/host",
 }
+
+options(
+  link: { "wasm": { "export-memory-name": "memory" } },
+)
 ```
 
 Then compile and run:
@@ -256,6 +252,7 @@ across every function call.
 Here is a trivial example using [`config.get`](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/config/members?id=get):
 
 ```rust
+#export_name("greet")
 pub fn greet() -> Int {
   let user = match @config.get("user") {
     Some(user) => user
@@ -270,24 +267,21 @@ pub fn greet() -> Int {
 }
 ```
 
-Remember to import the `config` and `host` packages in `main/moon.pkg.json` and
-export your function:
+Remember to import the `config` and `host` packages in `main/moon.pkg`, declare
+the package as a foreign library, and mark your exported function with
+`#export_name`:
 
-```json
-{
-  "import": [
-    "extism/moonbit-pdk/pdk/config",
-    "extism/moonbit-pdk/pdk/host"
-  ],
-  "link": {
-    "wasm": {
-      "exports": [
-        "greet"
-      ],
-      "export-memory-name": "memory"
-    }
-  }
+```
+pkgtype(kind: "foreign_library")
+
+import {
+  "extism/moonbit-pdk/pdk/config",
+  "extism/moonbit-pdk/pdk/host",
 }
+
+options(
+  link: { "wasm": { "export-memory-name": "memory" } },
+)
 ```
 
 To test it, the [Extism CLI](https://github.com/extism/cli) has a `--config` option that lets you pass in `key=value` pairs:
@@ -307,6 +301,7 @@ will persist across function calls. These variables will persist as long as the
 host has loaded and not freed the plug-in.
 
 ```rust
+#export_name("count")
 pub fn count() -> Int {
   let mut count = match @var.get_int("count") {
     Some(v) => v
@@ -323,24 +318,21 @@ pub fn count() -> Int {
 > **Note**: Use the untyped variant [`@var.set_bytes`](https://mooncakes.io/docs/#/extism/moonbit-pdk/pdk/var/members?id=set_bytes)
 > to handle your own types.
 
-Remember to import the `host` and `var` packages in `main/moon.pkg.json` and
-export your function:
+Remember to import the `host` and `var` packages in `main/moon.pkg`, declare the
+package as a foreign library, and mark your exported function with
+`#export_name`:
 
-```json
-{
-  "import": [
-    "extism/moonbit-pdk/pdk/host",
-    "extism/moonbit-pdk/pdk/var"
-  ],
-  "link": {
-    "wasm": {
-      "exports": [
-        "count"
-      ],
-      "export-memory-name": "memory"
-    }
-  }
+```
+pkgtype(kind: "foreign_library")
+
+import {
+  "extism/moonbit-pdk/pdk/host",
+  "extism/moonbit-pdk/pdk/var",
 }
+
+options(
+  link: { "wasm": { "export-memory-name": "memory" } },
+)
 ```
 
 ## Logging
@@ -527,9 +519,9 @@ The code has been updated to support compiler:
 
 ```bash
 $ moon version --all
-moon 0.1.20261119 (738607b 2026-11-19) ~/.moon/bin/moon
-moonc v0.10.22+124d61d05 (2026-11-19) ~/.moon/bin/moonc
-moonrun 0.1.20261119 (738607b 2026-11-19) ~/.moon/bin/moonrun
+moon 0.1.20261126 (ccd306a 2026-11-26) ~/.moon/bin/moon
+moonc v1.0.0-rc1+3c0520448 (2026-11-26) ~/.moon/bin/moonc
+moonrun 0.1.20261126 (ccd306a 2026-11-26) ~/.moon/bin/moonrun
 
 ```
 

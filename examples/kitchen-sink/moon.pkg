@@ -1,3 +1,5 @@
+pkgtype(kind: "foreign_library")
+
 import {
   "extism/moonbit-pdk/pdk/config",
   "extism/moonbit-pdk/pdk/http",
@@ -8,7 +10,7 @@ import {
 
 options(
   link: {
-    "wasm": { "export-memory-name": "memory", "exports": [ "kitchen_sink" ] },
-    "wasm-gc": { "export-memory-name": "memory", "exports": [ "kitchen_sink" ] },
+    "wasm": { "export-memory-name": "memory" },
+    "wasm-gc": { "export-memory-name": "memory" },
   },
 )

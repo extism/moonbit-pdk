@@ -62,6 +62,7 @@ fn get_vowels() -> String {
 /// in the host's "total" var.
 /// It sends the JSON `VowelReport` to the host via its output data channel.
 /// It returns 0 to the host on success.
+#export_name("count_vowels")
 pub fn count_vowels() -> Int32 {
   let input = @host.input_string()
   //
@@ -74,19 +75,4 @@ pub fn count_vowels() -> Int32 {
   //
   { count, total, vowels, }.to_json() |> @host.output_json_value()
   0 // success
-}
-
-///|
-test "VowelReport::to_json works as expected" {
-  let vowel_report = { count: 1, total: 2, vowels: "some string", }
-  let got = vowel_report.to_json().stringify()
-  let want =
-    #|{"count":1,"total":2,"vowels":"some string"}
-  inspect(got, content=want)
-  inspect(
-    vowel_report,
-    content=(
-      #|{count: 1, total: 2, vowels: "some string"}
-    ),
-  )
 }

@@ -2,6 +2,7 @@
 /// `greet` reads the input string from the host and writes a
 /// greeting to the host's output string.
 /// It returns 0 to the host on success.
+#export_name("greet")
 pub fn greet() -> Int32 {
   let input = @host.input_string()
   let greeting = "Hello, \{input}!"

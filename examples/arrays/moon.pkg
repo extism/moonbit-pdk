@@ -1,3 +1,5 @@
+pkgtype(kind: "foreign_library")
+
 import {
   "extism/moonbit-pdk/pdk/host",
   "moonbitlang/core/builtin",
@@ -5,25 +7,13 @@ import {
   "moonbitlang/core/json",
 }
 
+import {
+  "moonbitlang/core/debug",
+} for "test"
+
 options(
   link: {
-    "wasm": {
-      "export-memory-name": "memory",
-      "exports": [
-        "all_three_object",
-        "progressive_sum_ints",
-        "progressive_sum_floats",
-        "progressive_concat_strings",
-      ],
-    },
-    "wasm-gc": {
-      "export-memory-name": "memory",
-      "exports": [
-        "all_three_object",
-        "progressive_sum_ints",
-        "progressive_sum_floats",
-        "progressive_concat_strings",
-      ],
-    },
+    "wasm": { "export-memory-name": "memory" },
+    "wasm-gc": { "export-memory-name": "memory" },
   },
 )

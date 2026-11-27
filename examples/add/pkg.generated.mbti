@@ -1,12 +1,20 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "extism/moonbit-pdk/examples/add"
 
+import {
+  "moonbitlang/core/json",
+}
+
 // Values
 pub fn add() -> Int32
 
 // Errors
 
 // Types and methods
+#derive(@json.ToJson)
+pub(all) struct Sum {
+  sum : Int32
+}
 
 // Type aliases
 

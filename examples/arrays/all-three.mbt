@@ -32,21 +32,3 @@ pub fn process_all_three(all3 : AllThree) -> AllThree {
     strings: process_strings(all3.strings),
   }
 }
-
-///|
-test "AllThree::to_json works as expected" {
-  let all3 = { ints: [1, 2, 3], floats: [1, 2, 3], strings: ["1", "2", "3"], }
-  let got = all3.to_json().stringify()
-  @debug.debug_inspect(
-    got,
-    content=(
-      #|"{\"ints\":[1,2,3],\"floats\":[1,2,3],\"strings\":[\"1\",\"2\",\"3\"]}"
-    ),
-  )
-  @debug.debug_inspect(
-    all3,
-    content=(
-      #|{ ints: [1, 2, 3], floats: [1, 2, 3], strings: ["1", "2", "3"] }
-    ),
-  )
-}
